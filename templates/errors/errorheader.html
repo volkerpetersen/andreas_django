@@ -1,0 +1,94 @@
+<!------------------------------------------------------------------
+	errorheader.html
+	HTML Header file for the Toens website error pages
+
+	(c) KaiserWare, Volker Petersen, November 2022
+-------------------------------------------------------------------->
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta name="robots" content="noindex,nofollow" />
+	<meta name="MS.LOCALE" content="EN-US" />
+
+	<title>{% block title %}{% endblock %}</title>
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Shadows+Into+Light+Two" rel="stylesheet">
+
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/css/bootstrap.min.css" rel="stylesheet" media="all">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
+	
+	<link href="{% static '/' %}css/SailingLog.css" rel="stylesheet">
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static '/' %}js/SailingLog.js"></script>
+	<link rel="icon" href="{% static '/' %}images/sailingIcon.ico">
+
+</head>
+<body class="bg-light">
+	<nav id="navbar" class="navbar navbar-default fixed-top navbar-expand-lg bg-light">
+		<div class="container">
+			<a class="navbar-brand" href="{% url 'Directory' %}">
+				<h1 class="col-12 text-secondary">Volker's Sailing Log</h1>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="main_nav">
+				<ul id="nav-list" class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'Directory' %}">Home Page</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<main id="main" class="pt-5">
+	<!-- body page skeleton. Content gets inserted-->
+	{% block content %}
+	{% endblock %}
+	<!-- end of main body page-->
+	</main>
+
+<footer id="footer" class="container-fluid footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 col-12 text-start">
+				<p><i>
+				&copy; 2011-{% now "Y" %} Volker Petersen<br />Design & Implementation: KaiserWare&#0153;
+				<span class="d-block d-sm-none">
+					Powered by Django
+				</span>
+				</i></p>
+			</div>
+			<div class="col-md-5 d-none d-md-block text-end">
+				<p><i>
+					{% now "M. d, Y" %}<br>
+					Powered by Django
+				</i></p>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript">
+    function setResetFormPageHeight(element) {
+        document.body.classList.add('vh-100');
+        var height = document.body.clientHeight;
+        //height -= document.getElementById("navbar").clientHeight;
+        height -= document.getElementById("footer").clientHeight;
+        element.style.minHeight = (height) + "px";
+    };
+
+	$( document ).ready(function() {
+		setResetFormPageHeight(document.getElementById("main"))
+	});
+	
+</script>
+</body>
+</html>

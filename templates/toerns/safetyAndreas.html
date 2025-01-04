@@ -1,0 +1,251 @@
+<!------------------------------------------------------------------
+	safety.html
+	Page with the Andreas safety information
+
+	in pythonanywhere Bash console:
+    git pull git@github.com:volkerpetersen/DjangoWebsites.git
+
+	exceute on localhost using:
+	python manage.py runserver
+  -------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Andreas Safety{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <!-- Start of safety.html body content-->
+  <div class="container">
+    <div class="row pt-1">
+        <p>Sailing is a safe sport. s/v Andreas is a very safe and well maintained yacht. This briefing is part 
+          of our commitment to running a safe and fun program. 
+        </p>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Life Jackets</h4>
+      <ul class="list-bullet">
+        <li>Required for start/finish and at night. But suggested all the time</li>
+        <li>Should include a whistle to attract attention</li>
+        <li>Should include light. Make sure yours works</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Tether</h4>
+      <ul class="list-bullet">
+        <li>Required to be used at night, or as directed</li>
+        <li>Ensure you know where yours is</li>
+        <li>Make sure to have a one-handed knife on you at all times to be able to cut the tether in an emergency</li>
+        <li>Clip onto jack lines, shrouds, or hard points. Only click into the jacklines when moving</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">First Aid Kit</h4>
+      <ul class="list-bullet">
+        <li>Located in the cabinet above the sink in the head. 
+          Consider using the “Owie” kit for minor issues
+        </li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">MOB – if someone else goes in</h4>
+      <ul class="list-bullet">
+        <li>First person who notices the emergency yells "Man Overboard" (MOB). Permanent Spotter assigned thereafter</li>
+        <li>Press the <b>F2</b>-key on the laptop in the Nav Station. This records the 
+          current position and can be used later to find the person. Or hit the MOB button on the B&G VHF radio (see instruction below).
+        </li>
+        <li>Deploy <b>MOM</b> unit and any/all throwable floatation devices to mark the water</li>
+        <li>Deploy Lifesling, and throwline, when alongside. All on stern rail</li>
+        <li>Spinnaker up? Drop the sail, as boat turns up to head back to the MOB</li>
+        <li>Begin to sail through the Quick Stop method shown below</li>
+        <li>After checking for lines in the water start engine and drop all sails unless otherwise instructed by the skipper</li>
+        <li>Do not jump into water to assist rescue, unless instructed to so do</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">MOB – if you are the victim - We WILL come back for you!</h4>
+      <ul class="list-bullet">
+        <li>In cold water, remember the 1-10-1 rule:
+            <br>1 min to get your breathing under control
+            <br>10 min of meaningful motion to accomplish all necessary equipment fixes
+            <br>1 hr until hypothermia sets in
+        </li>
+        <li>Inflate life jacket. Turn on light. Use whistle to attract attention</li>
+        <li>Conserve energy — avoid panic, thrashing, or swimming toward floatation</li>
+        <li>Conserve body heat — fetal/crouching position. Keep boots on</li>
+        <li>Huddle together if more than one. Easier to see. Preserves body heat</li>
+        <li>Don't swim. We come and get you</li>
+        <li>Look for the throwable floatation devices the boat will deploy</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <div class="col-sm-9 col-12 ">
+        <h4 class="text-secondary">MOB – Quick Stop Method</h4>
+        <ul class="list-bullet">
+          <li>Preferred method is to drop all sails and recover crew under engine. The Quick Stop Method only applies when the engine recovery precedure is not possible</li>
+          <li>Shout "Man Overboard" Designate spotter</li>
+          <li>Deploy immediate flotation: MOM, Lifesling, etc.</li>
+          <li>Bring boat head-to-wind and beyond</li>
+          <li>Allow headsail to back-wind and further slow the boat</li>
+          <li>Keep turning with headsail backed until wind is abaft 
+              the beam
+          </li>
+          <li>Beam-to-broad reach course for 2x lengths then go to 
+          nearly dead downwind
+          </li>
+          <li>Drop headsail. Keep mainsail centered. The jib sheets 
+          are not slacked, to keep them inside the lifelines
+          </li>
+          <li>Hold the downward course until victim is abaft the beam.</li>
+          <li>Gybe</li>
+          <li>Approach the victim on a course of approximately 
+          45-60 degrees off the wind
+          </li>
+          <li>Establish contact with the victim with heaving line 
+          or another device
+          </li>
+          <li>Effect recovery over the leeward side</li>
+        </ul>
+        <h4 class="text-secondary pt-1">Abandon Ship - Last resort. Andreas is our best chance!</h4>
+      <ul class="list-bullet">
+        <li>Never step DOWN; only step UP</li>
+        <li>Prepare to abandon ship - Tasks and Roles</li>
+        <ul>
+          <li>Life raft on deck</li>
+          <li>Get ditch bag, air horn, and SOLAS flares</li>
+          <li>Activate SOS on Sat Phone and deploy EPIRB</li>
+          <li>Crew in full gear and lifevest on deck</li>
+        </ul>
+        <li>Abandon Ship- Tasks and Roles</li>
+        <ul>
+          <li>Tie off life raft securely to a cleat or stanchion base</li>
+          <li>Deploy into water - Pull painter line to inflate</li>
+          <li>Stongest persons board life raft first</li>
+          <li>Step up into it or use painter to pull yourself towards raft. Make sure to attach your tether to the painter.</li>
+          <li>Cut painter line when all aboard</li>
+          <li>Bail out water, close the hatch</li>
+        </ul>
+      </ul>
+      </div>
+      <div class="col-sm-3 col-12 text-center">
+        <img class="img-fluid" src="{% static '/images/QuickStop.png' %}">
+      </div>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Mast Down - Let it go. It'll do more harm than good</h4>
+      <ul class="list-bullet">
+        <li>Check for crew injuries</li>
+        <li>Check for hull punctures – spreader tips, etc.</li>
+        <li>Remove rig – remove cotter pins and clevis pins at shroud base to release shrouds. Cut the steel rigging first. Cut remaining lines with available tools last</li>
+        <li>Tools – hacksaw, hammer, screw dirvers, and pliers in toolbox and cockpit locker</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Fire</h4>
+      <ul class="list-bullet">
+        <li>Study Fire extinguisher locations on Emergency Equipment plan in Nav Station</li>
+        <li>Remember PASS:
+          <br>PULL - pull the pin
+          <br>AIM - aim at the base of the fire
+          <br>SQUEEZE - squeeze the trigger
+          <br>SWEEP - sweep from side to side at the base of the fire
+        </li>
+        <li>First person who notices the fire yells "FIRE" and starts fighting the fire</li>
+        <li>Time is of essence. On a boat a fire spreads very fast. It doubles in size every 7 seconds!</li>
+        <li>Second person supports with buckets and other fire extinguishers</li>
+        <li>Crew and life raft on deck. Put life vests on. Prepare to abandon ship – but DO NOT deploy life raft</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Water coming in</h4>
+      <ul class="list-bullet">
+        <li>Find the source – don’t start bailing</li>
+        <li>Through hull fittings – wood plugs attached to all through hull fittings</li>
+        <li>Punctured hull – stuff hole with something</li>
+        <li>Buckets for bailing, in cockpit locker</li>
+        <li>Monitor bilge pump pick-ups and assure no blockage</li>
+        <li>Manual pump in cockpit and at bottom of companionway</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Gas Stove Procedures</h4>
+      <ul class="list-bullet">
+        <li>Only turn on gas at the propane tank when you need a gas flame.</li>
+        <li>Always shut off gas immediately after you extinguished the flame on the stove</li>
+        <li>Smell for gas before lighting the stove</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Steering Failure</h4>
+      <ul class="list-bullet">
+        <li>Emergency tiller–stabilize with lines to winches, forces will be very high</li>
+        <li>Try autopilot (may work if a chain or cable failure)</li>
+        <li>Rig alternate rudder or use drogue or warps</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Flares - used to attract attention</h4>
+      <ul class="list-bullet">
+        <li>Stored behind companionway</li>
+        <li>Only use when chance of being seen</li>
+        <li>Read the instructions and identify the hot end</li>
+        <li>Stand downwind</li>
+        <li>Hold well away from face and wear a protective glove</li>
+        <li>Read the instructions and identify the hot end</li>
+        <li>Strike cap or pull firing line as appropriate</li>
+      </ul>
+    </div>
+    <div class="row pt-1">
+      <h4 class="text-secondary">Emergency Equipment plan</h4>
+      <ul class="list-bullet">
+        <li>Posted in the Nav Station</li>
+        <li>Shows location of all safety related equipment</li>
+        <li>Please invest a few moments to study it and identify/find all referenced equipment</li>
+        <li>Ask questions!</li>
+      </ul>
+      <img class="offset-sm-1 col-sm-10 col-12 img-fluid" src="{% static '/images/Andreas_Safety_Equipment.png' %}" />
+    </div>
+    <div class="row pt-2">
+      <h4 class="text-secondary">EPIRB</h4>
+      <ul class="list-bullet">
+        <li>Activate EPIRB for all MAYDAY situations (abandon ship or danger to life or welfare of crew)</li>
+        <li>Review instruction to activate and deploy the EPIRB upon arrival to boat</li>
+      </ul>
+    </div>
+    <div class="row pt-2">
+      <h4 class="text-secondary">VHF Radio Communication</h4>
+      <ul class="list-bullet">
+        <li>"How-to use in an Emergency" cheat sheet posted in the Nav Station</li>
+        <li>Use in emergency only unless otherwise directed by the skipper</li>
+      </ul>
+      <img class="offset-xs-1 col-xs-10 col-12 img-fluid" src="{% static '/images/VHF_Emergency_Call_Matrix.png' %}" />
+      <img class="offset-xs-1 col-xs-10 col-12 img-fluid" src="{% static '/images/B&G_Radio_Picture.png' %}" />
+      <h4 class="text-secondary">VHF Operation</h4>
+      <ul class="list-bullet">
+        <li>Turn the Knob 1) until Channel 16 is selected. Alternatively hit button 12 until channel 16 is selected.</li>
+        <li>Knob 2) a short press toggles between the Volume and the Squelch adjustments.</li>
+        <li>Knob 2) press shortly to select the Squelch adjustment function. Turn the Knob 2 to the left until you hear a screetching sound. Then turn to the right until that sound stops.</li>
+        <li>Button 13) open flap and press the red button to send an automatic MAYDAY call with vessels MMSI and position to
+          all ships</li>
+        <li>Button 17) press to talk (transmit). When done talking (transmitting), release this button so that other VHF
+          radios can
+          transmit</li>
+        <li>Button 8) short press will change the screen to navigation mode displaying vessel's current SOG and COG</li>
+        <li>Button 8) a long press marks the current position with a Crew-Over-Board waypoint (COB)</li>
+      </ul>
+    </div>
+    <div class="row pt-2"> 
+      <h4 class="text-secondary col-12">VHF - MOB Alarm Display</h4>
+      <img class="offset-xs-1 col-xs-10 col-6 img-fluid" src="{% static '/images/B&G_MOB_part1.png' %}" />
+      <img class="offset-xs-1 col-xs-10 col-6 img-fluid" src="{% static '/images/B&G_MOB_part2.png' %}" />
+    </div>
+  </div>
+
+<script type='text/javascript'>
+  jQuery(document).ready(function(){
+      $("#searchbox").remove();
+      $("#headline").html("Andreas's Safety Briefing")
+  });
+</script>
+  <!-- end of safety.html body content container -->
+{% endblock %}

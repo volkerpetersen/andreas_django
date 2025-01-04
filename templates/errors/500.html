@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!------------------------------------------------------------------
+	500.html
+	500 error page for the Family Recipe website
+-------------------------------------------------------------------->
+
+{% extends "errors/errorheader.html" %}
+
+{% block title %}Website Error{% endblock %}
+
+{% block content %}
+   <!-- Start of main page body content-->
+<section id="intro">
+    <div class="container intro pt-5">
+        <div class="row pt-5">
+            <h2 class="col-12 text-center text-primary">Oops - something went wrong</h2>
+            <h4 class="text-start pt-4">
+                We are sorry for the mistake and hope that the error 
+                will be fixed soon. Please feel free to inform our
+                <a href="mailto: volker.petersen01@gmail.com?subject=familyrecipe.de error">webmaster</a> about this error. 
+                It'll be very helpful if you attach a screenshot of this page to your email.
+            </h4>
+        </div>
+        <div class="row pt-4">
+            <div class="col-12 text-start">
+                <h4>Please hit the button to return to the website</br>&nbsp;</h4>
+                <a type="button" class="btn btn-secondary" href="{% url 'Directory' %}">
+                    Return to the Toerns website
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

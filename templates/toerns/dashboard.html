@@ -1,0 +1,310 @@
+<!------------------------------------------------------------------
+	dashboard.html
+    
+	in pythonanywhere Bash console:
+    git pull git@github.com:volkerpetersen/DjangoWebsites.git
+
+	exceute on localhost using:
+	python manage.py runserver
+-------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Trip Dashboard{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Start of main page body content-->
+    <div id="content_container" class="container">
+        <div id="content_row" class="row pt-1">
+            <div id="destinationPieChart" class="col-12 col-sm-6 text-center plr-0">
+                <h3 class="text-info">Running data analysis...</h3></div>
+            <div class="col-12 d-block d-sm-none hr-rule"></div>
+            <div id="annualMilesColumn" class="col-12 col-sm-6 text-center plr-0"></div>
+        </div>
+        <div id="content_row" class="row">
+            <div class="col-12 d-block d-sm-none hr-rule"></div>
+            <div id="skipperPieChart" class="col-12 col-sm-6 text-center plr-0"></div>
+            <div class="col-12 d-block d-sm-none hr-rule"></div>
+            <div id="bubbleMap" class="col-12 col-sm-6 center-block"></div>
+        </div>
+    </div>
+    <!-- end of main page body content container -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type='text/javascript'>
+        let destinationMilesDict = {};
+        let destinationCountDict = {};
+        let skipperMilesDict = {};
+        let annualMilesDict = {};
+        let annualDaysDict = {};
+        let elementHeight = 300;
+        let geoArea, geoRegions, totalMiles, numToerns, currentPopup;
+        let optionsBar, optionsCol, optionsPie, map;
+        var idx, geo, skipper, year, toern, miles;
+        
+        //while (typeof toernDirectory==='undefined' && toernDirectory.length<1) {
+        //        setTimeout(waitForDatabaseData, 40);//wait 40 millisecnds then recheck
+        //}
+
+        /*-----------------------------------------------------------------------------------------
+        Parse the toern data and build the dashbaord from the 
+        SQLite table data stored in the JSON array tripsJSON that was passed 
+        into this page thru the views.py variable content and converted 
+        to the Javascript array toernDirectory in header.html
+        -----------------------------------------------------------------------------------------*/
+        numToerns = toernDirectory.length;
+        totalMiles = 0;
+        for(idx=0; idx<numToerns; idx++) {
+            toern = toernDirectory[idx]['fields'];
+            // primary key = pk = startDate
+            year = moment(toernDirectory[idx]['pk']).format("YYYY");
+            skipper = toern['skipper'];
+            skipper = skipper.replace("&uuml;", "ue");
+            skipper = skipper.replace("&auml;", "ae");
+            skipper = skipper.replace("&ouml;", "oe");
+            geo = toern['georegion'];
+            miles = Math.round(toern['miles']*100)/100;
+            totalMiles += miles;
+            if (geo in destinationMilesDict) {
+                destinationMilesDict[geo] += miles;
+            } else {
+                destinationMilesDict[geo] = miles;
+            }
+            if (geo in destinationCountDict) {
+                destinationCountDict[geo] += 1;
+            } else {
+                destinationCountDict[geo] = 1;
+            }
+            if (skipper in skipperMilesDict) {
+                skipperMilesDict[skipper] += miles;
+            } else {
+                skipperMilesDict[skipper] = miles;
+            }
+
+            if (year in annualMilesDict) {
+                annualMilesDict[year] += miles;
+            } else {
+                annualMilesDict[year] = miles;
+            }
+            if (year in annualDaysDict) {
+                annualDaysDict[year] += toern['daysAtSea'];
+            } else {
+                annualDaysDict[year] = toern['daysAtSea'];
+            }
+        }
+
+        // process the data to be utilized in the chart and map plotting functions
+        geoArea = {
+            'Atlantic': {
+                'position': {'lat': 34.0, 'lng': -73.0},
+                'miles': 0.1},
+            'Baltic': {
+                'position': {'lat': 54.0, 'lng': 11.0},
+                'miles': 0.1},
+            'Caribbean': {
+                'position': {'lat': 17.0, 'lng': -64.0},
+                'miles': 0.1},
+            'Croatia': {
+                'position': {'lat': 44.5, 'lng': 14.0},
+                'miles': 0.1},
+            'Great Lakes': {
+                'position': {'lat':  47.0, 'lng': -88.0},
+                'miles': 0.1},
+            'Pacific': {
+                'position': {'lat': 32.0, 'lng': -128.0},
+                'miles': 0.1667}
+        }
+
+        const titleStyle = {color: "#337ab7",
+                    fontName: "Shadows Into Light Two",
+                    fontSize: 24,
+                    bold: false,
+                    italic: true
+                    }
+
+        geoRegions = Object.keys(geoArea).length;
+
+        optionsPie = {title: "Miles Sailed by Geographic Area",
+                    titleTextStyle: titleStyle,
+                    width: '100%',
+                    height: elementHeight,
+                    is3D: true,
+                    legend: { position: "right" },
+                    chartArea: {left: 30, top:35, width: '85%', height: '85%'}
+                };
+
+        optionsBar = {title: "Miles Sailed with Skipper",
+                    titleTextStyle: titleStyle,
+                    width: '100%',
+                    height: elementHeight,
+                    chartArea: {left: 100, top:45, width: '70%', height: '75%'},
+                    legend: { position: "none" }
+                };
+
+        optionsCol = {title: "Miles Sailed and Days at Sea",
+                    titleTextStyle: titleStyle,
+                    legend: { position: 'top', },
+                    width: '100%',
+                    height: elementHeight,
+                    chartArea: {left: 50, top:45, width: '85%', height: '65%'},
+                    hAxis: {
+                        slantedText: true,
+                        slantedTextAngle: 45 // here you can even use 180
+                    },
+                    vAxis: {
+                        0: {logScale: false},
+                        1: {logScale: false},
+                    },
+                    series: {
+                        0: {type: 'bars', targetAxisIndex: 0},
+                        1: {type: 'line', targetAxisIndex: 1, color: '#8A0808'}
+                    }
+                };
+
+        // Load the Google Map to display the bubble Chart Map.
+        function initMap() {
+            var i, key, zoom, labelText;
+
+            zoom = 2;
+            if (isMobile) {
+                zoom = 1;
+            }
+            map = new google.maps.Map(document.getElementById('bubbleMap'), {
+                zoom: zoom,
+                center: {lat: 45.0, lng: -55.0},
+                mapTypeId: 'terrain'
+            });
+
+            currentPopup = null;
+            for (key in geoArea) {
+                // Add the circle for each GeoArea to the map.
+                // https://developers.google.com/maps/documentation/javascript/examples/circle-simple
+
+                labelText = "<strong>" + key + "</strong><br />";
+                labelText += destinationCountDict[key] + " trips with <br />";
+                labelText += numberWithCommas(destinationMilesDict[key], 0)+"nm";
+                //console.log(labelText);
+
+                createInfoWindow(labelText, geoArea[key]['position'], destinationMilesDict[key] / totalMiles, map);
+            }
+        }
+
+        function createInfoWindow(infoText, position, miles, map) {
+            var bubble = new google.maps.Circle({
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: map,
+                center: position,
+                radius: miles * 3000000
+            });
+
+            var infoBubble = new google.maps.InfoWindow({
+                content: infoText,
+                backgroundColor: 'rgb(57,57,57)',
+                position: position,
+                zIndex: 900
+                //maxWidth: 200
+            });
+
+            google.maps.event.addListener(bubble, "mouseover", function() {
+                if (currentPopup != null) {
+                    currentPopup.close();
+                    currentPopup = null;
+                }
+                infoBubble.open(map, bubble);
+                currentPopup = infoBubble;
+                //console.log("Event fired");
+            });
+        }
+
+        // Callback that creates and populates a data table, instantiates
+        // the pie chart, passes in the data and draws it.
+        function drawChart() {
+            var key;
+            var destinationMiles = new google.visualization.DataTable();
+            destinationMiles.addColumn('string', 'GeoArea');
+            destinationMiles.addColumn('number', 'Distance');
+            for (key in destinationMilesDict) {
+                destinationMiles.addRow([key, Math.round(destinationMilesDict[key])]);
+            }
+
+            var annualMiles = new google.visualization.DataTable();
+            annualMiles.addColumn('string', 'Year');
+            annualMiles.addColumn('number', 'Distance');
+            annualMiles.addColumn('number', 'Days');
+            for (key in annualMilesDict) {
+                annualMiles.addRow([key, Math.round(annualMilesDict[key]), annualDaysDict[key]]);
+            }
+
+            var skipperMiles = new google.visualization.DataTable();
+            skipperMiles.addColumn('string', 'Skipper');
+            skipperMiles.addColumn('number', 'Distance');
+            for (key in skipperMilesDict) {
+                skipper = key.split(" ");
+                skipper = skipper[0]+" "+skipper[1][0]+".";
+                skipperMiles.addRow([skipper, Math.round(skipperMilesDict[key])]);
+            }
+            skipperMiles.sort({column: 1, desc: true});
+
+            var mapData = new google.visualization.DataTable();
+            mapData.addColumn('number', 'Lat');
+            mapData.addColumn('number', 'Long');
+            mapData.addColumn('string', 'Name');
+
+            var chart = new google.visualization.PieChart(document.getElementById('destinationPieChart'));
+            chart.draw(destinationMiles, optionsPie);
+
+            chart = new google.visualization.BarChart(document.getElementById('skipperPieChart'));
+            chart.draw(skipperMiles, optionsBar);
+
+            chart = new google.visualization.ColumnChart(document.getElementById('annualMilesColumn'));
+            chart.draw(annualMiles, optionsCol);
+        }
+
+        jQuery(document).ready(function(){
+            var containerHeight, text;
+
+            jQuery("#searchboxDiv").html("");  // delete the searchbox
+            
+            // Load the Visualization API and the corechart package.
+            google.charts.load("current", {
+                "packages": ["corechart"],
+                "mapsApiKey": "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c"
+            });
+
+            // Set a Chart callback to run when the Google Visualization API is loaded.
+            //google.charts.setOnLoadCallback(drawChart);
+
+            text = "Stats on " + numberWithCommas(totalMiles, 0) + " nm";
+            jQuery("#subheadline").html(text + " and "+numToerns+" trips<br />");
+
+            containerHeight = jQuery('body').outerHeight() 
+                            - jQuery('#navbar_container').outerHeight() 
+                            - jQuery('footer').outerHeight();
+            elementHeight = (containerHeight) / 2;
+            optionsCol.height = elementHeight;
+            optionsBar.height = elementHeight;
+            //console.log(elementHeight);
+            if (isMobile) {
+                optionsCol.width = jQuery("#content_container").outerWidth();
+                optionsCol.titleTextStyle.fontSize = 16;
+                optionsPie.titleTextStyle.fontSize = 16;
+                optionsBar.titleTextStyle.fontSize = 16;
+            } else {
+                optionsCol.width = jQuery("#content_container").outerWidth() / 2.0;
+            }
+            jQuery("#content_row").width(jQuery("#content_container").outerWidth());
+            jQuery("#bubbleMap").height(elementHeight);
+        });
+
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c&callback=initMap">
+    </script>
+{% endblock %}
+

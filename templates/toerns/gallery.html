@@ -1,0 +1,177 @@
+<!------------------------------------------------------------------
+	gallery.html
+    
+	in pythonanywhere Bash console:
+    git pull git@github.com:volkerpetersen/DjangoWebsites.git
+
+	exceute on localhost using:
+	python manage.py runserver
+-------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Trip Gallery{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <div id="trip_gallery" class="container"">
+        <!--
+        placeholder for the trip gallery.  The Javascript function
+        'parse_trip_gallery()' parses the data from the SQL table stored in
+        the Javascript dictionary into the html code.
+        -->
+    </div>
+    <div class="row"><div class="col-12 d-block d-sm-none"></div></div>
+    <script type="text/javascript">
+    let region = ['Atlantic', 'Caribbean', 'Great_Lakes', 'Pacific', 'all'];
+    let portfolio;
+
+    /*-----------------------------------------------------------------------------------------
+    Function to to update the subheader line
+    -----------------------------------------------------------------------------------------*/    
+    function set_subheadline(selector, miles, trips) {
+        var geoText;
+
+        if (selector == "*") {
+            // display text for ALL (*) trips
+            geoText = "";
+        } else {
+            // display text for trips from a selected Geo Region (sorted ascending)
+            geoText = selector.replace(".", "");
+            geoText = geoText.replace("_", " ") + " - ";
+        }
+        heading = geoText + trips  + " trips and "+numberWithCommas(miles, 0)+" nm";
+        jQuery('#subheadline').html(heading);
+    }
+
+    /*-----------------------------------------------------------------------------------------
+    Function to parse the toern data and build the toern gallery from the 
+    SQLite table data stored in the JSON array tripsJSON that was passed 
+    into this page thru the views.py variable content and converted 
+    to the Javascript array toernDirectory in header.html
+    -----------------------------------------------------------------------------------------*/    
+    function parse_trip_gallery() {
+        var idx, numToerns, html, nav_addon, geo, toern, startDate, yacht;
+
+        numToerns = toernDirectory.length;
+                
+        //-----------------------------------------------------------------------------------------
+        // portfolio filter for the Trip Gallery
+        //-----------------------------------------------------------------------------------------
+        $(function(){'use strict';
+            var portfolio_selectors = $('.portfolio-filter >li>a');
+            var portfolio_selectors_active = $('.portfolio-filter >li>a.active');
+            var portfolio_dates = $('.trip-name');
+            
+            portfolio = $('.portfolio-items');
+            portfolio.isotope({
+                itemSelector : '.portfolio-item',
+                layoutMode : 'fitRows'
+            });
+
+            portfolio_selectors.on('click', function(){
+                portfolio_selectors.removeClass('active');
+                $(this).addClass('active');
+                var selector = $(this).attr('data-filter');
+
+                portfolio.isotope({filter: selector, sortBy: portfolio_dates, sortAscending: true });
+
+                var trips = portfolio.isotope('getFilteredItemElements');
+                var selectedTrips = trips.length;
+                var selectedMiles = 0;
+                trips.forEach(function($item) {
+                    selectedMiles += parseFloat($item.attributes.getNamedItem('data-value').value);
+                });
+                //console.log("selected "+selectedTrips+" trips with "+selectedMiles+"nm."); 
+
+                set_subheadline(selector, selectedMiles, selectedTrips);
+  
+                return false;
+            });
+
+            $(function() {  // on window load function
+                //console.log("on load");
+                portfolio.isotope({ filter: portfolio_selectors_active.attr('data-filter'), sortBy: portfolio_dates, sortAscending: true});
+            });
+        });
+
+        html = '<div class="col-xs-12">';
+        html+= '<ul class="portfolio-filter">';
+        html+= '<li><a id="AllTrips" class="btn btn-sm active" href="#" data-filter="*">All Trips</a></li>';
+        html+= '<li><a class="btn btn-sm" href="#" data-filter=".Atlantic">Atlantic</a></li>';
+        html+= '<li><a class="btn btn-md" href="#" data-filter=".Caribbean">Caribbean</a></li>';
+        html+= '<li><a class="btn btn-md" href="#" data-filter=".Great_Lakes">Great Lakes</a></li>';
+        html+= '<li><a class="btn btn-md" href="#" data-filter=".Pacific">Pacific</a></li>';
+        html+= '</ul>';
+        html+= '</div>';
+        $("#nav_addon").html(html);
+
+        html = '<div class="col-xs-12" id="portfolio">';
+        html+= '<div id="tripItems" class="portfolio-items"></div></div></div>';
+        $("#trip_gallery").html(html);
+
+        selectedMiles = 0;
+        selectedTrips = 0;
+        for (idx=0; idx<numToerns; idx++) {
+            toern = toernDirectory[idx]['fields'];
+            // primary key = pk = startDate
+            startDate = moment(toernDirectory[idx]['pk']).format("MMMM");
+            startDate += " " + moment(toernDirectory[idx]['pk']).format("YYYY");
+            geo = toern['georegion'].replace(" ", "_");
+            //console.log(geo);
+            yacht = parse_yacht(toern['boat']);
+            tripMiles = parseFloat(toern['miles']);
+            selectedMiles += tripMiles;
+            selectedTrips += 1;
+
+            html = '<div class="portfolio-item ' + geo + ' col-xs-12 col-sm-4 col-md-3" data-value="'+ tripMiles +'">';
+            html+= '<div class="trip-details-wrap">';
+            html+= '<img class="img-responsive" src="../static/'+toern['image'];
+            html+= '" alt="'+toern['destination']+'" onerror="imgErrorTripPicture(this);" />';
+            html+= '<div class="text-center trip-name">'+startDate;
+            html+= '<br />'+toern['destination']+'</div>';
+            html+= '<div class="overlay">';
+            html+= '<div class="trip-details-inner">';
+            html+= '<h4><a href="../plotRoute/'+toern['maptable'];
+            html+= '" target="_blank">'+toern['destination']+'</a></h4>';
+            html+= '<p>'+toern['miles']+'nm in '+toern['daysAtSea']+' days on '+yacht;
+            html+= '<br />With '+parse_crew(toern);
+            if (toern['picturelink'] && toern['picturelink'].includes("http")) {
+                html+= '.<br/><a href="'+toern['picturelink']+'" target="_blank">Pictures</a></p>';
+            } else {
+                html+= '.</p>';
+            }
+            html+= '</div></div><div class="d-block d-sm-none"> <hr class="col-xs-12 portfolio-border" />';
+            html+= '</div></div></div>';
+
+            $("#tripItems").append(html);
+        } // end of loop over all toerns in toernDirectory
+        
+        set_subheadline("*", selectedMiles, selectedTrips);
+
+    } // end of function parse_trip_gallery()
+
+    //----------------------------------------------------------------------------------------
+    // function to display default image if Trip image is not available
+    //----------------------------------------------------------------------------------------
+    function imgErrorTripPicture(image) {
+        image.onerror = "";
+        image.src = "./static/images/2005_09_Baltic.jpg";
+        return true;
+    } // end of function imgErrorTripPicture()
+
+
+    jQuery(document).ready(function() {
+        $("#searchboxDiv").html("");        // delete the Menu searchbox
+        parse_trip_gallery();
+
+        $("img").on('load', function() {
+            //console.log(selector);
+            $("#AllTrips")[0].click();
+        });    
+
+    });
+
+    </script>
+{% endblock %}
+

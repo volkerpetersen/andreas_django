@@ -5,7 +5,7 @@ toerns Models with the database definitions
 https://pythonprogramming.net/django-web-development-python-tutorial/
 
 in pythonanywhere Bash console:
-git pull git@github.com:volkerpetersen/DjangoWebsites.git
+git pull git@github.com:volkerpetersen/andreas_django.git
  
 python manage shell ==> example 
   >>> from toerns.models import *
@@ -26,7 +26,7 @@ class toerndirectory(models.Model):
                                help_text="date in YYYY-MM-DD format")
     destination = models.CharField(blank=True, null=True, max_length=150)
     georegion = models.CharField(blank=True, null=True, max_length=40,
-                                 help_text="Atlantic, Baltic, Caribbean, Croatia, Great Lakes, Pacific")
+                                 help_text="Atlantic, Caribbean, Great Lakes, Pacific")
     maptable = models.CharField(blank=True, null=True, max_length=100,
                                 help_text="name of the map table")
     boat = models.CharField(blank=True, null=True, max_length=400)

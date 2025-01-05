@@ -14,8 +14,6 @@ python manage shell ==> example
 """
 
 from django.db import models
-from django.db.models.base import ModelBase
-
 
 class toerndirectory(models.Model):
     """Define the Toern Directory Table"""

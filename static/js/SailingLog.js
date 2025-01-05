@@ -1,5 +1,5 @@
 //========================================================================================
-//    HTML5 responsive Webpage to display Bernt's sailing trips utilising:
+//    HTML5 responsive Webpage to display Volker's sailing trips utilising:
 //      - Google Maps API v3 to display the map
 //      - MySQL DBs to store and retrieve the trip data
 //      - Bootstrap ver 5.0.1 framework
@@ -133,8 +133,15 @@ function enhance_toern_table_code(isMobile) {
 // Function to format a float number to 1 decimal with thousand comma separators
 //-----------------------------------------------------------------------------------------
 function numberWithCommas(value, decimals) {
-	value = value.toFixed(decimals);
-	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	try {
+		value = value.toFixed(decimals);
+		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	} catch {
+		value = 0;
+		value = value.toFixed(decimals);
+		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 }
 
 //-----------------------------------------------------------------------------------------

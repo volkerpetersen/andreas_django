@@ -39,13 +39,34 @@
         let annualMilesDict = {};
         let annualDaysDict = {};
         let elementHeight = 300;
-        let geoArea, geoRegions, totalMiles, numToerns, currentPopup;
+        let geoRegions, totalMiles, numToerns, currentPopup;
         let optionsBar, optionsCol, optionsPie, map;
         var idx, geo, skipper, year, toern, miles;
+
+        let geoArea = {
+            'Atlantic': {
+                'position': { 'lat': 34.0, 'lng': -73.0 },
+                'miles': 0.1
+            },
+            'Caribbean': {
+                'position': { 'lat': 17.0, 'lng': -64.0 },
+                'miles': 0.1
+            },
+            'Great Lakes': {
+                'position': { 'lat': 47.0, 'lng': -88.0 },
+                'miles': 0.1
+            },
+            'Pacific': {
+                'position': { 'lat': 32.0, 'lng': -128.0 },
+                'miles': 0.1667
+            }
+        };
         
-        //while (typeof toernDirectory==='undefined' && toernDirectory.length<1) {
-        //        setTimeout(waitForDatabaseData, 40);//wait 40 millisecnds then recheck
-        //}
+        geoRegions = Object.keys(geoArea).length;
+        
+        for (geo of Object.keys(geoArea)) {
+            destinationMilesDict[geo] = 0;
+        }
 
         /*-----------------------------------------------------------------------------------------
         Parse the toern data and build the dashbaord from the 
@@ -95,26 +116,6 @@
         }
 
         // process the data to be utilized in the chart and map plotting functions
-        geoArea = {
-            'Atlantic': {
-                'position': {'lat': 34.0, 'lng': -73.0},
-                'miles': 0.1},
-            'Baltic': {
-                'position': {'lat': 54.0, 'lng': 11.0},
-                'miles': 0.1},
-            'Caribbean': {
-                'position': {'lat': 17.0, 'lng': -64.0},
-                'miles': 0.1},
-            'Croatia': {
-                'position': {'lat': 44.5, 'lng': 14.0},
-                'miles': 0.1},
-            'Great Lakes': {
-                'position': {'lat':  47.0, 'lng': -88.0},
-                'miles': 0.1},
-            'Pacific': {
-                'position': {'lat': 32.0, 'lng': -128.0},
-                'miles': 0.1667}
-        }
 
         const titleStyle = {color: "#337ab7",
                     fontName: "Shadows Into Light Two",
@@ -122,8 +123,6 @@
                     bold: false,
                     italic: true
                     }
-
-        geoRegions = Object.keys(geoArea).length;
 
         optionsPie = {title: "Miles Sailed by Geographic Area",
                     titleTextStyle: titleStyle,
@@ -265,19 +264,24 @@
             chart.draw(annualMiles, optionsCol);
         }
 
+        // Load the Visualization API and the corechart package.
+        google.charts.load("current", {
+            "packages": ["corechart"],
+            "mapsApiKey": "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c"
+        });
+
         jQuery(document).ready(function(){
             var containerHeight, text;
 
             jQuery("#searchboxDiv").html("");  // delete the searchbox
             
-            // Load the Visualization API and the corechart package.
-            google.charts.load("current", {
-                "packages": ["corechart"],
-                "mapsApiKey": "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c"
-            });
+            // Set a Chart callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
 
             // Set a Chart callback to run when the Google Visualization API is loaded.
             //google.charts.setOnLoadCallback(drawChart);
+            
+            //console.log("Total miles: " + totalMiles);
 
             text = "Stats on " + numberWithCommas(totalMiles, 0) + " nm";
             jQuery("#subheadline").html(text + " and "+numToerns+" trips<br />");

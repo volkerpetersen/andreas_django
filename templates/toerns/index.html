@@ -132,14 +132,16 @@ function parse_trip_table(isMobile) {
 			img_caption = img_caption.substring(0,max_length);
 		}
 		if (!is_string_empty(toern['picturelink'])) {
-			picture1 = '<img class="img-fluid" ';
+			picture1 = '<img class="img-fluid"';
 			picture2 = 'border="0px" src="static/' + toern['image'] + '" ';
-			picture2+= 'title="No picture album available!" alt="' + img_caption + '"/></a>';
+			picture2+= 'title="No picture album available!" alt="' + img_caption; 
+			picture2+= '" onerror="imgErrorTripPicture(this)"/></a>';
 			//console.log("empty picture album link");
 		} else {
 			picture1 = '<a href="' + toern['picturelink'] + '" target="_blank"><img class="img-fluid" ';
 			picture2 = 'border="0px" src="static/' + toern['image'] + '" ';
-			picture2+= 'title="Click here for all trip images!" alt="' + img_caption + '"/></a>';
+			picture2+= 'title="Click here for all trip images!" alt="' + img_caption;
+			picture2+= '" onerror="imgErrorTripPicture(this)"/></a>';
 		}
 		
 		if (isMobile) {

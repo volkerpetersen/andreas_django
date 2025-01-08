@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx creator="OpenCPN" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:opencpn="http://www.opencpn.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<rte>
+<name>2006_RundFuenen</name>
+<extensions>
+<opencpn:guid>5ca1ffff-04d2-46fa-91a1-3e3001330000</opencpn:guid>
+<opencpn:viz>1</opencpn:viz>
+<opencpn:start>Burgtiefe</opencpn:start>
+<opencpn:planned_speed>4.00</opencpn:planned_speed>
+<opencpn:time_display>PC</opencpn:time_display>
+</extensions>
+<rtept lat="54.412617736" lon="11.199209994">
+<time>2006-05-12T15:00:00Z</time>
+<name>Burgtiefe</name>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2cf10000-5c66-46d1-a5f3-fc8b5f8fffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.415333962" lon="11.196616850">
+<time>2006-05-12T15:02:14Z</time>
+<name>WP002</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1d700000-ef91-427f-bba8-49a811340000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.414059522" lon="11.187982716">
+<time>2006-05-12T15:04:49Z</time>
+<name>WP003</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>118b0000-40f4-4fed-af93-5b6c3a030000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.405977316" lon="11.196098221">
+<time>2006-05-12T15:04:57Z</time>
+<name>WP004</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>19040000-5f54-4a57-9bb4-80a90c1e0000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.403411411" lon="11.205174225">
+<time>2006-05-12T15:07:05Z</time>
+<name>WP005</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>25060000-91ed-4db0-9ee7-04a41c180000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.391512976" lon="11.137610047">
+<time>2006-05-12T15:30:00Z</time>
+<name>WP006</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>02f40000-b695-4570-bae8-5b7e6a20ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.402052925" lon="11.113376927">
+<time>2006-05-12T15:36:49Z</time>
+<name>WP007</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>4e76ffff-9969-4e94-8d16-829b17f00000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.405275253" lon="11.047593905">
+<time>2006-05-12T16:03:52Z</time>
+<name>WP008</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>4b8cffff-b0e5-477b-807f-96d316a50000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.411297284" lon="10.940154908">
+<time>2006-05-12T16:48:44Z</time>
+<name>WP069</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>53eeffff-5be2-4753-95e5-842918a60000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.589784815" lon="10.255789051">
+<time>2006-05-12T21:55:17Z</time>
+<name>WP010</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>193b0000-8725-4fb9-abdb-54ea272e0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.781153555" lon="10.206299486">
+<time>2006-05-12T23:12:44Z</time>
+<name>NM006</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>66aeffff-aa85-47a2-8248-8635340d0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.946244738" lon="10.068691096">
+<time>2006-05-13T01:08:35Z</time>
+<name>WP011</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>19a00000-5198-4ae6-a7e4-a7092af70000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.022208840" lon="9.974128685">
+<time>2006-05-13T02:13:39Z</time>
+<name>WP012</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>428fffff-704c-4f66-af98-3d1c49abffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.214129914" lon="9.755127620">
+<time>2006-05-13T04:53:19Z</time>
+<name>WP013</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>00a30000-4e40-419d-ba6d-30402cb60000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.291903838" lon="9.867079744">
+<time>2006-05-13T05:01:31Z</time>
+<name>WP014</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>044e0000-79d8-4d24-b39b-571e5080ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.330733745" lon="9.855067713">
+<time>2006-05-13T05:25:51Z</time>
+<name>WP015</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>0afa0000-dba9-47c2-8a6b-04862e100000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.356417139" lon="9.763295800">
+<time>2006-05-13T06:04:35Z</time>
+<name>WP016</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5ddcffff-819b-4a3b-88f0-8abf6c3fffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.465910099" lon="9.708626530">
+<time>2006-05-13T07:19:03Z</time>
+<name>WP017</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>54e1ffff-1c20-4f4b-a4b4-49082de50000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.486522823" lon="9.725720504">
+<time>2006-05-13T07:26:08Z</time>
+<name>WP018</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6562ffff-2494-40e5-b681-7e6238ed0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.490850126" lon="9.720628682">
+<time>2006-05-13T07:29:52Z</time>
+<name>WP019</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6152ffff-1e8a-4062-98d6-b93f5639ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.492704538" lon="9.725356802">
+<time>2006-05-13T07:29:42Z</time>
+<name>Middelfart</name>
+<desc>Nachtfahrt, Segeln / Motoren abwechselnd. Michi/Manfreds Nachtwache mit riesiger U-Boot Welle</desc>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7e67ffff-2f34-4983-926a-d75d4159ffff</opencpn:guid>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.490850126" lon="9.720628682">
+<time>2006-05-14T15:02:21Z</time>
+<name>WP019</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6152ffff-1e8a-4062-98d6-b93f5639ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.492498497" lon="9.700261393">
+<time>2006-05-14T15:10:15Z</time>
+<name>WP022</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1c390000-d0cf-484f-97be-5dc847f0ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.499709310" lon="9.693351063">
+<time>2006-05-14T15:14:01Z</time>
+<name>WP023</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>171c0000-1ba6-46f2-8345-fc211b4d0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.505888956" lon="9.674074879">
+<time>2006-05-14T15:23:00Z</time>
+<name>WP024</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>79f0ffff-5fda-42e7-adb6-2ef66650ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.518657151" lon="9.672620073">
+<time>2006-05-14T15:28:32Z</time>
+<name>WP025</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6363ffff-b2a7-464d-957e-6c4a1a100000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.521865620" lon="9.691223617">
+<time>2006-05-14T15:25:14Z</time>
+<name>WP026</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1ae80000-7d06-4afe-9d1e-34867e75ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.518329507" lon="9.706599016">
+<time>2006-05-14T15:20:00Z</time>
+<name>WP027</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5d4cffff-0648-48f9-b38b-9fc515df0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.510008181" lon="9.740268567">
+<time>2006-05-14T15:13:53Z</time>
+<name>WP028</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5245ffff-0ce2-40f8-ad9e-b4977365ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.525039695" lon="9.755544034">
+<time>2006-05-14T15:26:23Z</time>
+<name>WP029</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2eb80000-2026-4901-8c72-ebf72dbf0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.549327669" lon="9.749361845">
+<time>2006-05-14T15:42:00Z</time>
+<name>WP030</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1ace0000-286e-47bf-9cbd-e40d309b0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.576227308" lon="9.847860495">
+<time>2006-05-14T16:18:18Z</time>
+<name>NM002</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>64f5ffff-a5e5-46ff-925a-e27532b90000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.546881334" lon="9.933866634">
+<time>2006-05-14T16:33:41Z</time>
+<name>WP031</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5a4fffff-99bb-47eb-9190-72cc71f0ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.717216103" lon="10.102996023">
+<time>2006-05-14T18:43:23Z</time>
+<name>WP032</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>4181ffff-17ea-40d2-ad51-3c405e5affff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.635395943" lon="10.514287948">
+<time>2006-05-14T20:37:51Z</time>
+<name>NM001</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>20c20000-fb13-486e-ac8b-77705061ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.746139476" lon="10.652068434">
+<time>2006-05-14T21:59:23Z</time>
+<name>WP033</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5e26ffff-ebed-4db4-a2ee-f7753c9a0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.816701663" lon="10.656069152">
+<time>2006-05-14T22:25:02Z</time>
+<name>WP034</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7a61ffff-6952-4ae3-be99-eaaf7fcaffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.816139716" lon="10.639611655">
+<time>2006-05-14T22:19:08Z</time>
+<name>Ballen</name>
+<desc>6 Bft in Böen 7, W, Halben Wind</desc>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2b2c0000-0e18-4da9-89f5-981f37130000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.817110347" lon="10.680073456">
+<time>2006-05-15T15:16:25Z</time>
+<name>WP036</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>05490000-cbc5-4024-bfba-a6db7cd9ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.715050888" lon="10.781435507">
+<time>2006-05-15T16:32:53Z</time>
+<name>WP037</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7024ffff-a56d-4509-b405-8f0d30900000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.493567822" lon="10.833327479">
+<time>2006-05-15T19:05:40Z</time>
+<name>WP038</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>731effff-bd47-4906-aca5-31d279f3ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.444542781" lon="10.773747807">
+<time>2006-05-15T19:33:32Z</time>
+<name>WP039</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>03410000-9779-401b-927d-46fa50a1ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.451629469" lon="10.672708499">
+<time>2006-05-15T19:23:16Z</time>
+<name>WP040</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>14970000-63ba-4851-a498-240a6567ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.453176358" lon="10.669435185">
+<time>2006-05-15T19:22:05Z</time>
+<name>WP041</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>66fdffff-dddb-426d-b795-59ca05940000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.453537289" lon="10.665434467">
+<time>2006-05-15T19:21:45Z</time>
+<name>Kerteminde</name>
+<desc>3-4 Bft, Hafentag mit 6-7 Bft auf den Kopf</desc>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>51e0ffff-6536-4af8-b8c1-301e203c0000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.453176358" lon="10.669435185">
+<time>2006-05-16T15:01:40Z</time>
+<name>WP041</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>66fdffff-dddb-426d-b795-59ca05940000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.363718283" lon="11.035409902">
+<time>2006-05-16T17:44:47Z</time>
+<name>WP044</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6832ffff-d69d-44bb-a4c1-0216146f0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.314075534" lon="11.036137305">
+<time>2006-05-16T18:02:11Z</time>
+<name>WP045</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>014d0000-bcc7-4a6f-aeef-142e01bf0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.172252166" lon="10.924117218">
+<time>2006-05-16T18:49:00Z</time>
+<name>WP046</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1a6a0000-f1dd-4af8-8585-7baa68bbffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.136717238" lon="10.888929090">
+<time>2006-05-16T19:06:16Z</time>
+<name>WP048</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>732effff-7b4c-4c5b-9069-0b9c41e4ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="55.138068560" lon="10.860196665">
+<time>2006-05-16T19:01:12Z</time>
+<name>WP049</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>26ca0000-f293-4061-94a0-1abc7feaffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.969372658" lon="10.707078298">
+<time>2006-05-16T20:49:39Z</time>
+<name>WP051</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>28940000-8413-4d41-a702-0e8e4a97ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.959037219" lon="10.710624389">
+<time>2006-05-16T20:57:10Z</time>
+<name>WP052</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>213a0000-3186-4091-bcf7-c2637fceffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.938985152" lon="10.705350716">
+<time>2006-05-16T21:11:31Z</time>
+<name>WP053</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>3c470000-c3d7-4fbc-b03a-f1bf485bffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.925925044" lon="10.675254410">
+<time>2006-05-16T21:20:35Z</time>
+<name>WP054</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>367f0000-0652-4ad5-b10f-b84f6547ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.909776889" lon="10.656705629">
+<time>2006-05-16T21:32:14Z</time>
+<name>WP055</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>172a0000-9d8f-4eb6-a761-d48159f3ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.879501247" lon="10.618335112">
+<time>2006-05-16T21:54:30Z</time>
+<name>WP056</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7050ffff-b8fb-49f9-8e23-53b65ff3ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.875898949" lon="10.568168400">
+<time>2006-05-16T21:58:34Z</time>
+<name>WP021</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6f4fffff-8cb3-46bf-9e50-b6375f8affff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.868326522" lon="10.521751123">
+<time>2006-05-16T22:06:15Z</time>
+<name>WP020</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>01c90000-fc6b-4349-9f8a-94914ee5ffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.856530969" lon="10.522840716">
+<time>2006-05-16T22:14:37Z</time>
+<name>WP059</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5c0fffff-1e0e-4366-8753-8b5f28ad0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.848980361" lon="10.525727597">
+<time>2006-05-16T22:19:51Z</time>
+<name>WP060</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7417ffff-0e64-4185-bc77-7a105966ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.848836401" lon="10.523681776">
+<time>2006-05-16T22:20:04Z</time>
+<name>Marstal</name>
+<desc>3-4 Bft NW-W</desc>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>05830000-2dee-49e2-9128-516a42e3ffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.848980361" lon="10.525727597">
+<time>2006-05-17T15:00:51Z</time>
+<name>WP060</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>7417ffff-0e64-4185-bc77-7a105966ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.856530969" lon="10.522840716">
+<time>2006-05-17T15:05:34Z</time>
+<name>WP059</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5c0fffff-1e0e-4366-8753-8b5f28ad0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.856138424" lon="10.528205314">
+<time>2006-05-17T15:05:35Z</time>
+<name>WP062</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6b98ffff-3a26-4fe8-898a-26724a62ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.843175005" lon="10.552726446">
+<time>2006-05-17T15:12:44Z</time>
+<name>WP063</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>37040000-6848-401f-91ce-519003c80000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.808576563" lon="10.552726446">
+<time>2006-05-17T15:31:27Z</time>
+<name>NM005</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>39bc0000-3b6c-4053-88c9-e80300120000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.642925191" lon="10.644978840">
+<time>2006-05-17T17:36:52Z</time>
+<name>WP064</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>6c34ffff-38b0-45d2-9a37-67726abeffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.412921907" lon="10.914638245">
+<time>2006-05-17T20:54:16Z</time>
+<name>WP065</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>52f8ffff-6c82-498d-84af-9fd731dc0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.390466236" lon="11.022357573">
+<time>2006-05-17T21:30:44Z</time>
+<name>WP070</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>212f0000-3db2-4bda-af48-db6d50ecffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.381254937" lon="11.035063979">
+<time>2006-05-17T21:39:12Z</time>
+<name>WP071</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2d950000-e15f-40b8-b313-08a400ea0000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.373401050" lon="11.026247289">
+<time>2006-05-17T21:42:05Z</time>
+<name>WP072</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>24040000-2988-4ca0-a12e-9f374da6ffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.374912706" lon="10.986651159">
+<time>2006-05-17T21:32:45Z</time>
+<name>WP073</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>560fffff-134a-4645-9378-e247685fffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.375971935" lon="10.983332382">
+<time>2006-05-17T21:31:24Z</time>
+<name>Heiligenhafen</name>
+<desc>5-6 Bft, SE-SW, auf der Kreuz dann halber Wind</desc>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>11320000-9207-4e5f-b3de-cbf5768fffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.374912706" lon="10.986651159">
+<time>2006-05-18T15:01:35Z</time>
+<name>WP073</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>560fffff-134a-4645-9378-e247685fffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.373401050" lon="11.026247289">
+<time>2006-05-18T15:18:07Z</time>
+<name>WP072</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>24040000-2988-4ca0-a12e-9f374da6ffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.404163856" lon="11.064028670">
+<time>2006-05-18T15:39:31Z</time>
+<name>WP073</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>655dffff-f9bb-4af4-a170-77423a170000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.402053442" lon="11.113378429">
+<time>2006-05-18T15:57:46Z</time>
+<name>WP074</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>09bd0000-57a0-4f57-9605-fee135fd0000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.362813302" lon="11.219634380">
+<time>2006-05-18T16:39:45Z</time>
+<name>NM003</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2d9b0000-022a-476f-9054-6efe435fffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.325842926" lon="11.281135976">
+<time>2006-05-18T17:10:18Z</time>
+<name>WP077</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>50ddffff-4daa-473a-8cad-ec35534effff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.353853840" lon="11.313808699">
+<time>2006-05-18T17:19:47Z</time>
+<name>NM004</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>3de20000-07c2-42fe-9244-e64b4ce2ffff</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FF0000" number="0" step="1" units="0" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.381859020" lon="11.279078829">
+<time>2006-05-18T17:04:19Z</time>
+<name>WP078</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>5786ffff-a8ad-4559-8b99-ad57648affff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.403411411" lon="11.205174225">
+<time>2006-05-18T16:35:15Z</time>
+<name>WP005</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>25060000-91ed-4db0-9ee7-04a41c180000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.405977316" lon="11.196098221">
+<time>2006-05-18T16:31:56Z</time>
+<name>WP004</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>19040000-5f54-4a57-9bb4-80a90c1e0000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.414059522" lon="11.187982716">
+<time>2006-05-18T16:30:13Z</time>
+<name>WP003</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>118b0000-40f4-4fed-af93-5b6c3a030000</opencpn:guid>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.415333962" lon="11.196616850">
+<time>2006-05-18T16:33:57Z</time>
+<name>WP002</name>
+<sym>Empty</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>1d700000-ef91-427f-bba8-49a811340000</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+<rtept lat="54.412617736" lon="11.199209994">
+<time>2006-05-18T16:34:26Z</time>
+<name>Burgtiefe</name>
+<sym>Service-Marina</sym>
+<type>WPT</type>
+<extensions>
+<opencpn:guid>2cf10000-5c66-46d1-a5f3-fc8b5f8fffff</opencpn:guid>
+<opencpn:viz_name>1</opencpn:viz_name>
+<opencpn:auto_name>1</opencpn:auto_name>
+<opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+<opencpn:waypoint_range_rings colour="#FFFFFF" number="-1" step="-1" units="-1" visible="false"/>
+</extensions>
+</rtept>
+</rte>
+</gpx>

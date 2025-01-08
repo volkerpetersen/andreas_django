@@ -126,8 +126,8 @@
 
             html = '<div class="portfolio-item ' + geo + ' col-xs-12 col-sm-4 col-md-3" data-value="'+ tripMiles +'">';
             html+= '<div class="trip-details-wrap">';
-            html+= '<img class="img-responsive" src="../static/'+toern['image'];
-            html+= '" alt="'+toern['destination']+'" onerror="imgErrorTripPicture(this);" />';
+            html+= '<img class="img-responsive" id="tripImage" src="../static/'+toern['image'];
+            html+= '" alt="'+toern['destination']+'" onerror="imgErrorTripPicture(this)"/>';
             html+= '<div class="text-center trip-name">'+startDate;
             html+= '<br />'+toern['destination']+'</div>';
             html+= '<div class="overlay">';
@@ -150,15 +150,6 @@
         set_subheadline("*", selectedMiles, selectedTrips);
 
     } // end of function parse_trip_gallery()
-
-    //----------------------------------------------------------------------------------------
-    // function to display default image if Trip image is not available
-    //----------------------------------------------------------------------------------------
-    function imgErrorTripPicture(image) {
-        image.onerror = "";
-        image.src = "./static/images/2005_09_Baltic.jpg";
-        return true;
-    } // end of function imgErrorTripPicture()
 
 
     jQuery(document).ready(function() {

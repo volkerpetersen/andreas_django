@@ -26,7 +26,7 @@ class toerndirectory(models.Model):
     georegion = models.CharField(blank=True, null=True, max_length=40,
                                  help_text="Atlantic, Caribbean, Great Lakes, Pacific")
     maptable = models.CharField(blank=True, null=True, max_length=100,
-                                help_text="name of the map table")
+                                help_text="name of the Google Maps waypoints table")
     boat = models.CharField(blank=True, null=True, max_length=400)
     miles = models.DecimalField(
         blank=True, null=True, max_digits=8, decimal_places=2)
@@ -49,6 +49,7 @@ class toerndirectory(models.Model):
     class Meta:
         managed = True
         db_table = "ToernDirectoryTable"
+        verbose_name_plural = 'Toern Directory'
 
     def __str__(self):
         return f"{self.startDate}: {self.destination}"

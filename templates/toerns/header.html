@@ -83,6 +83,17 @@
 		$('body').scrollTop(0);
 	}
 
+	//----------------------------------------------------------------------------------------
+	// function to display default image if Trip image if None is not available
+	//----------------------------------------------------------------------------------------
+	function imgErrorTripPicture(image) {
+		if (image) {
+			image.onerror = "";
+			image.src = "./static/images/BackgroundMap_noOpacity.PNG";
+		}
+		return true;
+	} // end of function imgErrorTripPicture()
+
 	document.addEventListener("DOMContentLoaded", function(){
 		html ='<input id="searchbox" class="form-control" type="text" placeholder="search..."></div>';
 		if(isMobile) {
@@ -116,7 +127,6 @@
 				document.body.style.paddingTop = '0';
 			} 
 		});
-	
 	}); 
 </script>
 
@@ -128,7 +138,7 @@
 			<div class="col-11 col-sm-7 subheadline" id="subheadline"></div>
 		</div>
 	
-		<nav class="main-nav navbar navbar-expand-sm navbar-light" id="navbar_container">
+		<nav class="main-nav navbar navbar-expand-sm navbar-light" id="navbar">
 			<div class="container col-hdr-container">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarNav" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<!-- <span class="navbar-toggler-icon"></span> -->
@@ -144,6 +154,7 @@
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<li><a class="dropdown-item" href="{% url 'Safety-Andreas' %}">Safety-Andreas</a></li>
 								<li><a class="dropdown-item" href="{% url 'Weather' %}">Weather Page</a></li>
+								<li><a class="dropdown-item" href="/admin">Admin Pages</a></li>
 							</ul>
 						</li>
 					</ul>

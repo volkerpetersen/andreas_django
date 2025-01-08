@@ -13,13 +13,16 @@ site admin page /admin: petersen toerns
 import json
 import os
 from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.shortcuts import render
 from django.core import serializers
-from django.conf import settings as conf_settings
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
+from django.db import connection
 from toerns.models import toerndirectory, fetchRouteData
-from toerns.settings import SQLITE
+from toerns.settings import SQLITE, MEDIA_ROOT
+from toerns.NavToolsLib import NavTools
+
 
 def fetchContent(route="all"):
     """---------------------------------------------------------------------
@@ -49,8 +52,6 @@ def fetchContent(route="all"):
     }
 
     if route == "all":
-        #trips = toerndirectory.objects.filter(
-        #    startDate__lte=datetime.now()).order_by("-startDate")
         trips = toerndirectory.objects.all().order_by("-startDate")
         if trips is None:
             trips = {}
@@ -104,11 +105,116 @@ def safetyAndreas(request):
     """
     return render(request, "toerns/safetyAndreas.html", context=fetchContent(route=None))
 
-def safetyZigzag(request):
+def updateTrip(request):
     """---------------------------------------------------------------------
-        view function for the Zigzag Safety page
+        view function to gather user input for a route update request
     """
-    return render(request, "toerns/safetyZigzag.html", context=fetchContent(route=None))
+    content = fetchContent(route=None)
+    content["trips"] = toerndirectory.objects.all().order_by("-startDate")
+    return render(request, "toerns/updateTrip.html", context=content)
+
+@require_POST
+def updateTripData(request):
+    """---------------------------------------------------------------------
+        view function to process a route/image update AJAX request
+    """
+    content = {}
+    content['msg'] = None
+    msg = ""
+
+    if request.FILES['fileUpload']:
+        uploadedFile = request.FILES['fileUpload']
+        fs = FileSystemStorage()
+        filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
+        if fs.exists(filePath):
+            fs.delete(filePath)
+        filename = fs.save(filePath, uploadedFile)
+        fileURL = fs.url(filename)
+        fn = filename.split('.')
+        routeName = fn[0]
+        routeFormat = fn[1]
+    else:
+        content['success'] = False
+        content['msg'] = F"No valid waypoint file received."
+        return JsonResponse(content)
+
+    if request.FILES['imageUpload']:
+        uploadedFile = request.FILES['imageUpload']
+        fs = FileSystemStorage()
+        filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
+        if fs.exists(filePath):
+            fs.delete(filePath)
+        imageName = fs.save(filePath, uploadedFile)
+        imageURL = fs.url(imageName)
+    else:
+        content['success'] = False
+        content['msg'] = F"No valid image file received."
+        return JsonResponse(content)
+
+    try:
+        if not filename:
+            content['success'] = False
+            content['msg'] = f"Route name must be specified first in the 'Toerndirectory' table field 'maptable'."
+            return JsonResponse(content)
+
+        content['success'] = True
+        navtools = NavTools()
+
+        if routeFormat == "gpx":
+            msg = navtools.parseSQLRouteFile(MEDIA_ROOT, MEDIA_ROOT, filename)
+            filename = filename.replace('gpx', 'sql')
+
+        (content['msg'], routeName) = uploadSQL(MEDIA_ROOT, filename)
+
+        # get the current toern we're working with
+        startDate = request.POST['routeSelect']
+        #print(f"startDate: {startDate}")
+
+        startDate = datetime.strptime(startDate, '%b. %d, %Y').strftime('%Y-%m-%d')
+        #print(f"startDate: {startDate}")
+
+        # update the maptable and image entries in the Toerndirectory table
+        toern = toerndirectory.objects.get(startDate=startDate)
+        toern.maptable = routeName
+        toern.image = imageName
+        toern.save()
+
+        dbTable = fetchRouteData(routeName)
+        numWaypoints = dbTable.objects.all().count()
+        content['msg'] = F"Updated {numWaypoints} waypoints in DB table {routeName} and uploaded the trip image {imageName}."
+
+    except Exception as e:
+        content['success'] = False
+        content['msg'] = F"Failed to update the image and/or route data to database.<br>{str(e)}"
+    return JsonResponse(content)
+
+def uploadSQL(pathName, fileName):
+    """---------------------------------------------------------------------
+        view function to upload an sql file to the Sqlite DB
+    """
+    routeName = None
+    try:
+        fn = os.path.normpath(os.path.join(pathName, fileName))
+        
+        with open(fn, 'r') as sql_file:
+            sql_content = sql_file.read()
+        
+        with connection.cursor() as cursor:
+            for command in sql_content.split(';'):
+                command = command.strip()
+                if command:
+                    cursor.execute(command)
+                    if "INSERT OR REPLACE INTO" in command:
+                        routeName = command.replace('INSERT OR REPLACE INTO "', "")
+                        routeName = routeName.split('"')
+                        routeName = routeName[0]
+
+        msg = "File successfully added to the database."    
+    except Exception as e:
+        msg = (f"DB error: {str(e)}")
+        print(msg)
+
+    return (msg, routeName)
 
 
 def weather(request):
@@ -136,43 +242,6 @@ def printDirectory(request):
         view function for the print version of Toern Directory
     """
     return render(request, "toerns/printDirectory.html", context=fetchContent(route="all"))
-
-
-@ csrf_exempt
-def upload_sqlite(request):
-    """---------------------------------------------------------------------
-        ajax function to execute an SQLite query
-    """
-    import sqlite3
-
-    sqlFile = request.POST.get("sqlFile", None)
-    path = conf_settings.STATICFILES_DIRS[0]
-    filename = os.path.normpath(os.path.join(path, "sqlite_files/" + sqlFile))
-
-    response = {"status": "success",
-                "msg": "Updated the SQLite table '%s'" % sqlFile}
-
-    # fetch the SQLite query and process it
-    try:
-        with open(filename, "r") as file:
-            sqliteQuery = file.read()
-    except:
-        response["status"] = "error"
-        response["msg"] = "Error reading SQLite query file '%s'" % filename
-        return JsonResponse(response)
-
-    # execute the SQLite query and write data to SQLite DB
-    try:
-        db = sqlite3.connect(SQLITE)
-        cursor = db.cursor()
-        cursor.executescript(sqliteQuery)
-        db.commit()
-        db.close()
-    except:
-        response["status"] = "error"
-        response["msg"] = "Error executing SQLite query '%s'" % sqlFile
-
-    return JsonResponse(response)
 
 
 def plotRoute(request, routeName):

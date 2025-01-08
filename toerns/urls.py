@@ -32,10 +32,13 @@ handler500 = 'toerns.views.error_500'
 
 urlpatterns = [
     re_path(r"^$", views.index, name="Directory"),
-    re_path(r"^gallery/", views.gallery, name="Gallery"),
-    re_path(r"^dashboard/", views.dashboard, name="Dashboard"),
-    re_path(r"^safetyAndreas/", views.safetyAndreas, name="Safety-Andreas"),
-    re_path(r"^weather/", views.weather, name="Weather"),
+    path("gallery", views.gallery, name="Gallery"),
+    path("dashboard", views.dashboard, name="Dashboard"),
+    path("safetyAndreas", views.safetyAndreas, name="Safety-Andreas"),
+    path("updateTrip", views.updateTrip, name="Update-Trip"),
+    path("weather", views.weather, name="Weather"),
+    path("admin", admin.site.urls, name="Admin-Pages"),  # Django Admin site),
+    # helper URL, not directly accessible for the user
+    path("updateTripData", views.updateTripData, name="updateTripData"),
     path("plotRoute/<routeName>", views.plotRoute, name="Route"),
-    path("admin/", admin.site.urls),  # Django Admin site),
 ]

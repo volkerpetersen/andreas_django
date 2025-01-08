@@ -157,6 +157,11 @@ body, html {
   z-index: 900;
 }
 
+.form-label {
+  font-size: 20px;
+  padding-top: 0px;
+}
+
 .searchbox {
   margin-right: 8px !important;
   margin-top: -21px !important;
@@ -219,6 +224,10 @@ body, html {
   padding-left:3rem;
 }
 
+.error {
+  font-size: 20px;
+  color: #640000;
+}
 /* Back to top button */
 .back-to-top {
   position: fixed;

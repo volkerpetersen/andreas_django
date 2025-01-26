@@ -136,6 +136,10 @@ body, html {
   padding-top: 5px !important;
 }
 
+.monospace {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+}
 #title_container {
   background-color: #ffffff;
 }

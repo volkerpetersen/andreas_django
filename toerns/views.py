@@ -23,6 +23,11 @@ from toerns.models import toerndirectory, fetchRouteData
 from toerns.settings import SQLITE, MEDIA_ROOT
 from toerns.NavToolsLib import NavTools
 
+dateFmtRead = ["%B %d, %Y",     # April 07, 2025
+               "%b. %d, %Y",    # Apr. 07, 2025
+               "%b %d, %Y",     # Apr 07, 2025
+]
+dateFmtWrite = "%Y-%m-%d"     # 2025-04-07
 
 def fetchContent(route="all"):
     """---------------------------------------------------------------------
@@ -39,7 +44,7 @@ def fetchContent(route="all"):
             content (dictionary): dictonary holding the data
     """
 
-    dateTimeStr = '%Y-%m-%d %H:%M:%S'
+    dateTimeStr = f"{dateFmtWrite} %H:%M:%S"
     
     dateStr = datetime.now().strftime(dateTimeStr)
     css = "../static/css/SailingLog.css?v=" + dateStr
@@ -116,7 +121,7 @@ def updateTrip(request):
 @require_POST
 def updateTripData(request):
     """---------------------------------------------------------------------
-        view function to process a route/image update AJAX request
+        AJAX function to process a route/image update AJAX request
     """
     content = {}
     content['msg'] = None
@@ -128,9 +133,9 @@ def updateTripData(request):
         filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
         if fs.exists(filePath):
             fs.delete(filePath)
-        filename = fs.save(filePath, uploadedFile)
-        fileURL = fs.url(filename)
-        fn = filename.split('.')
+        fileName = fs.save(filePath, uploadedFile)
+        fn = fileName.split('/').pop()
+        fn = fn.split('.')
         routeName = fn[0]
         routeFormat = fn[1]
     else:
@@ -145,14 +150,13 @@ def updateTripData(request):
         if fs.exists(filePath):
             fs.delete(filePath)
         imageName = fs.save(filePath, uploadedFile)
-        imageURL = fs.url(imageName)
     else:
         content['success'] = False
         content['msg'] = F"No valid image file received."
         return JsonResponse(content)
 
     try:
-        if not filename:
+        if not fileName:
             content['success'] = False
             content['msg'] = f"Route name must be specified first in the 'Toerndirectory' table field 'maptable'."
             return JsonResponse(content)
@@ -160,17 +164,18 @@ def updateTripData(request):
         content['success'] = True
         navtools = NavTools()
 
-        if routeFormat == "gpx":
-            msg = navtools.parseSQLRouteFile(MEDIA_ROOT, MEDIA_ROOT, filename)
-            filename = filename.replace('gpx', 'sql')
+        path = os.path.normpath(os.path.join(MEDIA_ROOT, 'routes'))
+        if routeFormat.lower() == "gpx":
+            msg = navtools.parseSQLRouteFile(path, path, routeName)
+            #print(msg)
+            fileName = fileName.replace('gpx', 'sql')
 
-        (content['msg'], routeName) = uploadSQL(MEDIA_ROOT, filename)
-
+        (msg, fn) = uploadSQL(MEDIA_ROOT, fileName)
         # get the current toern we're working with
         startDate = request.POST['routeSelect']
         #print(f"startDate: {startDate}")
 
-        startDate = datetime.strptime(startDate, '%b. %d, %Y').strftime('%Y-%m-%d')
+        startDate = parseDateString(startDate)
         #print(f"startDate: {startDate}")
 
         # update the maptable and image entries in the Toerndirectory table
@@ -188,14 +193,104 @@ def updateTripData(request):
         content['msg'] = F"Failed to update the image and/or route data to database.<br>{str(e)}"
     return JsonResponse(content)
 
+def parseDateString(dateString):
+    """---------------------------------------------------------------------
+        helper function to convert a date string into a standardized format
+    """
+    for fmt in dateFmtRead:
+        try:
+            date = datetime.strptime(dateString, fmt)
+            return date.strftime(dateFmtWrite)
+        except:
+            pass
+    return None
+
+def navTools(request):
+    """---------------------------------------------------------------------
+        view function to provide some Navigation Tools
+    """
+    content = fetchContent(route=None)
+    content["trips"] = toerndirectory.objects.all().order_by("-startDate")
+    return render(request, "toerns/navTools.html", context=content)
+
+
+@require_POST
+def navToolsData(request):
+    """---------------------------------------------------------------------
+        AJAX function to process a navTools AJAX request
+    """
+    content = {}
+    content['msg'] = None
+    msg = ""
+
+    try:
+        navtools = NavTools()
+
+        if request.POST['sqlite'] == 'true':
+            # AJAX request for analysis of a maptable in the SqLite DB
+            startDateSQL = request.POST['routeSelect']
+            startDate = parseDateString(startDateSQL)
+
+            try:
+                toern = toerndirectory.objects.get(startDate=startDate)
+            except:
+                msg = F"Can not find a trip record with startDate: {startDateSQL}"
+                print(f"navToolsData(): {msg}")
+                content['success'] = False
+                content['msg'] = msg
+                return JsonResponse(content)
+
+            tripFile = f"{toern.maptable}.gpx"
+        else:
+            # AJAX request for analysis of a .gpx file
+            if request.FILES['routeFileSelection']:
+                specifiedFile = request.FILES['routeFileSelection']
+                tripFile = specifiedFile.name
+            else:
+                content['success'] = False
+                content['msg'] = F"No valid image file received."
+                return JsonResponse(content)
+        
+        pathName = os.path.join(MEDIA_ROOT, "routes")
+        fn = os.path.normpath(os.path.join(pathName, tripFile))
+
+        with open(fn, 'r') as gpx_file:
+            xml = gpx_file.read()
+        if xml:
+            colgroup = (F"<table><colgroup>"+
+                        F"<col style='width: 30%;'>"+
+                        F"<col style='width: 15%;'>"+
+                        F"<col style='width: 15%;'>"+
+                        F"<col style='width: 10%;'>"+
+                        F"<col style='width: 10%;'>"+
+                        F"<col style='width: 10%;'>"+
+                        F"<col style='width: 10%;'>"+
+                        F"</colgroup>"
+            )
+            msg = navtools.ComputeRouteDistances(xml, verbose=False, 
+                    skipWP=False, noSpeed=False, tablefmt="html")
+            msg = msg.replace("\nT", "<br>T")
+            msg = msg.replace("\nAv", "<br>Av")
+            msg = msg.replace("<table>", colgroup)
+            content['success'] = True
+            content['msg'] = msg
+        else:
+            content['success'] = False
+            content['msg'] = F"No valid gpx route received."
+
+    except Exception as e:
+        content['success'] = False
+        content['msg'] = F"Failed to process the specified route data.<br>{str(e)}"
+    return JsonResponse(content)
+
+
 def uploadSQL(pathName, fileName):
     """---------------------------------------------------------------------
-        view function to upload an sql file to the Sqlite DB
+        helper function to upload an sql file to the Sqlite DB
     """
     routeName = None
     try:
         fn = os.path.normpath(os.path.join(pathName, fileName))
-        
         with open(fn, 'r') as sql_file:
             sql_content = sql_file.read()
         
@@ -223,26 +318,6 @@ def weather(request):
     """
     return render(request, "toerns/weather.html", context=fetchContent(route=None))
 
-def ais(request):
-    """---------------------------------------------------------------------
-        view function for the AIS display
-    """
-    return render(request, "toerns/ais.html", context=fetchContent(route=None))
-
-
-def navigation(request):
-    """---------------------------------------------------------------------
-        Compute the Rhumb Line and Great Circle Distance between 2 points
-    """
-    return render(request, "toerns/navigation.html", context=fetchContent(route=None))
-
-
-def printDirectory(request):
-    """---------------------------------------------------------------------
-        view function for the print version of Toern Directory
-    """
-    return render(request, "toerns/printDirectory.html", context=fetchContent(route="all"))
-
 
 def plotRoute(request, routeName):
     """---------------------------------------------------------------------
@@ -260,26 +335,6 @@ def plotRoute(request, routeName):
     content["wpsJSON"] = json.dumps(serializers.serialize("json", routeData))
 
     return render(request, "toerns/plotRoute.html", content)
-
-
-def update_sqliteDB(request):
-    """---------------------------------------------------------------------
-        view function update the sqlite DB
-    """
-    from django.db import connection
-
-    content = fetchContent(route="all")
-    for trip in content["trips"]:
-        routeName = trip.maptable
-        if len(routeName):
-            #query = (f"ALTER TABLE '{routeName}' RENAME COLUMN 'to' TO 'name'")
-            query = (f"ALTER TABLE '{routeName}' DROP COLUMN 'from'")
-            print(query)
-            with connection.cursor() as cursor:
-                x=cursor.execute(query)
-                print(x)
-
-    return render(request, "toerns/index.html", content)
 
 # add custom error pages
 def error_404(request, exception=None):

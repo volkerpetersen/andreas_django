@@ -21,7 +21,7 @@ git pull git@github.com:volkerpetersen/andreas_django.git
 py manage.py makemigrations
 py manage.py migrate 
 
-site admin page /admin: helgaas  raceAdmin
+site admin page /admin  UN:helgaas  PW:raceAdmin
 
 install a python package in pythonanywhere:
 pip install --user package_name
@@ -167,6 +167,11 @@ JAZZMIN_SETTINGS = {
             "name": "Upload GPX or SQL",
             "url": "/updateTrip",
             "icon": "fas fa-cog",
+            },
+            {
+            "name": "Nav Tools",
+            "url": "/navTools",
+            "icon": "fas fa-tools",
             },
         ],
     },

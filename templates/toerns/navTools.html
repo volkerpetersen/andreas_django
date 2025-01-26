@@ -1,0 +1,258 @@
+<!------------------------------------------------------------------
+	navTools.html
+	Page to provide some navogation tools
+
+	in pythonanywhere Bash console:
+    git pull git@github.com:volkerpetersen/DjangoWebsites.git
+
+	exceute on localhost using:
+	python manage.py runserver
+  -------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Navigation Tools{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <!-- Start of updateTrip.html body content-->
+  <div class="container">
+    <div class="row pt-2">
+      <div class="col-12">
+        <p class="form-label">
+          This page allows you to:<br>
+          <ol>
+            <li>select a GPX route file from a trip and compute distances between waypoints.</li>
+            <li>upload a GPX route file and compute distances between waypoints.</li>
+            <li>upload an Expedition csv weather routing results file and summarize the data.</li>
+          </ol>
+        </p>
+      </div>
+    </div>
+    <div class="row pt-1">
+      <form id="navToolsDataForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <label for="routeSelect" class="col-12 col-md-3 form-label">Select a trip from this list:</label>
+          <div class="col-12 col-md-7">
+            <select class="form-select" id="routeSelect" name="routeSelect" onChange="tripSelection(this);">
+              <option value="none">-- none selected --</option>
+            {% for trip in trips %}
+            {% autoescape off %}
+              <option value="{{trip.startDate}}">{{trip.startDate}} - {{trip.destination}}</option>
+            {% endautoescape %}
+            {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="row pt-1">
+          <label for="routeFileSelection" class="col-12 col-md-3 form-label">Select route file:</label>
+          <div class="col-12 col-md-8">
+            <input type="file" name="routeFileSelection" id="routeFileSelection" onchange="routeSelection()" accept=".gpx" />
+          </div>
+        </div>
+        <div class="row pt-2">
+          <button type="submit" class="col-4 col-md-2 btn btn-success" id="navToolsSubmit">Calculate</button>
+          <button type="button" class="offset-5 offset-md-9 col-2 col-md-1 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#navToolsHelpModal">Help</button>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <span class="error" id="noTripSelection">No trip selected from the Toerndirectory.</span><br>
+            <span class="error" id="noRouteSelection">No .gpx route file selected.</span><br>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <div class="col-12">&nbsp;</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!--
+=============================================================================================================
+	Modal Form Feedback msg
+=============================================================================================================
+-->
+<div class="modal fade in" id="modalFormFeedback" role="dialog">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="modalFormFeedbackHeader"><!-- Header msg spaceholder --></div>
+        <button type="button" class="btn-close" id="modalFormClose" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="modalFormFeedbackBody"><!-- Body msg spaceholder --></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /Modal Form Feedback msg-->
+
+<!--
+=============================================================================================================
+	Modal Form with Help for this page
+=============================================================================================================
+-->
+<div class="modal fade" id="navToolsHelpModal" tabindex="-1" aria-labelledby="Nav Tools Help" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div id="modalHeader"><h3>Nav Tools Help</h3></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="modalBody">
+          <p>The 'Navigation Tools' page integrates various handy tools.
+          The tools convert route data between various file formats (gpx, kml, sql, spot).
+          In addition the software can upload SQL files to the Toern website and compute
+          route statistics.
+          </p>
+          <p class="monospace">
+          OpenCPN Waypoint Symbol/Name legend:<br>
+          &nbsp;&nbsp;Generic WP name options-------> NMxxx, WPxxx, WPTxxx, or 0xxx<br>
+          &nbsp;&nbsp;Diamonds/non-Generic WP name--> regular WP on route<br>
+          &nbsp;&nbsp;Diamonds/Generic WP name------> non-visible WP on route<br>
+          &nbsp;&nbsp;Empty-------------------------> non-visible WP on route<br>
+          &nbsp;&nbsp;Circle------------------------> Harbor<br>
+          &nbsp;&nbsp;Service-Marina----------------> Harbor<br>
+          &nbsp;&nbsp;Anchorage---------------------> Mooring / Anchorage<br>
+          </p>
+          <p>
+          The program computes the Time, Speed, and Etmals between WPs that
+          contain a &lt;desc&gt;&lt;/desc&gt; tag with these entry options:<br>
+          &nbsp;&nbsp;arrival 2019-09-25 19:30 (arrival date/time at this WP)<br>
+          &nbsp;&nbsp;departure 2019-09-26 09:37 (departure date/time from this WP)<br>
+          &nbsp;&nbsp;timedleg 2019-09-26 09:37 (arrival and departure at/from this WP)<br>
+          &nbsp;&nbsp;poi (Point of Interest on route not being listed)<br>
+          &nbsp;&nbsp;homeport (designates the Waypoint from which a round-trip toern originates)<br>
+          Add departure and arrival times using the above keywords in add'l lines.
+          </p>
+          <p>
+          Yellowbrick Google Earth files are available at "yb.tl/racenamexxxx.kml" e.g.:<br>
+          &nbsp;&nbsp;https://yb.tl/bayviewmack2024.kml<br>
+          &nbsp;&nbsp;https://yb.tl/chicagomac2023.kml<br>
+          &nbsp;&nbsp;https://yb.tl/transsuperior2021.kml<br>
+          &nbsp;&nbsp;https://yb.tl/transpac2025.kml<br>
+          </p>
+          <p>This gets all available Yellowbrick links:<br>
+          &nbsp;&nbsp;https://yb.tl/links/transpac2025
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div><!-- /Modal Form Feedback msg-->
+
+<script type='text/javascript'>
+  let sqlSelectionFlag = false;
+  let fileSelectionFlag = false;
+
+  function resetPageHeight(element) {
+    document.body.classList.add('vh-100');
+    var height = document.body.clientHeight;
+    height -= document.getElementById("title_container").clientHeight;
+    height -= document.getElementById("footer").clientHeight;
+    element.style.minHeight = (height) + "px";
+  };
+
+  function tripSelection(option) {
+    var trip = option.value;
+    console.log("trip: "+trip);
+
+    if (trip.includes("none")) {
+      $("#noTripSelection").html("No trip selected from the Toerndirectory.");
+      sqlSelectionFlag = false;
+    }
+    else {
+      $("#noRouteSelection").html("");
+      $("#noTripSelection").html("");
+      sqlSelectionFlag = true
+    }
+
+    if(sqlSelectionFlag || fileSelectionFlag) {
+      $('#navToolsSubmit').prop('disabled', false);
+    } else {
+      $('#navToolsSubmit').prop('disabled', true);
+    }
+  };
+
+  function routeSelection() {
+    var upl = document.getElementById("routeFileSelection");
+    var route = upl.files[0]
+
+    if (route && route.name.includes('.gpx')) {
+      $("#noRouteSelection").html("");
+      $("#noTripSelection").html("");
+      fileSelectionFlag = true;
+    }
+    else {
+      $("#noRouteSelection").html("Invalid route file format selected. Please select a .gpx file.");
+      fileSelectionFlag = false;
+    }
+
+    if (sqlSelectionFlag || fileSelectionFlag) {
+      $('#navToolsSubmit').prop('disabled', false);
+    } else {
+      $('#navToolsSubmit').prop('disabled', true);
+    }
+  };
+
+  jQuery(document).ready(function(){
+    $('#navToolsSubmit').prop('disabled', true);
+    $("#searchbox").remove();
+    $("#headline").html("Navigation Tools")
+    resetPageHeight(document.getElementById("main"))
+  });
+
+  $("#navToolsDataForm").on('submit', function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    if(sqlSelectionFlag) {
+      formData.append('sqlite', 'true');
+    } else {
+      formData.append('sqlite', 'false');
+    }
+    $.ajax({
+      type: "POST",
+      url: '{% url "navToolsData" %}',
+      data: formData,
+      processData: false, // prevent jQuery from transforming the data into query string
+      contentType: false, // let jQuery set the type correctly
+      success: function(response) {
+        hdr = "<h5>Trip Summary</h5>";
+        if (response.success) {
+          msg = "<p>" + response.msg + "<br></p>";
+          //alert("success")
+        } else {
+          msg = "<h5>" + response.msg + "<br>Please contact Volker Petersen for assistance.</h5>";
+        }
+        $("#modalFormFeedback").modal("show");
+        $("#modalFormFeedbackHeader").html(hdr);
+        $("#modalFormFeedbackBody").html(msg);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        msg = "<h5>";
+        if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+          msg += jqXHR.responseJSON.error;
+        } else if (jqXHR.status === 0) {
+          msg += "Could not connect to the server.";
+        } else if (jqXHR.status) {
+          msg += "Server error: " + jqXHR.status;
+        } else if (errorThrown) {
+          msg += errorThrown;
+        } else {
+          msg += textStatus;
+        }
+        msg += "<br>Please contact Volker Petersen for assistance.</h5>";
+        console.log("Navigation Tools error: " + msg);
+      }
+    });
+  });
+
+</script>
+  <!-- end of safety.html body content container -->
+{% endblock %}

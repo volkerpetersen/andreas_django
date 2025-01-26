@@ -1,0 +1,868 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="OpenCPN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" xmlns:opencpn="http://www.opencpn.org">
+  <rte>
+    <name>2019_Bayfield_Chicago_Delivery</name>
+    <extensions>
+      <opencpn:guid>6bbcffff-8605-4385-90f6-c55b4f33ffff</opencpn:guid>
+      <opencpn:viz>1</opencpn:viz>
+      <opencpn:start>Bayfield</opencpn:start>
+      <opencpn:end>Chicago</opencpn:end>
+      <opencpn:planned_speed>6.00</opencpn:planned_speed>
+      <opencpn:planned_departure>2019-06-01T06:19:56Z</opencpn:planned_departure>
+      <opencpn:time_display>PC</opencpn:time_display>
+      <gpxx:RouteExtension>
+        <gpxx:IsAutoNamed>false</gpxx:IsAutoNamed>
+      </gpxx:RouteExtension>
+    </extensions>
+    <rtept lat="46.809443333" lon="-90.812775000">
+      <time>2019-05-29T12:31:20Z</time>
+      <name>Bayfield</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>74d6ffff-0ff8-42a0-8032-93735fadffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.809232584" lon="-90.812218384">
+      <time>2019-05-29T16:13:01Z</time>
+      <name>NM003</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>08a80000-6946-4794-aa96-e4e32b760000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.809881047" lon="-90.811847640">
+      <time>2019-05-29T16:12:43Z</time>
+      <name>NM002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>6611ffff-f075-4660-ae9d-20f264ffffff</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.809063419" lon="-90.806945592">
+      <time>2019-05-29T16:11:33Z</time>
+      <name>NM0301</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5ad5ffff-bc2b-4c3c-8c47-ba3d5326ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.825695000" lon="-90.756525000">
+      <time>2019-05-29T16:13:55Z</time>
+      <name>NM0404</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5630ffff-ee3b-4356-90d2-6ade2ff50000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.889019231" lon="-90.603284028">
+      <time>2019-05-29T12:31:23Z</time>
+      <name>NM02002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>72c5ffff-03de-4428-a8e3-6b3a7b37ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.241998536" lon="-88.635992582">
+      <time>2019-05-29T12:31:51Z</time>
+      <name>NM02003</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>25080000-c371-4851-b5d1-531c717cffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.228189597" lon="-88.627299976">
+      <time>2019-05-29T12:32:46Z</time>
+      <name>NM02004</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3bc00000-9d69-421c-b4ab-ff570b580000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.215379704" lon="-88.619318086">
+      <time>2019-05-29T12:32:48Z</time>
+      <name>NM02005</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>1cbf0000-6b2c-4a60-a16a-a193100f0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.199075104" lon="-88.618935393">
+      <time>2019-05-29T12:32:52Z</time>
+      <name>NM02007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>099c0000-3bb2-4dd1-ad80-8f192eab0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.189973547" lon="-88.621504905">
+      <time>2019-05-29T12:32:55Z</time>
+      <name>NM02008</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>14640000-2d72-4116-aae4-a7f906b50000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.170241956" lon="-88.641623641">
+      <time>2019-05-29T12:32:58Z</time>
+      <name>NM02009</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>38320000-b417-40ce-ac6b-0a503bea0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.158273089" lon="-88.633204387">
+      <time>2019-05-29T12:33:01Z</time>
+      <name>NM02011</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7c76ffff-e989-40f7-9185-be8518fc0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.129938505" lon="-88.622215621">
+      <time>2019-05-29T12:33:05Z</time>
+      <name>NM02012</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>23e40000-87d1-4c94-96be-4cbc0ed20000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.122796700" lon="-88.601440840">
+      <time>2019-05-29T12:33:07Z</time>
+      <name>NM02013</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>027b0000-83f3-41ab-9da1-59160dd20000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.122536304" lon="-88.586242448">
+      <time>2019-06-03T08:12:25Z</time>
+      <name>NM09801</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>67efffff-89c7-41e7-a7d3-b13715c00000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.123615081" lon="-88.566834429">
+      <time>2019-05-29T12:33:14Z</time>
+      <name>Houghton</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>53d7ffff-bcfb-4cad-9c29-263c4ca8ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.122517704" lon="-88.547563086">
+      <time>2019-05-29T12:33:17Z</time>
+      <name>NM02017</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>2ad50000-d629-46d9-af91-b6096aafffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.112026385" lon="-88.506423551">
+      <time>2019-05-29T12:34:34Z</time>
+      <name>NM02018</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>561affff-a8d3-447e-8cb6-bead49d7ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="47.022692109" lon="-88.475425392">
+      <time>2019-05-29T12:34:43Z</time>
+      <name>NM02019</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5b6cffff-aa09-4764-a254-e9e16e45ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.994039057" lon="-88.435337300">
+      <time>2019-05-29T12:34:48Z</time>
+      <name>NM02020</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7dabffff-5364-4a41-b255-91174a89ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.981717395" lon="-88.434996575">
+      <time>2019-05-29T12:34:53Z</time>
+      <name>NM02021</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>197b0000-fd21-4f9a-9d3a-cb7510050000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.966498333" lon="-88.431716667">
+      <time>2019-06-03T08:16:36Z</time>
+      <name>NM079602</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>6371ffff-875d-49d1-82cf-8eeb6220ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.982666589" lon="-88.106772559">
+      <time>2019-05-29T12:35:30Z</time>
+      <name>NM001</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7c24ffff-b61d-4c01-bbfa-2cac1c570000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.980971107" lon="-87.981683934">
+      <time>2019-05-29T12:35:01Z</time>
+      <name>NM02022</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>1d9a0000-d1e3-4b59-b42c-0dee2ef90000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.853090180" lon="-85.073166307">
+      <time>2019-05-29T12:36:15Z</time>
+      <name>NM02024</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>6754ffff-99d5-4911-95bc-d11543faffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.791871161" lon="-84.905829206">
+      <time>2019-05-29T12:36:16Z</time>
+      <name>NM02025</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>313f0000-da67-4e2e-903e-e7fd041f0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.497015793" lon="-84.605493707">
+      <time>2019-05-29T12:36:21Z</time>
+      <name>NM02026</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7a0effff-6448-4d2e-b298-374011f60000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.446928427" lon="-84.533669838">
+      <time>2019-05-29T12:37:26Z</time>
+      <name>NM02027</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5c1dffff-a6f5-4c08-9566-dfd54c4dffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.456630998" lon="-84.493906566">
+      <time>2019-05-29T12:37:27Z</time>
+      <name>NM02028</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>1e820000-c95d-4f34-b7e2-434a39360000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.463478831" lon="-84.469054521">
+      <time>2019-05-29T12:37:29Z</time>
+      <name>NM02029</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>2ae20000-a2cd-421e-8253-e7a74f66ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.482305931" lon="-84.444202477">
+      <time>2019-05-29T12:37:30Z</time>
+      <name>NM02030</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7d7bffff-6abe-4347-b495-5cb4573bffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.496849684" lon="-84.416036826">
+      <time>2019-05-29T12:37:32Z</time>
+      <name>NM02031</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>0d110000-5926-4042-b1ce-f3911c360000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.501465086" lon="-84.381269851">
+      <time>2019-05-29T12:37:34Z</time>
+      <name>NM02032</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>61b0ffff-147c-4b2a-9495-998d03470000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.503390000" lon="-84.344406667">
+      <time>2019-05-29T12:38:31Z</time>
+      <name>NM055002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>0a9e0000-06be-4ee6-83f6-42a406810000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.501251667" lon="-84.336588333">
+      <time>2019-05-29T12:38:47Z</time>
+      <name>NM056003</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5ffbffff-a64f-4581-81af-73f0094a0000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.499825683" lon="-84.337519897">
+      <time>2019-05-29T12:37:36Z</time>
+      <name>Sault Saint Marie</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>04aa0000-36bc-4997-a40a-e1c9575dffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.501322532" lon="-84.336484396">
+      <time>2019-05-14T16:39:00Z</time>
+      <name>NM01001</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>325d0000-3478-4758-8149-15ce6871ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.493231932" lon="-84.305833541">
+      <time>2019-05-14T16:39:08Z</time>
+      <name>NM01004</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5cabffff-ea53-489e-9b52-b09f3f9f0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.450626667" lon="-84.274138333">
+      <time>2019-05-14T16:39:24Z</time>
+      <name>NM011005</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>13c00000-79aa-4eb1-b83b-fec972abffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.430603333" lon="-84.252698333">
+      <time>2019-05-14T16:39:36Z</time>
+      <name>NM011006</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7371ffff-64c2-4ed6-9c8b-c52315670000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.390756667" lon="-84.234521667">
+      <time>2019-05-14T16:39:47Z</time>
+      <name>NM011007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>744dffff-3d12-435f-9465-cfbd6ebfffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.379247464" lon="-84.226985667">
+      <time>2019-05-14T16:39:57Z</time>
+      <name>NM01008</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>27fe0000-3152-448d-8099-dd856043ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.353078333" lon="-84.213121667">
+      <time>2019-05-14T16:40:05Z</time>
+      <name>NM011009</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>51abffff-5d82-4ac8-84b3-ebd527360000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.288896667" lon="-84.215500000">
+      <time>2019-05-14T16:40:28Z</time>
+      <name>NM011011</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>509fffff-a821-495f-9ac1-47be3deb0000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.259981667" lon="-84.184871667">
+      <time>2019-05-14T16:40:41Z</time>
+      <name>NM011012</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>35f70000-c9f5-45e9-a8b5-4d4e1b0e0000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.251176667" lon="-84.180680000">
+      <time>2019-05-14T16:40:47Z</time>
+      <name>NM011013</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>4bfdffff-09da-4892-bd9e-3b243a160000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.222130000" lon="-84.171813333">
+      <time>2019-05-14T16:40:58Z</time>
+      <name>NM011014</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>689cffff-27ac-4329-b0d7-10ee5213ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.185756667" lon="-84.105723333">
+      <time>2019-05-29T12:48:45Z</time>
+      <name>NM095001</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7ae1ffff-2304-45f4-bab0-96c15c91ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.141658050" lon="-84.021592383">
+      <time>2019-05-14T16:41:11Z</time>
+      <name>NM01015</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>6eabffff-fa15-4fdb-a54f-426c2ff00000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.124454448" lon="-84.012081382">
+      <time>2019-05-14T16:41:55Z</time>
+      <name>NM01015</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>51f5ffff-ba0d-4e8e-b0e1-ab8b6d0fffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.074377050" lon="-84.019174332">
+      <time>2019-05-14T16:42:03Z</time>
+      <name>NM01016</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3c310000-649e-4e72-abb0-05940fd70000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.041489040" lon="-83.935227660">
+      <time>2019-05-14T16:42:09Z</time>
+      <name>NM01017</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>4146ffff-d63d-4879-9276-94f72f0b0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="46.004438621" lon="-83.891662441">
+      <time>2019-05-14T16:42:15Z</time>
+      <name>NM01018</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7e83ffff-c95b-479f-ab6b-562a324b0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.985623333" lon="-83.892991667">
+      <time>2019-05-14T16:58:16Z</time>
+      <name>NM013002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>26630000-533e-41cd-9b18-8fed627affff</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.947751618" lon="-83.900568929">
+      <time>2019-05-14T16:42:24Z</time>
+      <name>NM01019</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>0c3a0000-454a-4ae9-8714-a9f139f20000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.900206361" lon="-84.147371337">
+      <time>2019-05-14T16:43:12Z</time>
+      <name>NM01020</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>4bb2ffff-41d0-45f4-ad1a-dbf9119f0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.843468333" lon="-84.607043333">
+      <time>2019-05-14T16:43:51Z</time>
+      <name>NM078001</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>741effff-3f2e-40e7-8c6e-def106880000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.848858333" lon="-84.613853333">
+      <time>2018-07-14T16:43:29Z</time>
+      <name>NM078002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>096c0000-af43-4c35-85b3-f73d04a20000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.848858333" lon="-84.613853333">
+      <time>2018-07-14T16:43:29Z</time>
+      <name>NM078002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>096c0000-af43-4c35-85b3-f73d04a20000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.843021667" lon="-84.612788333">
+      <time>2018-07-14T16:58:56Z</time>
+      <name>NM0978901</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>1db10000-5716-436b-ba2e-997b09c20000</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.817605757" lon="-84.702682147">
+      <time>2018-07-14T16:59:15Z</time>
+      <name>Graham Shoal to Port</name>
+      <sym>Marks-Race-Tetrahedron-Mark1</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>2e2a0000-380c-4db5-9acc-994157deffff</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.823848338" lon="-85.134498234">
+      <time>2018-07-14T16:59:19Z</time>
+      <name>Grays Reef Channel End</name>
+      <sym>Marks-Race-Tetrahedron-Mark1</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>597bffff-2488-4a3c-a5d8-67aa4135ffff</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.763468333" lon="-85.147071667">
+      <time>2019-06-01T06:12:50Z</time>
+      <name>NM0501</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7b45ffff-7e80-46aa-b845-b6a551d0ffff</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.681714085" lon="-85.187200574">
+      <time>2018-07-14T17:00:10Z</time>
+      <name>Grays Reef Channel Start</name>
+      <sym>Marks-Race-Tetrahedron-Mark1</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>6651ffff-7432-41f7-8410-f3e948ffffff</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.356365022" lon="-85.308804802">
+      <time>2019-07-12T08:15:14Z</time>
+      <name>NM001</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7261ffff-2390-4d0b-b682-55ce1e180000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.320396416" lon="-85.265054119">
+      <time>2019-07-12T08:16:26Z</time>
+      <name>NM004</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>34fc0000-5ad4-4e7c-b8c2-81517d7dffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.319137101" lon="-85.260346444">
+      <time>2019-07-12T08:16:46Z</time>
+      <name>NM005</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>25e10000-067e-4bff-a367-6e841a460000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.318956667" lon="-85.257736667">
+      <time>2019-07-12T08:16:53Z</time>
+      <name>NM006</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>2d630000-e901-4dea-b96e-99bf1c1d0000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.315935000" lon="-85.255126667">
+      <time>2019-07-12T08:16:20Z</time>
+      <name>Charlevoix</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>32200000-c219-452b-8281-bcc3192d0000</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.318993333" lon="-85.257788333">
+      <time>2019-07-12T08:15:25Z</time>
+      <name>NM002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>68ecffff-8641-4933-9ee5-4dba06410000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.319065000" lon="-85.260346667">
+      <time>2019-07-12T08:18:19Z</time>
+      <name>NM007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3c9b0000-6464-4e4e-ace2-5f820bf50000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.324605923" lon="-85.280149384">
+      <time>2019-07-12T08:18:25Z</time>
+      <name>NM008</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7eb0ffff-cbcd-4362-958c-0f2e5133ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.329750452" lon="-85.317196746">
+      <time>2019-07-12T08:18:40Z</time>
+      <name>NM009</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>17060000-7388-40b8-bbf1-71d26369ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.234915437" lon="-85.599861975">
+      <time>2019-07-12T08:19:01Z</time>
+      <name>NM010</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>286a0000-7ba0-453b-9ddd-8af334620000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="45.009393333" lon="-85.939146667">
+      <time>2019-05-15T07:47:09Z</time>
+      <name>NM01006</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>60b7ffff-a98d-4e83-81d8-873f06d40000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="44.845498768" lon="-86.282671596">
+      <time>2019-05-15T11:16:44Z</time>
+      <name>NM01007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>4e88ffff-101e-4f36-af62-48644fe0ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="41.878994891" lon="-87.588327902">
+      <time>2019-06-01T06:16:57Z</time>
+      <name>NM08602</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3fea0000-48b0-411f-9c02-169421ce0000</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="41.876389702" lon="-87.610305434">
+      <time>2019-06-01T06:17:04Z</time>
+      <name>NM07503</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>289c0000-6ea4-467f-a60d-1bf47e2fffff</opencpn:guid>
+        <opencpn:arrival_radius>0.500</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+    <rtept lat="41.881233641" lon="-87.614460390">
+      <time>2018-07-14T17:01:39Z</time>
+      <name>Monroe Harbor</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>227a0000-e0e7-4f87-821a-3d205617ffff</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      </extensions>
+    </rtept>
+  </rte>
+</gpx>

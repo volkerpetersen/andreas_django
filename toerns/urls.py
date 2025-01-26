@@ -36,9 +36,11 @@ urlpatterns = [
     path("dashboard", views.dashboard, name="Dashboard"),
     path("safetyAndreas", views.safetyAndreas, name="Safety-Andreas"),
     path("updateTrip", views.updateTrip, name="Update-Trip"),
+    path("navTools", views.navTools, name="Nav Tools"),
     path("weather", views.weather, name="Weather"),
     path("admin", admin.site.urls, name="Admin-Pages"),  # Django Admin site),
     # helper URL, not directly accessible for the user
     path("updateTripData", views.updateTripData, name="updateTripData"),
+    path("navToolsData", views.navToolsData, name="navToolsData"),
     path("plotRoute/<routeName>", views.plotRoute, name="Route"),
 ]

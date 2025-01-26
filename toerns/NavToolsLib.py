@@ -253,7 +253,7 @@ class NavTools:
             generic = (generic or wpt.startswith(genericWP))
         return generic
 
-    def ComputeRouteDistances(self, xml, verbose, skipWP, noSpeed):
+    def ComputeRouteDistances(self, xml, verbose, skipWP, noSpeed, tablefmt="plain"):
         """--------------------------------------------------------------------------
         Method to compute the distance, speed, and Etmals between 
         sequential route waypoints
@@ -272,7 +272,7 @@ class NavTools:
             verbose (bool): run this function with (True) or w/o printout (False)
             skipWP (bool):  skip output for all WPs that are marked with label 'empty'
             noSpeed (bool): True/False - don't/do compute speed and time between waypoints
-
+            tablefmt:       "plain", "grid", "fancygrid", "simple", "html"
         Return:
             (string) function results
         """
@@ -418,10 +418,10 @@ class NavTools:
         msg = ""
         if noSpeed:
             msg += (tabulate(rows, headers=["WP Name", "Lat", "Lon",
-                                            "Distance"], floatfmt=',.2f', numalign="right"))
+                                            "Distance"], floatfmt=',.2f', numalign="right", tablefmt=tablefmt))
         else:
             msg += (tabulate(rows, headers=["WP Name", "Lat", "Lon", "Distance",
-                                            "Time", "Speed", "Etmal"], floatfmt=',.2f', numalign="right"))
+                                            "Time", "Speed", "Etmal"], floatfmt=',.2f', numalign="right", tablefmt=tablefmt))
 
         msg += (f"\n\nTotal Trip Distance: {total_trip_distance:9,.2f}nm")
         if (not noSpeed):
@@ -651,8 +651,8 @@ class NavTools:
         filename2 = filename+".sql"
         fn2 = os.path.normpath(os.path.join(pathSQL, filename2))
 
-        # print(f"gpx file: {filename1} \ngpx path: {fn1}")
-        # print(f"sql file: {filename2} \nsql path: {fn2}")
+        #print(f"gpx file: {filename1} \ngpx path: {fn1}")
+        #print(f"sql file: {filename2} \nsql path: {fn2}")
 
         outputFile = open(fn2, "w")
 

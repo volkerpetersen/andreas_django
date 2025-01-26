@@ -1,0 +1,948 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="OpenCPN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www8.garmin.com/xmlschemas/GpxExtensionsv3.xsd" xmlns:opencpn="http://www.opencpn.org">
+  <rte>
+    <name>2024 Newport to Ensenada</name>
+    <extensions>
+      <opencpn:guid>715affff-de7d-4094-9e87-a54b70a806ca</opencpn:guid>
+      <opencpn:viz>1</opencpn:viz>
+      <opencpn:start>San Diego</opencpn:start>
+      <opencpn:end>San Diego</opencpn:end>
+      <opencpn:planned_speed>6.00</opencpn:planned_speed>
+      <opencpn:planned_departure>2025-01-04T20:06:30Z</opencpn:planned_departure>
+      <opencpn:time_display>PC</opencpn:time_display>
+      <gpxx:RouteExtension>
+        <gpxx:IsAutoNamed>false</gpxx:IsAutoNamed>
+      </gpxx:RouteExtension>
+    </extensions>
+    <rtept lat="32.723588415" lon="-117.222509443">
+      <time>2024-04-27T21:55:00Z</time>
+      <name>San Diego</name>
+      <desc>arrival 2024-04-27 16:55</desc>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a61774dd9a01</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.717740000" lon="-117.217875000">
+      <time>2025-01-04T20:04:50Z</time>
+      <name>NM004</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5232ffff-94db-42f0-a7df-de1f6e49ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.703066667" lon="-117.231168333">
+      <time>2025-01-04T20:05:09Z</time>
+      <name>NM005</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3db50000-c4b3-4a56-9cc7-04d20cac0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.658006667" lon="-117.228118333">
+      <time>2025-01-04T20:05:24Z</time>
+      <name>NM006</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>2ddd0000-e49d-4a38-8778-cec15e80ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.655953333" lon="-117.243363333">
+      <time>2025-01-04T20:05:41Z</time>
+      <name>NM007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>0bfc0000-374a-4495-a7b9-4020425dffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.669095000" lon="-117.265678333">
+      <time>2025-01-04T20:05:47Z</time>
+      <name>NM008</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>5eb5ffff-e0b3-4c33-9152-e40d3ecf0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.589541667" lon="-117.877423333">
+      <time>2025-01-04T20:03:05Z</time>
+      <name>NM002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>69b2ffff-2076-4093-bf28-3cd466f9ffff</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.601325000" lon="-117.882180000">
+      <time>2025-01-04T20:02:19Z</time>
+      <name>Newport Beach</name>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>409effff-97e7-4b2a-b1b0-900d3b7c0000</opencpn:guid>
+        <opencpn:viz_name>1</opencpn:viz_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.583446667" lon="-117.876448333">
+      <time>2025-01-04T20:03:19Z</time>
+      <name>NM00303</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>3a0b0000-9491-4c5e-a3a2-12b438ba0000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.596043333" lon="-117.902423333">
+      <time>2025-01-04T18:14:47Z</time>
+      <name>Race Start</name>
+      <sym>Marks-Race-Start</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>57cdffff-f2ad-4748-8dd6-ee43097d0000</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.431700000" lon="-117.804700000">
+      <time>2024-04-26T20:05:00Z</time>
+      <name>NM00002</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-72c8ab0eb6c2</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.426700000" lon="-117.800400000">
+      <time>2024-04-26T20:10:00Z</time>
+      <name>NM00003</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a58c16a9829e</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.411200000" lon="-117.790800000">
+      <time>2024-04-26T20:20:00Z</time>
+      <name>NM00004</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-2a2e63642cb2</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.401000000" lon="-117.788000000">
+      <time>2024-04-26T20:25:00Z</time>
+      <name>NM00005</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf- bdb69e3c3dd</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.313200000" lon="-117.760600000">
+      <time>2024-04-26T21:10:00Z</time>
+      <name>NM00006</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-3a2cc26f56e7</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.306200000" lon="-117.758500000">
+      <time>2024-04-26T21:15:00Z</time>
+      <name>NM00007</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-534d208362bf</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.242800000" lon="-117.744600000">
+      <time>2024-04-26T22:00:00Z</time>
+      <name>NM00008</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-83a971468ebd</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.233600000" lon="-117.745700000">
+      <time>2024-04-26T22:05:00Z</time>
+      <name>NM00009</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-3b9d00564c1d</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.229500000" lon="-117.746900000">
+      <time>2024-04-26T22:10:00Z</time>
+      <name>NM00010</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf- ed74696e266</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.229100000" lon="-117.745600000">
+      <time>2024-04-26T22:15:00Z</time>
+      <name>NM00011</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf- b9dc2be1889</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.229000000" lon="-117.744500000">
+      <time>2024-04-26T22:20:00Z</time>
+      <name>NM00012</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-3aa236840a7d</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.228500000" lon="-117.743700000">
+      <time>2024-04-26T22:30:00Z</time>
+      <name>NM00013</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-ea071d78acb2</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.226500000" lon="-117.739300000">
+      <time>2024-04-26T22:35:00Z</time>
+      <name>NM00014</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-f1788a917e0e</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.221300000" lon="-117.730400000">
+      <time>2024-04-26T22:45:00Z</time>
+      <name>NM00015</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-3aedd56fc629</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.211000000" lon="-117.717700000">
+      <time>2024-04-26T23:00:00Z</time>
+      <name>2024-04-26 18:00</name>
+      <desc>timedleg 2024-04-26 14:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-76891b985d69</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.206300000" lon="-117.714300000">
+      <time>2024-04-26T23:05:00Z</time>
+      <name>NM00017</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf- ffa3f6b8421</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.135600000" lon="-117.665200000">
+      <time>2024-04-26T23:55:01Z</time>
+      <name>NM00018</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-7a255df0c94f</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.126900000" lon="-117.658700000">
+      <time>2024-04-27T00:00:01Z</time>
+      <name>NM00019</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-f6a5a5689502</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.095700000" lon="-117.642200000">
+      <time>2024-04-27T00:15:00Z</time>
+      <name>NM00020</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-f85d15d3e33c</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.088200000" lon="-117.634200000">
+      <time>2024-04-27T00:20:00Z</time>
+      <name>NM00021</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-4640337964bf</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="33.038300000" lon="-117.585700000">
+      <time>2024-04-27T00:50:00Z</time>
+      <name>NM00022</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-5af68f662502</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.890200000" lon="-117.490300000">
+      <time>2024-04-27T02:00:00Z</time>
+      <name>2024-04-26 21:00</name>
+      <desc>timedleg 2024-04-26 17:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-df9f2aab7fc6</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.794900000" lon="-117.423500000">
+      <time>2024-04-27T02:45:00Z</time>
+      <name>NM00024</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-b4fb1795113c</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.716900000" lon="-117.377000000">
+      <time>2024-04-27T03:20:00Z</time>
+      <name>NM00025</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-b893ad0158a8</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.505900000" lon="-117.235600000">
+      <time>2024-04-27T05:00:00Z</time>
+      <name>2024-04-27 00:00</name>
+      <desc>timedleg 2024-04-26 20:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a2c6f79b9c06</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.234400000" lon="-117.060800000">
+      <time>2024-04-27T07:15:00Z</time>
+      <name>NM00027</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-b2cd4b295052</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.224200000" lon="-117.054300000">
+      <time>2024-04-27T07:20:00Z</time>
+      <name>NM00028</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-cdb17b5dbed1</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.204500000" lon="-117.037800000">
+      <time>2024-04-27T07:30:00Z</time>
+      <name>NM00029</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-61290eaffdf7</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.146300000" lon="-116.991000000">
+      <time>2024-04-27T08:00:00Z</time>
+      <name>2024-04-27 03:00</name>
+      <desc>timedleg 2024-04-26 23:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-703ef9a07931</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.103800000" lon="-116.965800000">
+      <time>2024-04-27T08:20:00Z</time>
+      <name>NM00031</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-93dd95d7a29b</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.032600000" lon="-116.917700000">
+      <time>2024-04-27T09:00:02Z</time>
+      <name>NM00032</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-60b1dd596f5d</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.001800000" lon="-116.890000000">
+      <time>2024-04-27T09:20:02Z</time>
+      <name>NM00033</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a52188bb28f3</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.993600000" lon="-116.882600000">
+      <time>2024-04-27T09:25:02Z</time>
+      <name>NM00034</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-169212245f28</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.944100000" lon="-116.841000000">
+      <time>2024-04-27T09:55:02Z</time>
+      <name>NM00035</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-252559c84281</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.874200000" lon="-116.785000000">
+      <time>2024-04-27T10:40:02Z</time>
+      <name>NM00036</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a08874a3d945</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.868600000" lon="-116.746400000">
+      <time>2024-04-27T11:00:02Z</time>
+      <name>2024-04-27 06:00</name>
+      <desc>timedleg 2024-04-27 02:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-fe4ce7a16d27</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.866200000" lon="-116.724700000">
+      <time>2024-04-27T11:10:02Z</time>
+      <name>NM00038</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-1d662e11af6f</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.867300000" lon="-116.710600000">
+      <time>2024-04-27T11:20:02Z</time>
+      <name>NM00039</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-368e8f9bfbf5</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.869800000" lon="-116.704000000">
+      <time>2024-04-27T11:25:02Z</time>
+      <name>NM00040</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-5bf11ce40b75</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.868400000" lon="-116.693600000">
+      <time>2024-04-27T11:35:02Z</time>
+      <name>NM00041</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-94ff351c3da8</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.863900000" lon="-116.690700000">
+      <time>2024-04-27T11:40:02Z</time>
+      <name>NM00042</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-464702cfd080</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.860100000" lon="-116.689200000">
+      <time>2024-04-27T11:45:02Z</time>
+      <name>NM00043</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-9c90492876ab</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.850800000" lon="-116.684700000">
+      <time>2024-04-27T11:55:02Z</time>
+      <name>NM00044</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-cdcdb0fce6d0</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.849500000" lon="-116.680300000">
+      <time>2024-04-27T12:00:02Z</time>
+      <name>NM0034056</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a4642ff17f00</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.850300000" lon="-116.676700000">
+      <time>2024-04-27T12:05:00Z</time>
+      <name>NM00046</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-fee1bc0fca9e</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.850500000" lon="-116.665400000">
+      <time>2024-04-27T12:20:00Z</time>
+      <name>NM00047</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-be829c65d8b2</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.849700000" lon="-116.665800000">
+      <time>2024-04-27T12:25:00Z</time>
+      <name>Race Finish</name>
+      <desc>timedleg 2024-04-27 02:42</desc>
+      <sym>Marks-Race-Finish</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-1215cba1013d</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.849500000" lon="-116.669800000">
+      <time>2024-04-27T12:30:00Z</time>
+      <name>NM00049</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf- 802136f15a2</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.851700000" lon="-116.676200000">
+      <time>2024-04-27T12:35:00Z</time>
+      <name>NM00050</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-82b1c4f79688</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.857200000" lon="-116.688800000">
+      <time>2024-04-27T12:45:00Z</time>
+      <name>NM00051</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-4166ee0e3238</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="31.924600000" lon="-116.801000000">
+      <time>2024-04-27T14:00:00Z</time>
+      <name>2024-04-27 09:00</name>
+      <desc>timedleg 2024-04-27 05:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-d0b8e0dbf7ce</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.000000000" lon="-116.917900000">
+      <time>2024-04-27T15:15:00Z</time>
+      <name>NM00053</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-2126edd910be</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.042400000" lon="-116.954000000">
+      <time>2024-04-27T15:45:00Z</time>
+      <name>NM00054</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-7ace7824a17d</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.164500000" lon="-117.033300000">
+      <time>2024-04-27T17:00:00Z</time>
+      <name>2024-04-27 12:00</name>
+      <desc>timedleg 2024-04-27 08:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-9bf13086ff5a</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.395400000" lon="-117.164100000">
+      <time>2024-04-27T19:10:00Z</time>
+      <name>NM00056</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-549f09dbcfe5</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.498700000" lon="-117.192800000">
+      <time>2024-04-27T20:00:00Z</time>
+      <name>2024-04-27 15:00</name>
+      <desc>timedleg 2024-04-27 12:00</desc>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-308164deb0cd</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.653700000" lon="-117.225800000">
+      <time>2024-04-27T21:15:00Z</time>
+      <name>NM00058</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-69afe6daa34b</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.663700000" lon="-117.227400000">
+      <time>2024-04-27T21:20:00Z</time>
+      <name>NM00059</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-56f8e0b30364</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.703400949" lon="-117.229565542">
+      <time>2024-04-27T21:45:00Z</time>
+      <name>NM00060</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-3628fb693eb5</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="-1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.717022189" lon="-117.215070609">
+      <time>2025-01-04T18:09:40Z</time>
+      <name>NM0015703</name>
+      <sym>empty</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>7b78ffff-f641-401f-a791-b03534970000</opencpn:guid>
+        <opencpn:auto_name>1</opencpn:auto_name>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+    <rtept lat="32.723588415" lon="-117.222509443">
+      <time>2024-04-27T21:55:00Z</time>
+      <name>San Diego</name>
+      <desc>arrival 2024-04-27 14:39</desc>
+      <sym>Service-Marina</sym>
+      <type>WPT</type>
+      <extensions>
+        <opencpn:guid>715bffff-e783-458a-87cf-a61774dd9a01</opencpn:guid>
+        <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+        <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+        <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+      </extensions>
+    </rtept>
+  </rte>
+</gpx>

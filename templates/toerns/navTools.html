@@ -51,6 +51,12 @@
             <input type="file" name="routeFileSelection" id="routeFileSelection" onchange="routeSelection()" accept=".gpx" />
           </div>
         </div>
+        <div class="row pt-1">
+          <label for="weatherFileSelection" class="col-12 col-md-3 form-label">Select Expedition weather file:</label>
+          <div class="col-12 col-md-8">
+            <input type="file" name="weatherFileSelection" id="weatherFileSelection" onchange="weatherSelection()" accept=".csv" />
+          </div>
+        </div>
         <div class="row pt-2">
           <button type="submit" class="col-4 col-md-2 btn btn-success" id="navToolsSubmit">Calculate</button>
           <button type="button" class="offset-5 offset-md-9 col-2 col-md-1 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#navToolsHelpModal">Help</button>
@@ -59,6 +65,7 @@
           <div class="col-12">
             <span class="error" id="noTripSelection">No trip selected from the Toerndirectory.</span><br>
             <span class="error" id="noRouteSelection">No .gpx route file selected.</span><br>
+            <span class="error" id="noWeatherSelection">No .csv Expedition weather analysis file selected.</span><br>
           </div>
         </div>
         <div class="row pt-5">
@@ -81,6 +88,8 @@
         <button type="button" class="btn-close" id="modalFormClose" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
+        <img id="plot1" src="" alt=""><!-- plot 1 spaceholder -->
+        <img id="plot2" src="" alt=""><!-- plot 2 spaceholder -->
         <div id="modalFormFeedbackBody"><!-- Body msg spaceholder --></div>
       </div>
       <div class="modal-footer">
@@ -149,7 +158,8 @@
 
 <script type='text/javascript'>
   let sqlSelectionFlag = false;
-  let fileSelectionFlag = false;
+  let routeFileSelectionFlag = false;
+  let weatherFileSelectionFlag = false
 
   function resetPageHeight(element) {
     document.body.classList.add('vh-100');
@@ -161,19 +171,19 @@
 
   function tripSelection(option) {
     var trip = option.value;
-    console.log("trip: "+trip);
 
     if (trip.includes("none")) {
       $("#noTripSelection").html("No trip selected from the Toerndirectory.");
       sqlSelectionFlag = false;
     }
     else {
+      $("#noWeatherSelection").html("");
       $("#noRouteSelection").html("");
       $("#noTripSelection").html("");
       sqlSelectionFlag = true
     }
 
-    if(sqlSelectionFlag || fileSelectionFlag) {
+    if(sqlSelectionFlag || routeFileSelectionFlag || weatherFileSelectionFlag) {
       $('#navToolsSubmit').prop('disabled', false);
     } else {
       $('#navToolsSubmit').prop('disabled', true);
@@ -187,14 +197,37 @@
     if (route && route.name.includes('.gpx')) {
       $("#noRouteSelection").html("");
       $("#noTripSelection").html("");
-      fileSelectionFlag = true;
+      $("#noWeatherSelection").html("");
+      routeFileSelectionFlag = true;
     }
     else {
       $("#noRouteSelection").html("Invalid route file format selected. Please select a .gpx file.");
-      fileSelectionFlag = false;
+      routeFileSelectionFlag = false;
     }
 
-    if (sqlSelectionFlag || fileSelectionFlag) {
+    if (sqlSelectionFlag || routeFileSelectionFlag || weatherFileSelectionFlag) {
+      $('#navToolsSubmit').prop('disabled', false);
+    } else {
+      $('#navToolsSubmit').prop('disabled', true);
+    }
+  };
+
+  function weatherSelection() {
+    var upl = document.getElementById("weatherFileSelection");
+    var route = upl.files[0]
+
+    if (route && route.name.includes('.csv')) {
+      $("#noWeatherSelection").html("");
+      $("#noRouteSelection").html("");
+      $("#noTripSelection").html("");
+      weatherFileSelectionFlag = true;
+    }
+    else {
+      $("#noWeatherSelection").html("Invalid weather analysis file selected. Please select an Expedition weather routing anlysis .csv file.");
+      weatherFileSelectionFlag = false;
+    }
+
+    if (sqlSelectionFlag || routeFileSelectionFlag || weatherFileSelectionFlag) {
       $('#navToolsSubmit').prop('disabled', false);
     } else {
       $('#navToolsSubmit').prop('disabled', true);
@@ -206,15 +239,29 @@
     $("#searchbox").remove();
     $("#headline").html("Navigation Tools")
     resetPageHeight(document.getElementById("main"))
+    sqlSelectionFlag = false;
+    routeFileSelectionFlag = false;
+    weatherFileSelectionFlag = false;
+    document.getElementById('weatherFileSelection').value = '';
+    document.getElementById('routeFileSelection').value = '';
   });
 
   $("#navToolsDataForm").on('submit', function (e) {
     e.preventDefault();
     var formData = new FormData(this);
+
+    formData.append('sqlite', 'false');
+    formData.append('route', 'false');
+    formData.append('weather', 'false');
+
     if(sqlSelectionFlag) {
-      formData.append('sqlite', 'true');
-    } else {
-      formData.append('sqlite', 'false');
+      formData.set('sqlite', 'true');
+    } 
+    else if(routeFileSelectionFlag) {
+      formData.set('route', 'true');
+    }
+    else if (weatherFileSelectionFlag) {
+      formData.set('weather', 'true');
     }
     $.ajax({
       type: "POST",
@@ -225,7 +272,15 @@
       success: function(response) {
         hdr = "<h5>Trip Summary</h5>";
         if (response.success) {
-          msg = "<p>" + response.msg + "<br></p>";
+          if (response.plot1) {
+            $('#plot1').attr('src', 'data:image/png;base64,' + response.plot1);
+            hdr = "<h5>Weather Routing Analysis for '"+response.file+"'</h5>"
+          }
+          if (response.plot2) {
+            $('#plot2').attr('src', 'data:image/png;base64,' + response.plot2);            
+          } else {
+            msg = "<p>" + response.msg + "<br></p>";            
+          }
           //alert("success")
         } else {
           msg = "<h5>" + response.msg + "<br>Please contact Volker Petersen for assistance.</h5>";

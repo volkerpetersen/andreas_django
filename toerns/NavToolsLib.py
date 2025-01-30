@@ -25,18 +25,22 @@ __doc__ = """
 try:
     import sys
     import os
+    import csv
     import inspect
     import json
     import re
     from datetime import datetime, timedelta
     from bs4 import BeautifulSoup
     import pandas as pd
+    import numpy as np
     import random
     from tabulate import tabulate
     from collections import Counter
     import math
     import sqlite3
     from PIL import Image, ExifTags
+    import matplotlib.pyplot as plt
+    import seaborn as sns
 
 except ImportError as e:
     print(
@@ -99,6 +103,15 @@ class NavTools:
             </rtept>
             """
         self.gpxFooter = "</rte></gpx>\n"
+        
+        plt.style.use('ggplot')
+        #plt.style.use('fivethirtyeight')
+        # global plot parameters
+        self.linewidth = 1            # linewidth for all lines
+        self.barColor = 'steelblue'   # marker color for scatter plots
+        self.gridColor = 'dimGrey'    # color of the plot grids
+        self.colorMap = 'Blues'       # colormap 'cool, 'Accent', 'YlOrBr', 'crest', 'GnBu'
+        self.figsize = (9, 12)        # size of all plot windows
 
     def __str__(self):
         return f"Nav Config is using the init file '{self.configFile}'."
@@ -651,8 +664,8 @@ class NavTools:
         filename2 = filename+".sql"
         fn2 = os.path.normpath(os.path.join(pathSQL, filename2))
 
-        #print(f"gpx file: {filename1} \ngpx path: {fn1}")
-        #print(f"sql file: {filename2} \nsql path: {fn2}")
+        # print(f"gpx file: {filename1} \ngpx path: {fn1}")
+        # print(f"sql file: {filename2} \nsql path: {fn2}")
 
         outputFile = open(fn2, "w")
 
@@ -768,6 +781,139 @@ class NavTools:
         msg += txt + "\n\n"
         log_msg = msg + log_msg
         return log_msg
+
+
+    def Expedition_Weather_Routing_Analysis(self, path, filename, webpage=False):
+        """---------------------------------------------------------------------
+        summarize Expedition Weather Routing Analysis csv file
+
+        Args:
+            path (string):        path to the csv file
+            filename (string):    file name of the csv file to be processed
+            webpage (boolean):    flag to indicate if this utilizes a webpage file load
+        Returns:
+            summary (dict):       dictionary with the results
+        """
+        
+        twa = ['n/a']
+        summary = {'tws': {}, 'twa': {}, 'sails': {}, 'hours': 0}
+        dist = []
+        sails = []
+        windFlag = False
+        sailFlag = False
+
+        if(webpage):
+            records = filename
+            if len(records) == 0:
+                print(f"\nCan't read csv file. Teminating App!")
+                summary = {}
+                return summary
+
+        else:
+            filepath = os.path.normpath(os.path.join(path, filename))
+            if not os.path.isfile(filepath):
+                print(f"\nCan't locate file '{filepath}'. Teminating App!")
+                summary = {}
+                return summary
+
+            with open(filepath) as csv_file:
+                reader = csv.reader(csv_file)
+                records = []
+                for row in reader:
+                    if len(row):
+                        records.append(row)
+        # end of file read setup
+        r = 0
+        for row in records:
+            if windFlag and len(row) and len(row[0]) and 'sails' not in row[0].lower():
+                if row[0] not in summary['tws']:
+                    tws = f"{row[0]}"
+                    summary['tws'][tws] = 0
+                    dist.append([])
+                    dist[r] = []
+                for idx in range(1,len(row)):
+                    try:
+                        dist[r].append(float(row[idx]))
+                        summary['twa'][twa[idx]] += float(row[idx])
+                        summary['tws'][tws] += float(row[idx])
+                        summary['hours'] += float(row[idx])
+                    except Exception as e:
+                        print(f"Error parsing the csv file with error code '{str(e)}' in row")
+                        print(row)
+                        summary = {}
+                        return summary
+                r = r + 1
+            if sailFlag and len(row) and len(row[0]):
+                if "total hours" not in row[0].lower():
+                    if row[0] not in summary['sails']:
+                        summary['sails'][row[0]] = float(row[1])
+                    else:
+                        summary['sails'][row[0]]+= float(row[1])
+                else:
+                    sailFlag = False
+            if len(row) and 'tws' in row[0].lower():
+                windFlag = True
+                for idx in range(1, len(row)):
+                    summary['twa'][row[idx]] = 0
+                    twa.append(row[idx])
+            if len(row) and 'sails' in row[0].lower():
+                sailFlag = True
+                windFlag = False
+                #for sail in sails:
+                #    summary['sails'][sail] = 0
+            if not len(row) or not len(row[0]):
+                windFlag = False
+                sailFlag = False
+        # end of loop over all records in dataset
+        
+        summary['distribution'] = np.array(dist) / summary['hours'] * 100
+        df = pd.DataFrame(data=np.array(dist) / summary['hours'],
+                                    index=summary['tws'],
+                                    columns=summary['twa'])
+        # drop all but one rows with zero in all columns
+        idx = df[(df<0.001).all(axis=1)].index
+        df = df.drop(index=idx[:-1])  # don't drop the last row
+
+        if '010' in df.columns:
+            df.drop(['010'], axis=1, inplace=True)
+        if '020' in df.columns:
+            df.drop(['020'], axis=1, inplace=True)
+
+        summary['df'] = df
+
+        return summary
+
+    # plot a heat map
+    def heat_map(self, exp, figCtr=1):
+        df = exp['df']
+        mask = df<0.001
+        fig = plt.figure(figCtr, figsize=(10,6))
+        ax = plt.gca()
+        ax.set_facecolor('#FFFFFF') # white
+        sns.heatmap(df, annot=True, cmap=self.colorMap, 
+                    fmt='.1%', mask=mask,
+                    ax=ax, cbar=False,
+                    annot_kws={'size': 8},
+                    linewidth=0.5, linecolor='grey')
+
+        plt.title('Percentage of time at given TWS/TWA')
+        plt.xlabel('True Wind Angle')
+        plt.ylabel('True Wind Speed (kts)')
+
+        return fig
+
+    # plot a horizontal bar chart
+    def plot_barh(self, df, ax, title=None, ylabel=None):
+        df.plot.barh(ax=ax, color=self.barColor, align='center', legend=False)
+        ax.grid(color=self.gridColor)
+        xticks = ax.get_xticks()
+        xlabels = [f"{x*100:,.1f}%" for x in xticks]
+        ax.set_xticks(xticks)
+        ax.set_xticklabels(xlabels)
+        ax.set_title(title)
+        ax.set_ylabel(ylabel)
+        return
+
 
     def getTime(self, timeStr, timezoneDifference=0.0):
         """--------------------------------------------------------------------------

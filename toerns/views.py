@@ -22,6 +22,8 @@ from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.db import connection
+from django.db.models import Sum
+from django_user_agents.utils import get_user_agent
 from toerns.models import toerndirectory, fetchRouteData
 from toerns.settings import MEDIA_ROOT
 from toerns.NavToolsLib import NavTools
@@ -48,12 +50,13 @@ gpx_header = """<?xml version="1.0" encoding="utf-8" ?>
 </extensions>\n"""
 
 
-def fetchContent(route="all"):
+def fetchContent(request, route="all"):
     """---------------------------------------------------------------------
         function to create a dictionary with data to be passed into a
         html file
 
         Args:
+            request (obj): request object
             route (str): route option are:
                 None
                 all
@@ -69,18 +72,28 @@ def fetchContent(route="all"):
     css = "../static/css/SailingLog.css?v=" + dateStr
     js = "../static/js/SailingLog.js?v=" + dateStr
 
+    user_agent = get_user_agent(request)
     content = {
         "css": css,
         "js": js,
         "today": datetime.now(),
+        'is_mobile': user_agent.is_mobile,
+        'is_tablet': user_agent.is_tablet,
+        'is_desktop': not user_agent.is_mobile,
     }
 
+    #print(f"is_mobile: {content['is_mobile']}")
+
     if route == "all":
-        #trips = toerndirectory.objects.filter(
-        #    startDate__lte=datetime.now()).order_by("-startDate")
         trips = toerndirectory.objects.all().order_by("-startDate")
         if trips is None:
             trips = {}
+            content["numToerns"] = 0
+            content["sumMiles"] = 0
+        else:
+            content["numToerns"] = trips.count()
+            content["sumMiles"] = trips.aggregate(Sum('miles'))['miles__sum']
+
     elif route == "sqlfiles":
         query = toerndirectory.objects.all().values("maptable")
         trips = {}
@@ -96,9 +109,6 @@ def fetchContent(route="all"):
             trips = {}
 
     content["trips"] = trips
-    if route != "sqlfiles":
-        # if trips is a dictionary, don't serialize it
-        content["tripsJSON"] = json.dumps(serializers.serialize("json", trips))
 
     #print(f"{len(trips)} trips in SqLite")
     return content
@@ -108,40 +118,92 @@ def index(request):
     """---------------------------------------------------------------------
         view function for the home page with the Toern Directory
     """
-    return render(request, "toerns/index.html", context=fetchContent(route="all"))
+    return render(request, "toerns/index.html", 
+                  context=fetchContent(request, route="all"))
 
 
 def gallery(request):
     """---------------------------------------------------------------------
         view function for the Gallery page
     """
-    return render(request, "toerns/gallery.html", context=fetchContent(route="all"))
+    return render(request, "toerns/gallery.html", 
+                  context=fetchContent(request, route="all"))
 
 
 def dashboard(request):
     """---------------------------------------------------------------------
         view function for the Dashboard page
     """
-    return render(request, "toerns/dashboard.html", context=fetchContent(route="all"))
+    content = fetchContent(request, route="all")
+    trips = content['trips']
+    destinationMiles = {}
+    destinationCount = {}
+    skipperMiles = {}
+    annualMiles = {}
+    annualDays = {}
+    for trip in trips:
+        miles = float(trip.miles)
+        year = trip.startDate.strftime("%Y")
+        skipper = trip.skipper.first()
+        name = f"{skipper.firstName} {skipper.lastName}"
+        #name = name.replace("&uuml;", "ue");
+        #name = name.replace("&auml;", "ae");
+        #name = name.replace("&ouml;", "oe");
 
+        if trip.georegion in destinationMiles:
+            destinationMiles[trip.georegion] += miles
+        else:
+            destinationMiles[trip.georegion] = miles
+
+        if trip.georegion in destinationCount:
+            destinationCount[trip.georegion] += 1
+        else:
+            destinationCount[trip.georegion] = 1
+        
+        if name in skipperMiles:
+            skipperMiles[name] += miles
+        else:
+            skipperMiles[name] = miles
+
+        if year in annualMiles:
+            annualMiles[year] += miles
+        else:
+            annualMiles[year] = miles
+
+        if year in annualDays:
+            annualDays[year] += trip.daysAtSea
+        else:
+            annualDays[year] = trip.daysAtSea
+
+    content['destinationMiles'] = destinationMiles
+    content['destinationCount'] = destinationCount
+    content['skipperMiles'] = skipperMiles
+    content['annualMiles'] = annualMiles
+    content['annualDays'] = annualDays
+
+    return render(request, "toerns/dashboard.html", 
+                  context=content)
+
+
+def documentation(request):
+    """---------------------------------------------------------------------
+        view function for the Documentation page
+    """
+    return render(request, "toerns/documentation.html", 
+                  context=fetchContent(request, route=None))
 
 def safetyAndreas(request):
     """---------------------------------------------------------------------
         view function for the Andreas Safety page
     """
-    return render(request, "toerns/safetyAndreas.html", context=fetchContent(route=None))
-
-def safetyZigzag(request):
-    """---------------------------------------------------------------------
-        view function for the Zigzag Safety page
-    """
-    return render(request, "toerns/safetyZigzag.html", context=fetchContent(route=None))
+    return render(request, "toerns/safetyAndreas.html", 
+                  context=fetchContent(request, route=None))
 
 def updateTrip(request):
     """---------------------------------------------------------------------
         view function to gather user input for a route update request
     """
-    content = fetchContent(route=None)
+    content = fetchContent(request, route=None)
     content["trips"] = toerndirectory.objects.all().order_by("-startDate")
     return render(request, "toerns/updateTrip.html", context=content)
 
@@ -240,7 +302,7 @@ def navTools(request):
     """---------------------------------------------------------------------
         view function to provide some Navigation Tools
     """
-    content = fetchContent(route=None)
+    content = fetchContent(request, route=None)
     content["trips"] = toerndirectory.objects.all().order_by("-startDate")
     return render(request, "toerns/navTools.html", context=content)
 
@@ -449,20 +511,23 @@ def weather(request):
     """---------------------------------------------------------------------
         view function for the Weather page
     """
-    return render(request, "toerns/weather.html", context=fetchContent(route=None))
+    return render(request, "toerns/weather.html", 
+                  context=fetchContent(request, route=None))
 
 def ais(request):
     """---------------------------------------------------------------------
         view function for the AIS display
     """
-    return render(request, "toerns/ais.html", context=fetchContent(route=None))
+    return render(request, "toerns/ais.html", 
+                  context=fetchContent(request, route=None))
 
 
 def printDirectory(request):
     """---------------------------------------------------------------------
         view function for the print version of Toern Directory
     """
-    return render(request, "toerns/printDirectory.html", context=fetchContent(route="all"))
+    return render(request, "toerns/printDirectory.html", 
+                  context=fetchContent(request, route="all"))
 
 
 def plotRoute(request, routeName):
@@ -475,7 +540,7 @@ def plotRoute(request, routeName):
     if routeData is None:
         routeData = {}
 
-    content = fetchContent(route=routeName)
+    content = fetchContent(request, route=routeName)
     content["routeName"] = routeName
     content["wps"] = routeData
     content["wpsJSON"] = json.dumps(serializers.serialize("json", routeData))
@@ -489,7 +554,7 @@ def update_sqliteDB(request):
     """
     from django.db import connection
 
-    content = fetchContent(route="all")
+    content = fetchContent(request, route="all")
     for trip in content["trips"]:
         routeName = trip.maptable
         if len(routeName):

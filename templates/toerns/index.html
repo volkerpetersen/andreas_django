@@ -13,251 +13,251 @@
 {% block title %}Trip Directory{% endblock %}
 
 {% load static %}
+{% load humanize %}
+{% load custom_filter %}
 {% block content %}
     <!-- Start of main page body content-->
     <div class="container">
-		<div id="mobileSearchbox" class="d-flex justify-content-end">
-		</div>
-		<div class="row"></div>
+		<div id="mobileSearchbox" class="d-flex justify-content-end"></div>
+		<div class="row">
 			<div id="trip_table" class="col-12 table-responsive">
-			<!--
-			placeholder for the trip directory table.  The Javascript function
-			'parse_trip_table()' parses the data from the SQL table stored in
-			the Javascript dictionary into the html code.
-			-->
+			<table id="toern_table" class="table table-hover borderless searchless no-footer display wrap" cellspacing="0">
+			{% if is_mobile %}
+				<thead>
+					<tr class="d-none">
+						<th></th>
+					</tr>
+				</thead>
+			{% else %}
+				<thead>
+					<tr class="d-none">
+						<th>picture</th>
+						<th>date</th>
+						<th>destination</th>
+						<th>crew</th>
+						<th>miles</th>
+						<th>numMiles</th>
+						<th>numDate</th>
+					</tr>
+				</thead>
+			{% endif %}
+			<tbody class="bodytext">
+
+			{% for trip in trips %}
+				<!-- the function multi_replace for the yacht variable is  
+				     defined in toerns/templatetags/custom_filer.py
+				-->
+				{% with 
+					destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"'>"|add:trip.destination|add:"</a>"
+					yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../static/pdf/,&#34;,'"
+					img_caption=trip.destination
+					img_error=" onerror='imgErrorTripPicture(this)' />"
+				%}
+				{% if is_mobile %}
+				<tr class="bodytext">
+					<td class="container responsive">
+						<div class="row row-padding">
+							<div class="col-12 no-padding">
+								{% if trip.picturelink %}
+									{% with
+										picture1="<a href='"|add:trip.picturelink|add:"' target='_blank'><img class='img-fluid'"
+										picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
+									%}
+									{{ picture1|safe }}{{ picture2|safe }}
+									{% endwith %}
+								{% else %}
+									{% with 
+										picture1="<img class='img-fluid'"
+										picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error
+									%}
+									{{ picture1|safe }}{{ picture2|safe }}
+									{% endwith %}
+								{% endif %}
+							</div>
+						</div>
+				
+						<div class="row row-padding">
+							<div class="col-2 no-padding">When:</div>
+							<div class="col-10 no-padding">
+								{{ trip.startDate|date:"F" }}&nbsp;{{ trip.startDate|date:"Y" }}
+							</div>
+						</div>
+				
+						<div class="row row-padding">
+							<div class="col-2 no-padding">Where:</div>
+							<div class="col-10 no-padding">
+								{{ destination|safe }}<br />{{ yacht|safe }}
+							</div>
+						</div>
+				
+						<div class="row row-padding">
+							<div class="col-2 no-padding">Who:</div>
+							<div class="col-10 no-padding">
+								{% for crew in trip.crew.all|dictsort:"lastName" %}
+									{{ crew.firstName }}&nbsp;{{ crew.lastName }},
+								{% endfor %}
+								{% if trip.skipper.all %}
+									and skipper {{ skipper.firstName }}&nbsp;{{ skipper.lastName }}.
+								{% endif %}							
+							</div>
+						</div>
+				
+						<div class="row row-padding">
+							<div class="col-2 no-padding">Miles:</div>
+							<div id="miles" class="col-10 no-padding">
+								{{ trip.miles|floatformat:1|intcomma }} nm
+							</div>
+						</div>
+						<div class="row row-padding">
+							<div class="col-12 no-padding hr-rule"></div>
+						</div>
+					</td>
+				</tr>
+				{% else %}
+				<tr class="bodytext">
+					<td class="text-center col-3 align-middle">
+						{% if trip.picturelink %}
+							{% with
+								picture1="<a href='"|add:trip.picturelink|add:"' target='_blank'><img class='img-fluid enlarge'"
+								picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
+							%}
+							{{ picture1|safe }}{{ picture2|safe }}
+							{% endwith %}
+						{% else %}
+							{% with
+								picture1="<img class='img-fluid enlarge'"
+								picture2=" border='0px' src='static/"|add:trip.image|add:"' title='No picture album available' alt='"|add:img_caption|add:"'"|add:img_error
+							%}
+							{{ picture1|safe }}{{ picture2|safe }}
+							{% endwith %}
+						{% endif %}
+					</td>
+				
+					<td class="text-center col-2 align-middle">
+						{{ trip.startDate|date:"F" }}<br>{{ trip.startDate|date:"Y" }}
+					</td>
+					
+					<td class="text-center col-3 align-middle">
+						{{ destination|safe }}<br />{{ yacht|safe }}
+					</td>
+					
+					<td class="text-center col-3 align-middle">
+						{% for crew in trip.crew.all|dictsort:"lastName" %}
+							{{ crew.firstName }}&nbsp;{{ crew.lastName }},
+						{% endfor %}
+						{% for skipper in trip.skipper.all %}
+							and skipper {{ skipper.firstName }}&nbsp;{{ skipper.lastName }}
+						{% endfor %}							
+					</td>
+					
+					<td class="text-center col-1 align-middle" id="miles">
+						{{ trip.miles|floatformat:1|intcomma }} nm
+					</td>
+					<td class="d-none">{{ trip.miles }}</td>
+					<td class="d-none">{{ trip.startDate|date:"Y" }}_{{ trip.startDate|date:"m" }}</td>
+				</tr>
+				{% endif %}
+			{% endwith %}
+			{% endfor %}
+			</tbody>
+			</table>
 			</div>
 		</div>
     </div>
 
 <script type='text/javascript'>
-	let numToerns;
 
-/*-----------------------------------------------------------------------------------------
-Function to select the trips from this directory based on the user
-user in the search box
------------------------------------------------------------------------------------------*/
-function select_trips_from_searchbox(e, search_field) {
-	var ctr_trips = 0;
-	var miles = "";
-	var sub_header = "";
-	var search_str = jQuery(search_field).val();
+	/*-----------------------------------------------------------------------------------------
+	Function to select the trips from this directory based on the user
+	user in the search box
+	-----------------------------------------------------------------------------------------*/
+	function select_trips_from_searchbox(e, search_field) {
+		var ctr_trips = 0;
+		var miles = "";
+		var sub_header = "";
+		var search_str = jQuery(search_field).val();
 
-	sum_miles = 0;
-	data_table.search(search_str);
-	data_table.draw();
+		sum_miles = 0;
+		data_table.search(search_str);
+		data_table.draw();
 
-	$("#toern_table tbody tr").each(function(){
-		miles = $(this).find("#miles").text().replace(/\,/g, "");
-		if (miles) {
-			ctr_trips += 1;
+		$("#toern_table tbody tr").each(function () {
+			miles = $(this).find("#miles").text().replace(/\,/g, "");
+			if (miles) {
+				ctr_trips += 1;
+			}
+			sum_miles += parseFloat(miles.replace(/\ nm/g, ""));
+		});
+
+		if (ctr_trips == numToerns) {
+			sub_header = numberWithCommas(sum_miles, 0) + "nm, " + ctr_trips + " fun sailing trips, and still counting...";
+		} else {
+			if (ctr_trips == 0) {
+				sub_header = "No trips found matching your selection ('" + search_str + "')!";
+			} else {
+				sub_header = ctr_trips + " out of " + numToerns + " selected with a total of " + numberWithCommas(sum_miles, 1) + " nm";
+			}
 		}
-		sum_miles += parseFloat(miles.replace(/\ nm/g, ""));
-		//console.log("$this: "+$(this).find("#miles").text());
-		//console.log("var miles: "+miles);
+		jQuery("#subheadline").html(sub_header);
+	}
+
+	jQuery(document).ready(function () {
+		var html;
+
+		subheadline = "";
+		if (sum_trips == 0 && numToerns > -1) {
+			subheadline = "No sailing trips found that match the selection criteria. Try again please.";
+		}
+		if (sum_trips >= 1) {
+			subheadline = sum_trips + " out of " + numToerns + " trips selected with a total of " + number_format(sum_miles, 0) + "nm sailed.";
+		}
+		if (sum_trips == numToerns) {
+			subheadline = number_format(sum_miles, 0) + " nm, " + numToerns + " fun sailing trips, and still counting....";
+		}
+
+		jQuery("#subheadline").html(subheadline);
+
+		enhance_toern_table_code(isMobile); // enhance the html code
+
+		if (!isMobile) {
+			html = '<div id="table_header" class="container col-hdr-container Sd-none d-sm-block">';
+			html += '<div class="row col-hdr">';
+			html += '<div class="col-3" style="padding-top: 3px !important;">';
+			html += 'Picture Galleries</div><div class="col-2">Date&nbsp;';
+			html += '<i id="sort_date" class="fas fa-sort-amount-down"></i>';
+			html += '</div><div class="col-3">Location&nbsp;</div>';
+			html += '<div class="col-2" style="padding-top: 3px !important;">Crew</div>';
+			html += '<div class="col-2 text-end">Miles&nbsp;';
+			html += '<i id="sort_miles" class="fas fa-sort-amount-down"></i>';
+			html += '</div></div></div>';
+			$("#nav_addon").html(html);
+		}
+
+		jQuery("#FancyLink").fancybox({
+			iframe: {
+				css: {
+					"width": "100%",
+					"height": "100%",
+				}
+			}
+		});
+
+		jQuery('#sort_date').click(function () {
+			//console.log("sort date");
+			var glyphicon_asc = "fas fa-sort-amount-up";
+			var glyphicon_desc = "fas fa-sort-amount-down";
+			var sort_order = swapClassElement("#sort_date", glyphicon_asc, glyphicon_desc);
+			data_table.column("6:visible").order(sort_order);
+			data_table.draw();
+		});
+
+		jQuery("#sort_miles").click(function () {
+			var glyphicon_asc = "fas fa-sort-amount-up";
+			var glyphicon_desc = "fas fa-sort-amount-down";
+			var sort_order = swapClassElement('#sort_miles', glyphicon_asc, glyphicon_desc);
+			data_table.column('5:visible').order(sort_order);
+			data_table.draw();
+		});
 	});
-
-	if (ctr_trips == numToerns) {
-		sub_header = numberWithCommas(sum_miles, 0)+"nm, "+ctr_trips+" fun sailing trips, and still counting...";
-	} else {
-		if (ctr_trips == 0) {
-			sub_header = "No trips found matching your selection ('"+search_str+"')!";
-		} else {
-			sub_header = ctr_trips+" out of "+numToerns+" selected with a total of "+numberWithCommas(sum_miles, 1)+" nm";
-		}
-	}
-	jQuery("#subheadline").html(sub_header);
-	//console.log(sub_header);
-
-}
-
-/*-----------------------------------------------------------------------------------------
-Function to parse the toern data and build the toern directory from the 
-SQLite table data stored in the JSON array tripsJSON that was passed 
-into this page thru the views.py variable content and converted to the 
-Javascript array toernDirectory in header.html
-The variable isMobile is set in header.html
------------------------------------------------------------------------------------------*/
-function parse_trip_table(isMobile) {
-	var i;
-	var html = "";
-	var destinationStr;
-	var picture1;
-	var picture2;
-	var pic_enlarge;
-	var img_caption;
-	var max_length = 60;
-	var sum_trips=0;
-	let sum_miles=0;
-    var subheadline, month, year, toern, start, record, crew;
-
-	if (isMobile) {
-		//console.log("mobile device setup....")
-		html = '<table id="toern_table" class="table table-hover borderless searchless ';
-		html+= 'no-footer display wrap" cellspacing="0">';
-		html+= '<thead><tr class="d-none"><th></th></tr></thead>';
-		html+= '<tbody class="bodytext">';
-	} else {
-		html = '<table id="toern_table" class="table table-hover borderless searchless ';
-		html+= 'no-footer display wrap" cellspacing="0">';
-		html+= '<thead><tr class="d-none">';
-		html+= '<th>picture</th><th>date</th><th>destination</th>';
-		html+= '<th>crew</th><th>miles</th><th>numMiles</th><th>numDate</th>';
-		html+= '</tr></thead><tbody class="bodytext">';
-	}
-
-	numToerns = toernDirectory.length;
-	// loop over all trips in the SQLite data (table ToernDirectoryTable) stored in the Javascript arrays
-	//console.log("Number of trips is SailingLog.js: " + numToerns);
-    for (idx = 0; idx<numToerns; idx++) {
-        toern = toernDirectory[idx]['fields'];
-		// primary key = pk = startDate
-        start = new Date(toernDirectory[idx]['pk']);
-        month = moment(start).format("MMMM");
-        year = moment(start).format("YYYY");
-        crew = parse_crew(toern);
-		// concatenate the interactive map link
-		// using fancybox to display the webpage with the Google Map of the selected trip
-		destinationStr = toern['georegion'] + '<br /><a href="plotRoute/';
-		destinationStr+= toern['maptable'] + '">' + toern['destination'] + '</a>';
-		destinationStr+= '<br>'+parse_yacht(toern['boat']);
-		//console.log(destinationStr);
-
-        // concatenate the link for the picture galleries
-		// adding the class="enlarge" enables the jQuerry script to display the larger
-		// picture upon mouseover class "enlarge" is defined in SailingLog.js
-		pic_enlarge = 'class="enlarge img-fluid" ';
-		pic_enlarge = 'id="preview" ';
-		img_caption = toern['destination'] + " - " + month + " " + year;
-		if (img_caption.length > max_length) {
-			img_caption = img_caption.substring(0,max_length);
-		}
-		if (!is_string_empty(toern['picturelink'])) {
-			picture1 = '<img class="img-fluid"';
-			picture2 = 'border="0px" src="static/' + toern['image'] + '" ';
-			picture2+= 'title="No picture album available!" alt="' + img_caption; 
-			picture2+= '" onerror="imgErrorTripPicture(this)"/></a>';
-			//console.log("empty picture album link");
-		} else {
-			picture1 = '<a href="' + toern['picturelink'] + '" target="_blank"><img class="img-fluid" ';
-			picture2 = 'border="0px" src="static/' + toern['image'] + '" ';
-			picture2+= 'title="Click here for all trip images!" alt="' + img_caption;
-			picture2+= '" onerror="imgErrorTripPicture(this)"/></a>';
-		}
-		
-		if (isMobile) {
-			// let's display the trip data formatted for smartphones.
-			html+= '<tr class="bodytext"><td class="container responsive">';
-			html+= '<div class="row row-padding"><div class="col-12 no-padding">' + picture1+picture2 + '</div></div>';
-
-			html+= '<div class="row row-padding"><div class="col-2 no-padding">When:</div><div class="col-10 no-padding">';
-			html+= month + '&nbsp;' + year +'</div></div>';
-
-			html+= '<div class="row row-padding"><div class="col-2 no-padding">Where:</div><div class="col-10 no-padding">';
-			html+= destinationStr + '</div></div>';
-
-			html+= '<div class="row row-padding"><div class="col-2 no-padding">Who:</div><div class="col-10 no-padding">';
-			html+= crew + '</div></div>';
-
-			html+= '<div class="row row-padding"><div class="col-2 no-padding">Miles:</div><div id="miles" class="col-10 no-padding">';
-			html+= number_format(toern['miles'], 1) + ' nm</div></div>';
-			html+= '<div class="row row-padding"><div class="col-12 no-padding hr-rule"></div></div>';
-			html+= '</td></tr>';
-		}
-		else {
-			// let's display the trip data formatted for larger screens.
-			picture1 = picture1.replace("img-fluid", "img-fluid enlarge")
-			html+= '<tr class="bodytext">';
-			html+= '<td class="text-center col-3 align-middle">';
-			html+= picture1+picture2 + '</td>';
-
-			html+= '<td class="text-center col-2 align-middle">';
-			html+= month + '<br />' + year +'</td>';
-
-			html+= '<td class="text-center col-3 align-middle">';
-			html+= destinationStr + '</td>';
-
-			html+= '<td class="text-center col-3 align-middle">';
-			html+= crew + '</td>';
-
-			html+= '<td class="text-center col-1 align-middle" id="miles">';
-			html+= number_format(toern['miles'], 1) + ' nm</td>';
-
-			// invisible column to allow sorting by miles and date (yyyy_mm)
-            html+= '<td class="d-none">' + toern['miles'] + '</td>';
-            html+= '<td class="d-none">' + year+'_'+month + '</td></tr>';
-		}
-
-		sum_trips += 1;
-		try {
-			sum_miles += parseFloat(toern['miles']);
-		} catch(error) {
-			sum_miles += 0.0;
-		}
-	}
-	//console.log("Miles: " + sum_miles + "  len miles: " + miles.length);
-	//console.log("Number of trips is SailingLog.js: " + numToerns);
-	html+= '</tbody></table>';
-
-	subheadline = "";
-	if (sum_trips==0 && numToerns > -1) {
-		subheadline = "No sailing trips found that match the selection criteria. Try again please.";
-	}
-	if (sum_trips >= 1) {
-		subheadline = sum_trips + " out of " + numToerns + " trips selected with a total of " + number_format(sum_miles, 0) + "nm sailed.";
-	}
-	if (sum_trips == numToerns) {
-		subheadline = number_format(sum_miles, 0) + " nm, " + numToerns + " fun sailing trips, and still counting....";
-	}
-	jQuery('#trip_table').html(html);
-	jQuery('#subheadline').html(subheadline);
-
-}
-
-
-jQuery(document).ready(function(){
-	var html;
-    parse_trip_table(isMobile);         // build the html code from the trip data stored in javascript arrays
-    enhance_toern_table_code(isMobile); // enhance the html code
-
-	if(!isMobile) {
-		html = '<div id="table_header" class="container col-hdr-container Sd-none d-sm-block">';
-		html+= '<div class="row col-hdr">';
-		html+= '<div class="col-3" style="padding-top: 3px !important;">';
-		html+= 'Picture Galleries</div><div class="col-2">Date&nbsp;';
-		html+= '<i id="sort_date" class="fas fa-sort-amount-down"></i>';
-		html+= '</div><div class="col-3">Location&nbsp;</div>';
-		html+= '<div class="col-2" style="padding-top: 3px !important;">Crew</div>';
-		html+= '<div class="col-2 text-end">Miles&nbsp;';
-		html+= '<i id="sort_miles" class="fas fa-sort-amount-down"></i>';
-		html+= '</div></div></div>';
-		$("#nav_addon").html(html);
-	}
-
-    jQuery("#FancyLink").fancybox({
-        iframe: {
-            css: {
-                "width": "100%",
-                "height": "100%",
-            }
-        }
-    });
-
-    jQuery('#sort_date').click(function() {
-		//console.log("sort date");
-        var glyphicon_asc = "fas fa-sort-amount-up";
-        var glyphicon_desc = "fas fa-sort-amount-down";
-        var sort_order = swapClassElement("#sort_date", glyphicon_asc, glyphicon_desc);
-        data_table.column( "6:visible" ).order( sort_order );
-        data_table.draw();
-    });
-
-    jQuery("#sort_miles").click(function() {
-        var glyphicon_asc = "fas fa-sort-amount-up";
-        var glyphicon_desc = "fas fa-sort-amount-down";
-        var sort_order = swapClassElement('#sort_miles', glyphicon_asc, glyphicon_desc);
-        data_table.column( '5:visible' ).order( sort_order );
-        data_table.draw();
-    });
-});
 </script>
 {% endblock %}

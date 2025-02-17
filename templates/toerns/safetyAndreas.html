@@ -52,7 +52,9 @@
       <ul class="list-bullet">
         <li>First person who notices the emergency yells "Man Overboard" (MOB). Permanent Spotter assigned thereafter</li>
         <li>Press the <b>F2</b>-key on the laptop in the Nav Station. This records the 
-          current position and can be used later to find the person. Or hit the MOB button on the B&G VHF radio (see instruction below).
+          current position and can be used later to find the person. Or simultaneously press the <b>Enter</b> and <b>Exit</b> keys on the 
+          B&G Zeus3 chart plotter (see B&G VHF key functions below). This creates a MOB waypoint at the yacht's current position and switches the display to a 
+          zoomed chart panel centered at the yacht's position.
         </li>
         <li>Deploy <b>MOM</b> unit and any/all throwable floatation devices to mark the water</li>
         <li>Deploy Lifesling, and throwline, when alongside. All on stern rail</li>
@@ -219,9 +221,9 @@
         <li>Use in emergency only unless otherwise directed by the skipper</li>
       </ul>
       <img class="offset-xs-1 col-xs-10 col-12 img-fluid" src="{% static '/images/VHF_Emergency_Call_Matrix.png' %}" />
-      <img class="offset-xs-1 col-xs-10 col-12 img-fluid" src="{% static '/images/B&G_Radio_Picture.png' %}" />
-      <h4 class="text-secondary">VHF Operation</h4>
+      <h4 class="text-secondary pt-5">VHF Operation</h4>
       <ul class="list-bullet">
+        <img class="offset-xs-1 col-xs-10 col-12 img-fluid" src="{% static '/images/B&G_VHF.png' %}" />
         <li>Turn the Knob 1) until Channel 16 is selected. Alternatively hit button 12 until channel 16 is selected.</li>
         <li>Knob 2) a short press toggles between the Volume and the Squelch adjustments.</li>
         <li>Knob 2) press shortly to select the Squelch adjustment function. Turn the Knob 2 to the left until you hear a screetching sound. Then turn to the right until that sound stops.</li>
@@ -233,18 +235,14 @@
         <li>Button 8) short press will change the screen to navigation mode displaying vessel's current SOG and COG</li>
         <li>Button 8) a long press marks the current position with a Crew-Over-Board waypoint (COB)</li>
       </ul>
-    </div>
-    <div class="row pt-2"> 
-      <h4 class="text-secondary col-12">VHF - MOB Alarm Display</h4>
-      <img class="offset-xs-1 col-xs-10 col-6 img-fluid" src="{% static '/images/B&G_MOB_part1.png' %}" />
-      <img class="offset-xs-1 col-xs-10 col-6 img-fluid" src="{% static '/images/B&G_MOB_part2.png' %}" />
+      <p>For more information please see the B&G VHF manual.</p>
     </div>
   </div>
 
 <script type='text/javascript'>
   jQuery(document).ready(function(){
       $("#searchbox").remove();
-      $("#headline").html("Andreas's Safety Briefing")
+      $("#headline").html("Andreas's Safety Briefing");
   });
 </script>
   <!-- end of safety.html body content container -->

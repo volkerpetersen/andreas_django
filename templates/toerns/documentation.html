@@ -1,0 +1,108 @@
+<!------------------------------------------------------------------
+	documentation.html
+    
+-------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Web Documentation{% endblock %}
+
+{% load static %}
+{% block content %}
+    <!-- Start of main page body content-->
+    <div id="content_container" class="container">
+        <div id="content_row" class="row pt-1">
+            <div class="col-12 text-center">
+                <h3 class="text-secondary">Website Documentation</h3>
+            </div>
+            <div class="col-12">
+                <p class="text-start fs-5">
+                    This website is written in Django and uses a Sqlite database 
+                    to store all data. Currently the site is hosted on the free
+                    hosting site <a href="https://www.pythonanywhere.com/" target="_blank">
+                    pythonanywhere.com</a> under the account 
+                    <a href="https://andreas61667.pythonanywhere.com/" target="_blank">andreas61667</a>.
+                    <br>
+                    Please contact the webmaster Volker Petersen
+                    for any design changes or major updates to this site.<br><br>
+                    PS: The German word <i>T&ouml;rn</i> means a trip on a ship.
+                </p>
+                <h3 class="text-secondary text-start pt-1">
+                    Database
+                </h3>
+                <p class="text-start fs-5">
+                    You can reach the database maintenance tool by going to 
+                    Resource/Admin Page. All data is stored in 2 key tables:<br>
+                    <ul class="fs-5">
+                        <li>The table <i>Crew Members</i> holds a list of all crew members that 
+                            have sailed on Andreas. In addition to their name 
+                            the table also holds a list of their sailing skills. The field email is current not utilized.
+                        </li>
+                        <li>The table <i>Toern Directory</i> holds all information about a 
+                            single trip. These are the fields in this table:<br>
+                            <ul>
+                                <li>startDate: start of the trip using the format YYYY-MM-DD</li>
+                                <li>endDate: end of the trip using the format YYYY-MM-DD</li>
+                                <li>Destination: a headline description of the trip</li>
+                                <li>Geo Region: the geographical region of the trip. The website 
+                                    currently supports these regions: Atlantic, Caribbean, Great Lakes, Pacific
+                                </li>
+                                <li>Maptable: the name of an Sqlite table with the waypoints along the trip. 
+                                    This table is used to show the journey on a Google Map.
+                                </li>
+                                <li>Boat: the name and description of the boat. This field is also being used to 
+                                    add information like:<br>
+                                    a pdf file with a trip log (using a hyperlink pointing to the file surrounded by the keywords <i>openLink</i> and <i>closeLink</i>)<br>
+                                    a link to another website with tracker infor (e.g. Yellowbrick) or race results (e.g. Yacht Scoring)<br>
+                                    a linefeed the break the text into multiple lines (using keyword <i>linefeed</i>)
+                                    <br>Please see example implementations in the existing Toern Directory entries.
+                                </li>
+                                <li>Miles: the total miles sailed on this trip</li>
+                                <li>Days At Sea: the number of days at sea</li>
+                                <li>Skipper: the skipper for this trip</li>
+                                <li>Crew: a list of crew members on this trip. You can select the crew members from a 
+                                    list of all sailors in the table <i>Crew Members</i>. If a sailor is not yet in the 
+                                    Crew Member table they must be added first in this table before they can be added to a trip.
+                                </li>
+                                <li>Image: the name and location of an image you want to show for this trip. All images should 
+                                    be stored in the folder static/images. An entry in this field should then look like: images/nameOfTripImage.jpg
+                                </li>
+                                <li>Picture Link: a link to another website hold a picture album. I usually add a link to my Google Photo Albums</li>
+                            </ul>
+                        </li>
+                        <li>Please don't make any changes to the tables <i>Users</i> and <i>Groups</i> found on the Admin page.</li>
+                    </ul>
+                </p>
+                <h3 class="text-secondary text-start pt-1">
+                    Process to add a trip to this website
+                </h3>
+                <p class="text-start fs-5">
+                    For every trip that you want to add to this website you should have these components: 
+                <ol class="fs-5">
+                    <li>A picture to be featured on the website. The picture should be landscape 
+                        with an aspect ratio of 800x600 (W x H). A resolution of 100 pixels/inch
+                        is sufficient. Preferred image formats are webp, png, or jpg.<br>
+                        The tool <i>Upload Content</i> can be found at Resources/Admin.
+                    </li>
+                    <li>The trip stats. Start date, end date, total miles sailed, and number of days at sea.</li>
+                    <li>An SQL file with the route sailed on this trip. The tool <i>Upload Content</i>
+                        found on the Resources/Admin page can be used to convert a GPX route file (can be exported from Expedition)
+                        into am SQL file. This tool will also automatically upload the converted file
+                        into this wensite's database.
+                    </li>
+                    <li>Ideally a Google Photos album with pictures and videos from the trip.</li>
+                </ol>
+                </p>
+                <p class="text-start fs-5">
+                    First step is to update the Crew table with any crew members that have not previously sailed on Andreas.<br>
+                Second step is to upload all the content to the website (see above).<br>
+                The third and final step is to update the Toern Directory table with all the trip stats, picture name, and 
+                Google Photo Album link.<br>
+                The Database tables can be edited on the Resources/Admin page.
+                </p>
+            </div>
+        </div>
+        <div id="content_row" class="row pt-2"></div>
+    </div>
+    <!-- end of main page body content container -->
+{% endblock %}
+

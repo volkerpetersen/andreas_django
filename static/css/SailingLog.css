@@ -53,6 +53,18 @@ body, html {
 	padding-top: 1rem !important;
 }
 
+/* admin.py formating for Many-To-Many field selections */
+.select2-container--default .select2-selection--multiple {
+  color: #000000;
+  background-color: #7e7e7e;
+  border-color: #7E7E7E;
+}
+/* admin.py Targeting selected items in ManyToMany fields */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  color: #000000;
+  background-color: #3E3E3E;
+  color: #3E3E3E;
+}
 /* main menu formatting */
 .navbar-toggler,
 .navbar-toggler:focus {
@@ -211,7 +223,7 @@ body, html {
   font-family: 'Shadows Into Light Two', cursive;
   font-style: italic;
   font-weight: 800;  /* 800 */
-  font-size: calc(3.3vw) !important;
+  font-size: calc(3.2vw) !important;
 }
 
 .subheadline {

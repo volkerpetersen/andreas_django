@@ -12,16 +12,63 @@
 {% block title %}Trip Gallery{% endblock %}
 
 {% load static %}
-
+{% load humanize %}
+{% load custom_filter %}
 {% block content %}
-    <div id="trip_gallery" class="container"">
-        <!--
-        placeholder for the trip gallery.  The Javascript function
-        'parse_trip_gallery()' parses the data from the SQL table stored in
-        the Javascript dictionary into the html code.
-        -->
+    <div id="trip_gallery" class="container">
+        <div id="portfolio" class="col-xs-12">
+            <div id="tripItems" class="portfolio-items">
+            {% for trip in trips %}
+                <!-- the function multi_replace for the yacht variable is  
+                	 defined in toerns/templatetags/custom_filer.py
+                -->
+                {% with
+                    destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"'>"|add:trip.destination|add:"</a>"
+                    yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../static/pdf/,&#34;,'"
+                %}
+                <div class="portfolio-item {{ trip.georegion|replace:" ,_" }} col-xs-12 col-sm-4 col-md-3" data-value="{{ trip.miles|floatformat:1|intcomma }}">
+                    <div class="trip-details-wrap">
+                        <img class="img-responsive" id="tripImage" src="../static/{{ trip.image }}" alt="{{ trip.destination }}" onerror="imgErrorTripPicture(this)" />
+                        <div class="text-center trip-name">
+                            {{ trip.startDate|date:"F" }}&nbsp;{{ trip.startDate|date:"Y" }}<br />{{ trip.destination }}
+                        </div>
+                        <div class="overlay">
+                            <div class="trip-details-inner">
+                                <h4>
+                                    <a href="../plotRoute/{{ trip.maptable }}" target="_blank">{{ trip.destination }}</a>
+                                </h4>
+                                <p>{{ trip.miles|floatformat:1|intcomma }} nm in {{ trips.daysAtSea }} days on
+                                    {{ yacht|safe }}<br />
+                                    With 
+                                    {% for crew in trip.crew.all|dictsort:"lastName" %}
+                                        {{ crew.firstName }}&nbsp;{{ crew.lastName }},
+                                    {% endfor %}
+                                    {% for skipper in trip.skipper.all %}
+                                        and skipper {{ skipper.firstName }}&nbsp;{{ skipper.lastName }}.
+                                    {% endfor %}
+                                    <br />
+                                    {% if trip.picturelink %}
+                                        <a href='{{ trip.picturelink }}' target='_blank'>Picture Gallery</a>
+
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="d-block d-sm-none">
+                                <hr class="col-xs-12 portfolio-border" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endwith %}
+            {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="row"><div class="col-12 d-block d-sm-none"></div></div>
+
+    <div class="row">
+        <div class="col-12 d-block d-sm-none"></div>
+    </div>
+
     <script type="text/javascript">
     let region = ['Atlantic', 'Caribbean', 'Great_Lakes', 'Pacific', 'all'];
     let portfolio;
@@ -45,15 +92,10 @@
     }
 
     /*-----------------------------------------------------------------------------------------
-    Function to parse the toern data and build the toern gallery from the 
-    SQLite table data stored in the JSON array tripsJSON that was passed 
-    into this page thru the views.py variable content and converted 
-    to the Javascript array toernDirectory in header.html
+    Function to update the trip gallery and enable portfolio function
     -----------------------------------------------------------------------------------------*/    
-    function parse_trip_gallery() {
-        var idx, numToerns, html, nav_addon, geo, toern, startDate, yacht;
-
-        numToerns = toernDirectory.length;
+    function update_trip_gallery() {
+        var html;
                 
         //-----------------------------------------------------------------------------------------
         // portfolio filter for the Trip Gallery
@@ -105,56 +147,14 @@
         html+= '</ul>';
         html+= '</div>';
         $("#nav_addon").html(html);
+        set_subheadline("*", sum_miles, sum_trips);
 
-        html = '<div class="col-xs-12" id="portfolio">';
-        html+= '<div id="tripItems" class="portfolio-items"></div></div></div>';
-        $("#trip_gallery").html(html);
-
-        selectedMiles = 0;
-        selectedTrips = 0;
-        for (idx=0; idx<numToerns; idx++) {
-            toern = toernDirectory[idx]['fields'];
-            // primary key = pk = startDate
-            startDate = moment(toernDirectory[idx]['pk']).format("MMMM");
-            startDate += " " + moment(toernDirectory[idx]['pk']).format("YYYY");
-            geo = toern['georegion'].replace(" ", "_");
-            //console.log(geo);
-            yacht = parse_yacht(toern['boat']);
-            tripMiles = parseFloat(toern['miles']);
-            selectedMiles += tripMiles;
-            selectedTrips += 1;
-
-            html = '<div class="portfolio-item ' + geo + ' col-xs-12 col-sm-4 col-md-3" data-value="'+ tripMiles +'">';
-            html+= '<div class="trip-details-wrap">';
-            html+= '<img class="img-responsive" id="tripImage" src="../static/'+toern['image'];
-            html+= '" alt="'+toern['destination']+'" onerror="imgErrorTripPicture(this)"/>';
-            html+= '<div class="text-center trip-name">'+startDate;
-            html+= '<br />'+toern['destination']+'</div>';
-            html+= '<div class="overlay">';
-            html+= '<div class="trip-details-inner">';
-            html+= '<h4><a href="../plotRoute/'+toern['maptable'];
-            html+= '" target="_blank">'+toern['destination']+'</a></h4>';
-            html+= '<p>'+toern['miles']+'nm in '+toern['daysAtSea']+' days on '+yacht;
-            html+= '<br />With '+parse_crew(toern);
-            if (toern['picturelink'] && toern['picturelink'].includes("http")) {
-                html+= '.<br/><a href="'+toern['picturelink']+'" target="_blank">Pictures</a></p>';
-            } else {
-                html+= '.</p>';
-            }
-            html+= '</div></div><div class="d-block d-sm-none"> <hr class="col-xs-12 portfolio-border" />';
-            html+= '</div></div></div>';
-
-            $("#tripItems").append(html);
-        } // end of loop over all toerns in toernDirectory
-        
-        set_subheadline("*", selectedMiles, selectedTrips);
-
-    } // end of function parse_trip_gallery()
+    } // end of function update_trip_gallery()
 
 
     jQuery(document).ready(function() {
         $("#searchboxDiv").html("");        // delete the Menu searchbox
-        parse_trip_gallery();
+        update_trip_gallery();
 
         $("img").on('load', function() {
             //console.log(selector);

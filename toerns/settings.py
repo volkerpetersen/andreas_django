@@ -34,6 +34,12 @@ git remote set-url origin https://volkerpetersen:b4c8e7f1052f4b25a65c38ba9770146
 
 from pathlib import Path
 import environ, os
+import re
+from django.template import base
+
+# To break the given Django template tag into multiple lines, 
+# you need to override Django's default regex to allow newlines
+base.tag_re = re.compile(base.tag_re.pattern, re.DOTALL)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,6 +66,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django_user_agents",
+    "django.contrib.humanize",
     "toerns",
 ]
 
@@ -71,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = "toerns.urls"
@@ -164,7 +173,7 @@ JAZZMIN_SETTINGS = {
     "custom_links": {
         "toerns": [
             {
-            "name": "Upload GPX or SQL",
+            "name": "Upload Content",
             "url": "/updateTrip",
             "icon": "fas fa-cog",
             },
@@ -230,6 +239,7 @@ JAZZMIN_SETTINGS = {
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": False,
+    "custom_css": "css/SailingLog.css",
     ###############
     # Change view #
     ###############

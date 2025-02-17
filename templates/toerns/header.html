@@ -53,28 +53,23 @@
 		<span itemprop="description" content="The Sailing Log of s/v Andreas."></span>
 		<span itemprop="url" content="https://volkersailing.pythonanywhere.com"></span>
 	</span>
+	{% if is_mobile %}
+		<script>var isMobile = true;</script>
+	{% else %}
+		<script>var isMobile = false;</script>
+	{% endif %}
+
+	{% if sumMiles %}
+		<script>
+		let sum_miles = {{ sumMiles }};
+		let sum_trips = {{ numToerns }};
+		let numToerns = {{ numToerns }};
+		</script>
+	{% endif %}
 </head>
 
 <script type='text/javascript'>
-	var isMobileAgent = navigator.userAgent.toLowerCase().match(/mobile/i);
-	var isMobileTouch = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
-	var isMobile = false;
 	var html;
-	if (isMobileTouch || isMobileAgent) {
-		isMobile = true;
-	}
-
-	// convert the variable content['tripsJSON'] created in views.py 
-	// into the Javascript global variable 'toernsDirectory'. Leave
-	// this array empty if there is an error parsing the JSON code.
-	let toernDirectory = [];
-	
-	try {
-		toernDirectory = JSON.parse({% autoescape off %}{{tripsJSON}}{% endautoescape %});
-	}
-	catch (error) {
-		toernDirectory = [];
-	}
 	
 	//----------------------------------------------------------------------------------------
 	// function to jump to top of webpage
@@ -152,9 +147,10 @@
 						<li class="nav-item dropdown">
 							<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" href="{% url 'Safety-Andreas' %}">Safety-Andreas</a></li>
+								<li><a class="dropdown-item" href="{% url 'Safety' %}">Safety</a></li>
 								<li><a class="dropdown-item" href="{% url 'Weather' %}">Weather Page</a></li>
-								<li><a class="dropdown-item" href="/admin">Admin Pages</a></li>
+								<li><a class="dropdown-item" href="{% url 'Documentation' %}">Site Documentation</a></li>
+								<li><a class="dropdown-item" href="/admin">Admin Page</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -163,7 +159,7 @@
 			</div>
 		</nav>
 		<!-- create space for an additional navbar section that is not scolled
-			 used in index.php and NavGallery.php
+			 used in index.html and gallery.html
 		-->
 		<div id="nav_addon"></div>
 	

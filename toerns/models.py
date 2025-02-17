@@ -15,6 +15,33 @@ python manage shell ==> example
 
 from django.db import models
 
+class SailingSkills(models.Model):
+    """Table with approved crew sailing skills (navigator, skipper, trimmmer, main, etc.)"""
+    skill = models.CharField(max_length=20)
+
+    class Meta:
+        managed = True
+        db_table = "SailingSkills"
+        verbose_name_plural = 'SailingSkills'
+
+    def __str__(self):
+        return f"{self.skill}"
+
+class CrewMembers(models.Model):
+    """Table to track of the crew members"""
+    firstName = models.CharField(max_length=50)
+    lastName = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, blank=True)
+    skills = models.ManyToManyField(SailingSkills, blank=True)
+
+    class Meta:
+        managed = True
+        db_table = "CrewMembers"
+        verbose_name_plural = 'Crew Members'
+
+    def __str__(self):
+        return f"{self.firstName} {self.lastName}"
+
 class toerndirectory(models.Model):
     """Define the Toern Directory Table"""
 
@@ -31,59 +58,18 @@ class toerndirectory(models.Model):
     miles = models.DecimalField(
         blank=True, null=True, max_digits=8, decimal_places=2)
     daysAtSea = models.IntegerField()
-    skipper = models.CharField(blank=True, null=True, max_length=50)
-    crew0 = models.CharField(blank=True, null=True, max_length=50)
-    crew0 = models.CharField(blank=True, null=True, max_length=50)
-    crew1 = models.CharField(blank=True, null=True, max_length=50)
-    crew2 = models.CharField(blank=True, null=True, max_length=50)
-    crew3 = models.CharField(blank=True, null=True, max_length=50)
-    crew4 = models.CharField(blank=True, null=True, max_length=50)
-    crew5 = models.CharField(blank=True, null=True, max_length=50)
-    crew6 = models.CharField(blank=True, null=True, max_length=50)
-    crew7 = models.CharField(blank=True, null=True, max_length=50)
-    crew8 = models.CharField(blank=True, null=True, max_length=50)
-    crew9 = models.CharField(blank=True, null=True, max_length=50)
+    skipper = models.ManyToManyField(CrewMembers, blank=True, related_name='skipperToern')
+    crew = models.ManyToManyField(CrewMembers, blank=True, related_name='crewToern')
     image = models.CharField(blank=True, null=True, max_length=100)
     picturelink = models.CharField(blank=True, null=True, max_length=200)
 
     class Meta:
         managed = True
-        db_table = "ToernDirectoryTable"
+        db_table = "ToernDirectory"
         verbose_name_plural = 'Toern Directory'
 
     def __str__(self):
         return f"{self.startDate}: {self.destination}"
-
-class Races(models.Model):
-    """Define the Race """
-    raceDate = models.DateField(primary_key=True,
-                                help_text="date in YYYY-MM-DD format")
-    raceName = models.CharField(max_length=50)
-
-    class Meta:
-        managed = True
-        db_table = "Races"
-
-    def __str__(self):
-        return f"{self.raceDate}: {self.raceName}"
-
-class Participant_Tracking(models.Model):
-    """Table to track race participants ToDos"""
-    id = models.IntegerField(primary_key=True)
-    raceDate = models.ForeignKey(
-        Races, on_delete=models.CASCADE, help_text="Lookup from the 'Races' table")
-    firstName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    signupDate = models.DateField(help_text="date in YYYY-MM-DD format")
-    reviewDate = models.DateField(help_text="date in YYYY-MM-DD format")
-
-    class Meta:
-        managed = True
-        db_table = "Participant_Tracking"
-
-    def __str__(self):
-        return f"Race {self.raceID}: {self.firstName} {self.lastName}"
 
 def fetchRouteData(tableName):
     class RouteMetaClass(models.base.ModelBase):

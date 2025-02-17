@@ -14,6 +14,13 @@
 {% load static %}
 
 {% block content %}
+    {{ destinationMiles|json_script:"destinationMiles" }}
+    {{ destinationCount|json_script:"destinationCount" }}
+    {{ destinationMiles|json_script:"destinationMiles" }}
+    {{ annualMiles|json_script:"annualMiles" }}
+    {{ annualDays|json_script:"annualDays" }}
+    {{ skipperMiles|json_script:"skipperMiles" }}
+
     <!-- Start of main page body content-->
     <div id="content_container" class="container">
         <div id="content_row" class="row pt-1">
@@ -33,15 +40,15 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type='text/javascript'>
-        let destinationMilesDict = {};
-        let destinationCountDict = {};
-        let skipperMilesDict = {};
-        let annualMilesDict = {};
-        let annualDaysDict = {};
+        // convert Python dictionaries into Javascript. The Id elements are created on top of the template file.
+        let destinationMilesDict = JSON.parse(document.getElementById('destinationMiles').textContent);
+        let destinationCountDict = JSON.parse(document.getElementById('destinationCount').textContent);
+        let skipperMilesDict = JSON.parse(document.getElementById('skipperMiles').textContent);
+        let annualMilesDict = JSON.parse(document.getElementById('annualMiles').textContent);
+        let annualDaysDict = JSON.parse(document.getElementById('annualDays').textContent);
         let elementHeight = 300;
-        let geoRegions, totalMiles, numToerns, currentPopup;
+        let currentPopup;
         let optionsBar, optionsCol, optionsPie, map;
-        var idx, geo, skipper, year, toern, miles;
 
         let geoArea = {
             'Atlantic': {
@@ -61,62 +68,8 @@
                 'miles': 0.1667
             }
         };
-        
-        geoRegions = Object.keys(geoArea).length;
-        
-        for (geo of Object.keys(geoArea)) {
-            destinationMilesDict[geo] = 0;
-        }
-
-        /*-----------------------------------------------------------------------------------------
-        Parse the toern data and build the dashbaord from the 
-        SQLite table data stored in the JSON array tripsJSON that was passed 
-        into this page thru the views.py variable content and converted 
-        to the Javascript array toernDirectory in header.html
-        -----------------------------------------------------------------------------------------*/
-        numToerns = toernDirectory.length;
-        totalMiles = 0;
-        for(idx=0; idx<numToerns; idx++) {
-            toern = toernDirectory[idx]['fields'];
-            // primary key = pk = startDate
-            year = moment(toernDirectory[idx]['pk']).format("YYYY");
-            skipper = toern['skipper'];
-            skipper = skipper.replace("&uuml;", "ue");
-            skipper = skipper.replace("&auml;", "ae");
-            skipper = skipper.replace("&ouml;", "oe");
-            geo = toern['georegion'];
-            miles = Math.round(toern['miles']*100)/100;
-            totalMiles += miles;
-            if (geo in destinationMilesDict) {
-                destinationMilesDict[geo] += miles;
-            } else {
-                destinationMilesDict[geo] = miles;
-            }
-            if (geo in destinationCountDict) {
-                destinationCountDict[geo] += 1;
-            } else {
-                destinationCountDict[geo] = 1;
-            }
-            if (skipper in skipperMilesDict) {
-                skipperMilesDict[skipper] += miles;
-            } else {
-                skipperMilesDict[skipper] = miles;
-            }
-
-            if (year in annualMilesDict) {
-                annualMilesDict[year] += miles;
-            } else {
-                annualMilesDict[year] = miles;
-            }
-            if (year in annualDaysDict) {
-                annualDaysDict[year] += toern['daysAtSea'];
-            } else {
-                annualDaysDict[year] = toern['daysAtSea'];
-            }
-        }
-
+                
         // process the data to be utilized in the chart and map plotting functions
-
         const titleStyle = {color: "#337ab7",
                     fontName: "Shadows Into Light Two",
                     fontSize: 24,
@@ -180,12 +133,13 @@
                 // Add the circle for each GeoArea to the map.
                 // https://developers.google.com/maps/documentation/javascript/examples/circle-simple
 
-                labelText = "<strong>" + key + "</strong><br />";
-                labelText += destinationCountDict[key] + " trips with <br />";
-                labelText += numberWithCommas(destinationMilesDict[key], 0)+"nm";
-                //console.log(labelText);
+                if(key in destinationMilesDict) {
+                    labelText = "<strong>" + key + "</strong><br />";
+                    labelText += destinationCountDict[key] + " trips with <br />";
+                    labelText += numberWithCommas(destinationMilesDict[key], 0)+"nm";
 
-                createInfoWindow(labelText, geoArea[key]['position'], destinationMilesDict[key] / totalMiles, map);
+                    createInfoWindow(labelText, geoArea[key]['position'], destinationMilesDict[key] / sum_miles, map);
+                }
             }
         }
 
@@ -278,18 +232,13 @@
             // Set a Chart callback to run when the Google Visualization API is loaded.
             google.charts.setOnLoadCallback(drawChart);
 
-            // Set a Chart callback to run when the Google Visualization API is loaded.
-            //google.charts.setOnLoadCallback(drawChart);
-            
-            //console.log("Total miles: " + totalMiles);
-
-            text = "Stats on " + numberWithCommas(totalMiles, 0) + " nm";
+            text = "Stats on " + numberWithCommas(sum_miles, 0) + " nm";
             jQuery("#subheadline").html(text + " and "+numToerns+" trips<br />");
 
             containerHeight = jQuery('body').outerHeight() 
-                            - jQuery('#navbar_container').outerHeight() 
+                            - jQuery('#title_container').outerHeight() 
                             - jQuery('footer').outerHeight();
-            elementHeight = (containerHeight) / 2;
+            elementHeight = (containerHeight-17) / 2;
             optionsCol.height = elementHeight;
             optionsBar.height = elementHeight;
             //console.log(elementHeight);
@@ -308,7 +257,7 @@
     </script>
 
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c&loading=async&callback=initMap">
     </script>
 {% endblock %}
 

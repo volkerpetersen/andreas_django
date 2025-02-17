@@ -36,38 +36,6 @@ this.imageEnlarge = function(){
 	});
 };
 
-//-----------------------------------------------------------------------------------------
-// function to parse all the yacht info from the DB Toern record
-//-----------------------------------------------------------------------------------------
-function parse_yacht(yacht) {
-	if (yacht == null)
-		return yacht
-	yacht = yacht.replace(/linefeed/g, "<br>");
-	yacht = yacht.replace(/openLink/g, "<a");
-	yacht = yacht.replace(/closeLink/g, "</a>");
-	yacht = yacht.replace(/&#34;/g, "'");
-	yacht = yacht.replace(", <br>", ".<br>");
-	yacht = yacht.replace("pdf/", "../static/pdf/");
-	//console.log(yacht);
-	return yacht;
-}
-
-//-----------------------------------------------------------------------------------------
-// function to parse all crew members from the DB Toern record
-//-----------------------------------------------------------------------------------------
-function parse_crew(toern) {
-	var crew = "";
-	var field = "crew"
-	var idx = 0;
-
-	for (idx = 0; idx < 10; idx++) {
-		if (is_string_empty(toern[field + idx])) {
-			crew += toern[field + idx] + ", ";
-		}
-	}
-
-	return crew + "and skipper " + toern['skipper'];
-}
 
 
 //-----------------------------------------------------------------------------------------

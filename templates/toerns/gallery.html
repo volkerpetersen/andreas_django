@@ -26,7 +26,7 @@
                     destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"'>"|add:trip.destination|add:"</a>"
                     yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../static/pdf/,&#34;,'"
                 %}
-                <div class="portfolio-item {{ trip.georegion|replace:" ,_" }} col-xs-12 col-sm-4 col-md-3" data-value="{{ trip.miles|floatformat:1|intcomma }}">
+                <div class="portfolio-item {{ trip.georegion|replace:" ,_" }} col-xs-12 col-sm-4 col-md-3" data-value="{{ trip.miles }}">
                     <div class="trip-details-wrap">
                         <img class="img-responsive" id="tripImage" src="../static/{{ trip.image }}" alt="{{ trip.destination }}" onerror="imgErrorTripPicture(this)" />
                         <div class="text-center trip-name">

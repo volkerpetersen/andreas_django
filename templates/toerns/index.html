@@ -96,9 +96,9 @@
 								{% for crew in trip.crew.all|dictsort:"lastName" %}
 									{{ crew.firstName }}&nbsp;{{ crew.lastName }},
 								{% endfor %}
-								{% if trip.skipper.all %}
-									and skipper {{ skipper.firstName }}&nbsp;{{ skipper.lastName }}.
-								{% endif %}							
+								{% for skipper in trip.skipper.all %}
+									and skipper {{ skipper.firstName }}&nbsp;{{ skipper.lastName }}
+								{% endfor %}
 							</div>
 						</div>
 				

@@ -45,13 +45,23 @@ class CrewMembers(models.Model):
 class toerndirectory(models.Model):
     """Define the Toern Directory Table"""
 
+    geoChoices = (
+        ('Atlantic', u'Atlantic'),
+        ('Baltic', u'Baltic'),
+        ('Caribbean', u'Caribbean'),
+        ('Coratia', u'Croatia'),
+        ('Great Lakes', u'Great Lakes'),
+        ('Pacific', u'Pacific')
+    )
+
+
     startDate = models.DateField(primary_key=True,
                                  help_text="date in YYYY-MM-DD format")
     endDate = models.DateField(blank=True,
                                help_text="date in YYYY-MM-DD format")
     destination = models.CharField(blank=True, null=True, max_length=150)
-    georegion = models.CharField(blank=True, null=True, max_length=40,
-                                 help_text="Atlantic, Caribbean, Great Lakes, Pacific")
+    georegion = models.CharField(blank=True, null=True, max_length=40, choices=geoChoices,
+                                 help_text="Atlantic, Baltic, Caribbean, Croatia, Great Lakes, Pacific")
     maptable = models.CharField(blank=True, null=True, max_length=100,
                                 help_text="name of the Google Maps waypoints table")
     boat = models.CharField(blank=True, null=True, max_length=400)

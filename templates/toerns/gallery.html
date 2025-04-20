@@ -19,7 +19,7 @@
         <div id="portfolio" class="col-xs-12">
             <div id="tripItems" class="portfolio-items">
             {% for trip in trips %}
-                <!-- the function multi_replace for the yacht variable is  
+                <!-- the function multi_replace() for the yacht variable is  
                 	 defined in toerns/templatetags/custom_filer.py
                 -->
                 {% with
@@ -37,7 +37,7 @@
                                 <h4>
                                     <a href="../plotRoute/{{ trip.maptable }}" target="_blank">{{ trip.destination }}</a>
                                 </h4>
-                                <p>{{ trip.miles|floatformat:1|intcomma }} nm in {{ trips.daysAtSea }} days on
+                                <p>{{ trip.miles|floatformat:1|intcomma }} nm in {{ trip.daysAtSea }} days on
                                     {{ yacht|safe }}<br />
                                     With 
                                     {% for crew in trip.crew.all|dictsort:"lastName" %}
@@ -49,7 +49,6 @@
                                     <br />
                                     {% if trip.picturelink %}
                                         <a href='{{ trip.picturelink }}' target='_blank'>Picture Gallery</a>
-
                                     {% endif %}
                                 </p>
                             </div>

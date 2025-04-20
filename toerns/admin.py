@@ -1,12 +1,23 @@
 from django.contrib import admin
 from .models import toerndirectory
 from .models import CrewMembers
+from django import forms
+
+class toerndirectoryForm(forms.ModelForm):
+    class Meta:
+        model = toerndirectory
+        fields = '__all__'
+        widgets = {
+            'boat': forms.Textarea(attrs={'rows': 8, 'cols': 45}),
+        }
 
 class toerndirectoryAdmin(admin.ModelAdmin):
+    filter_horizontal = ('skipper', 'crew')
     # Create your own display
     list_display = ("startDate", "destination", "miles")
     list_filter = ("georegion", )
     search_fields = ("skipper", )
+    form = toerndirectoryForm
 
 
 class crewMemberAdmin(admin.ModelAdmin):

@@ -60,13 +60,13 @@
         <div class="row pt-1">
           <label for="fileUpload" class="col-12 col-md-3 form-label">Select route file:</label>
           <div class="col-12 col-md-8">
-            <input type="file" name="fileUpload" id="fileUpload" required onchange="waypoint_check()" accept=".gpx, .sql" />
+            <input type="file" name="fileUpload" id="fileUpload" onchange="waypoint_check()" accept=".gpx, .sql" />
           </div>
         </div>
         <div class="row pt-1">
           <label for="imageUpload" class="col-12 col-md-3 form-label">Select image file:</label>
           <div class="col-12 col-md-8">
-            <input type="file" name="imageUpload" id="imageUpload" required onchange="image_check()" accept=".jpg, .jpeg, .png, .webp,. tiff" />
+            <input type="file" name="imageUpload" id="imageUpload" onchange="image_check()" accept=".jpg, .jpeg, .png, .webp,. tiff" />
           </div>
         </div>
         <div class="row pt-2">
@@ -133,9 +133,12 @@
       waypointFile = true
     }
 
-    if(waypointFile && imageFile) {
+    if(waypointFile || imageFile) {
       $('#updateTripSubmit').prop('disabled', false);
+      //console.log("enabled")
     }
+    //console.log("Route: "+ waypointFile);
+    //console.log("Image: " + imageFile);
   };
 
   function image_check() {
@@ -151,9 +154,12 @@
       imageFile = false;
     }
 
-    if (waypointFile && imageFile) {
+    if (waypointFile || imageFile) {
       $('#updateTripSubmit').prop('disabled', false);
+      //console.log("enabled")
     }
+    //console.log("Route: " + waypointFile);
+    //console.log("Image: " + imageFile);
   };
 
   jQuery(document).ready(function(){
@@ -166,8 +172,22 @@
   $("#updateTripDataForm").on('submit', function (e) {
     e.preventDefault();
     var formData = new FormData(this);
+    if(waypointFile) {
+      formData.append('route', true);
+    } else {
+      formData.append('route', false);
+    }
+    if (imageFile) {
+      formData.append('image', true);
+    } else {
+      formData.append('image', false);
+    }
     //formData.push({'name':'fileUpload', 'value': document.getElementById('fileUpload').files[0].name});
     //formData.push({'name':'routeSelect','value': document.getElementById('routeSelect').value});
+    for (var value of formData.entries()) {
+      console.log(value);
+    }
+    
     $.ajax({
       type: "POST",
       url: '{% url "updateTripData" %}',

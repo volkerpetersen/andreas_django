@@ -142,7 +142,10 @@ def dashboard(request):
     annualMiles = {}
     annualDays = {}
     for trip in trips:
-        miles = float(trip.miles)
+        try:
+            miles = float(trip.miles)
+        except:
+            miles = 0
         year = trip.startDate.strftime("%Y")
         skipper = trip.skipper.first()
         name = f"{skipper.firstName} {skipper.lastName}"
@@ -214,76 +217,83 @@ def updateTripData(request):
         AJAX function to process a route/image update AJAX request
     """
     content = {}
-    content['msg'] = None
-    msg = ""
-    startDate = "garbage"
-
-    if request.FILES['fileUpload']:
-        uploadedFile = request.FILES['fileUpload']
-        fs = FileSystemStorage()
-        filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
-        if fs.exists(filePath):
-            fs.delete(filePath)
-        fileName = fs.save(filePath, uploadedFile)
-        fileURL = fs.url(fileName)
-        fn = fileName.split('/').pop()
-        fn = fn.split('.')
-        routeName = fn[0]
-        routeFormat = fn[1]
-    else:
-        content['success'] = False
-        content['msg'] = F"No valid waypoint file received."
-        return JsonResponse(content)
-
-    if request.FILES['imageUpload']:
-        uploadedFile = request.FILES['imageUpload']
-        fs = FileSystemStorage()
-        filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
-        if fs.exists(filePath):
-            fs.delete(filePath)
-        imageName = fs.save(filePath, uploadedFile)
-        imageURL = fs.url(imageName)
-    else:
-        content['success'] = False
-        content['msg'] = F"No valid image file received."
-        return JsonResponse(content)
+    content['msg'] = ""
 
     try:
-        if not fileName:
-            content['success'] = False
-            content['msg'] = f"Route name must be specified first in the 'Toerndirectory' table field 'maptable'."
-            return JsonResponse(content)
-
-        content['success'] = True
-        navTools = NavTools()
-
-        path = os.path.normpath(os.path.join(MEDIA_ROOT, 'routes'))
-        if routeFormat.lower() == "gpx":
-            msg = navTools.parseSQLRouteFile(path, path, routeName)
-            #print(msg)
-            fileName = fileName.replace('gpx', 'sql')
-
-        (msg, fn) = uploadSQL(MEDIA_ROOT, fileName)
         # get the current toern we're working with
         startDate = request.POST['routeSelect']
-        #print(f"startDate: {startDate}")
-
         startDate = parseDateString(startDate)
         #print(f"startDate: {startDate}")
+    except:
+        content['msg'] = F"No valid trip selected."
+        return JsonResponse(content)
 
-        # update the maptable and image entries in the Toerndirectory table
-        toern = toerndirectory.objects.get(startDate=startDate)
-        toern.maptable = routeName
-        toern.image = imageName
-        toern.save()
+    if 'true' in request.POST['route']:
+        content['success'] = True
+        if request.FILES['fileUpload']:
+            uploadedFile = request.FILES['fileUpload']
+            fs = FileSystemStorage()
+            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
+            if fs.exists(filePath):
+                fs.delete(filePath)
+            fileName = fs.save(filePath, uploadedFile)
+            if not fileName:
+                content['success'] = False
+                content['msg'] += f"Route file '{uploadedFile}' upload failed."
+                return JsonResponse(content)
+            fn = fileName.split('/').pop()
+            fn = fn.split('.')
+            routeName = fn[0]
+            routeFormat = fn[1]
 
-        dbTable = fetchRouteData(routeName)
-        numWaypoints = dbTable.objects.all().count()
-        content['msg'] = F"Updated {numWaypoints} waypoints in DB table {routeName} and uploaded the trip image {imageName}."
+            try:
+                navTools = NavTools()
+                path = os.path.normpath(os.path.join(MEDIA_ROOT, 'routes'))
+                if routeFormat.lower() == "gpx":
+                    msg = navTools.parseSQLRouteFile(path, path, routeName)
+                    #print(msg)
+                    fileName = fileName.replace('gpx', 'sql')
 
-    except Exception as e:
-        content['success'] = False
-        content['msg'] = F"Failed to update the image and/or route data to database.<br>{str(e)}"
+                (msg, fn) = uploadSQL(MEDIA_ROOT, fileName)
+
+                # update the maptable and image entries in the Toerndirectory table
+                toern = toerndirectory.objects.get(startDate=startDate)
+                toern.maptable = routeName
+                toern.save()
+
+                dbTable = fetchRouteData(routeName)
+                numWaypoints = dbTable.objects.all().count()
+                content['success'] = True
+                content['msg'] += F"Updated {numWaypoints} waypoints in DB table '{routeName}'."
+
+            except Exception as e:
+                content['success'] = False
+                content['msg'] += F"Failed to update the route data in the database.<br>{str(e)}"
+        else:
+            content['success'] = False
+            content['msg'] += F"No valid waypoint file received."
+
+
+    if 'true' in request.POST['image']:
+        if request.FILES['imageUpload']:
+            uploadedFile = request.FILES['imageUpload']
+            fs = FileSystemStorage()
+            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
+            if fs.exists(filePath):
+                fs.delete(filePath)
+            imageName = fs.save(filePath, uploadedFile)
+            imageURL = fs.url(imageName)
+
+            # update the maptable and image entries in the Toerndirectory table
+            toern = toerndirectory.objects.get(startDate=startDate)
+            toern.image = imageName
+            toern.save()
+            content['success'] = True
+            content['msg'] += f"<br>Uploaded the image '{imageName}' to the website."
+        else:
+            content['success'] = False
+            content['msg'] += F"<br>No valid image file received."
+
     return JsonResponse(content)
 
 def parseDateString(dateString):
@@ -435,7 +445,7 @@ def navToolsData(request):
             #print(f"\nconverted {wp_ctr} waypoints to xml string:\n{xml}\n")
 
         # handle .gpx route file analysis
-        elif request.POST['sqlite'] == 'true':
+        elif request.POST['route'] == 'true':
             # read xml data from GPX file
             if request.FILES['routeFileSelection']:
                 specifiedFile = request.FILES['routeFileSelection']

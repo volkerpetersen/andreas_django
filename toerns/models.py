@@ -23,6 +23,7 @@ class SailingSkills(models.Model):
         managed = True
         db_table = "SailingSkills"
         verbose_name_plural = 'SailingSkills'
+        ordering = ['skill']
 
     def __str__(self):
         return f"{self.skill}"
@@ -38,6 +39,7 @@ class CrewMembers(models.Model):
         managed = True
         db_table = "CrewMembers"
         verbose_name_plural = 'Crew Members'
+        ordering = ['lastName', 'firstName']
 
     def __str__(self):
         return f"{self.firstName} {self.lastName}"

@@ -60,7 +60,7 @@
         <div class="row pt-1">
           <label for="fileUpload" class="col-12 col-md-3 form-label">Select route file:</label>
           <div class="col-12 col-md-8">
-            <input type="file" name="fileUpload" id="fileUpload" onchange="waypoint_check()" accept=".gpx, .sql" />
+            <input type="file" name="routeUpload" id="routeUpload" onchange="waypoint_check()" accept=".gpx, .sql" />
           </div>
         </div>
         <div class="row pt-1">
@@ -196,7 +196,8 @@
       contentType: false, // let jQuery set the type correctly
       success: function(response) {
         hdr = "<h5>Trip Data Update</h5>";
-        if (response.success) {
+        //alert("Return values: "+JSON.stringify(response, null, 2));
+        if (response.successRoute || response.successImage) {
           msg = "<h5>" + response.msg + "<br></h5>";
           //alert("success")
         } else {

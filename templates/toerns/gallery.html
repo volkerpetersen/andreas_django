@@ -35,7 +35,11 @@
                         <div class="overlay">
                             <div class="trip-details-inner">
                                 <h4>
-                                    <a href="../plotRoute/{{ trip.maptable }}" target="_blank">{{ trip.destination }}</a>
+                                    {% if trip.maptable %}
+                                        <a href="../plotRoute/{{ trip.maptable }}" target="_blank">{{ trip.destination }}</a>
+                                    {% else %}
+                                        {{ trip.destination }}
+                                    {% endif %}
                                 </h4>
                                 <p>{{ trip.miles|floatformat:1|intcomma }} nm in {{ trip.daysAtSea }} days on
                                     {{ yacht|safe }}<br />

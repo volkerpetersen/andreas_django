@@ -43,5 +43,6 @@ urlpatterns = [
     # helper URL, not directly accessible for the user
     path("updateTripData", views.updateTripData, name="updateTripData"),
     path("navToolsData", views.navToolsData, name="navToolsData"),
+    path("plotRoute/", views.plotRoute_redirect, name="RouteRedirect"),
     path("plotRoute/<routeName>", views.plotRoute, name="Route"),
 ]

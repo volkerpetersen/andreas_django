@@ -167,6 +167,10 @@
             lonOld = parseFloat(routeData[0]['fields']['lon']);
             fromWP = routeData[0]['fields']['name'];
             start = fromWP;
+            type = routeData[0]['fields']['type'];
+            bounds.extend(new google.maps.LatLng(latOld, lonOld));
+            //alert("Type: " + type+"  Lat: "+latOld+"  lon: "+lonOld);
+            addMarker(AdvancedMarkerElement, latOld, lonOld, distance, 0, fromWP, "", "", type);
             for (idx=1; idx<numWpts; idx++) {
                 wp = routeData[idx]['fields'];
                 toWP = wp['name'];

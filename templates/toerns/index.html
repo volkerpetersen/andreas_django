@@ -47,8 +47,8 @@
 				<!-- the function multi_replace for the yacht variable is  
 				     defined in toerns/templatetags/custom_filer.py
 				-->
-				{% with 
-					destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"'>"|add:trip.destination|add:"</a>"
+				{% with
+					destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"' target='_blank'>"|add:trip.destination|add:"</a>"
 					yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../static/pdf/,&#34;,'"
 					img_caption=trip.destination
 					img_error=" onerror='imgErrorTripPicture(this)' />"

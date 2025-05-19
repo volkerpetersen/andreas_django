@@ -243,10 +243,14 @@
             text = "Stats on " + numberWithCommas(sum_miles, 0) + " nm";
             jQuery("#subheadline").html(text + " and "+numToerns+" trips<br />");
 
-            containerHeight = jQuery('body').outerHeight() 
-                            - jQuery('#title_container').outerHeight() 
-                            - jQuery('footer').outerHeight();
-            elementHeight = (containerHeight-17) / 2;
+            document.body.classList.add('vh-100');
+
+            var containerHeight = document.body.clientHeight;
+            containerHeight -= document.getElementById("title_container").clientHeight;
+            containerHeight -= document.getElementById("footer").clientHeight;
+            document.getElementById("main").style.minHeight = (containerHeight) + "px";
+            elementHeight = (containerHeight - 25) / 2;
+            optionsPie.height = elementHeight;
             optionsCol.height = elementHeight;
             optionsBar.height = elementHeight;
             //console.log(elementHeight);

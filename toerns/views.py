@@ -17,7 +17,7 @@ import io
 import base64
 from datetime import datetime
 from django.views.decorators.http import require_POST
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -25,7 +25,7 @@ from django.db import connection
 from django.db.models import Sum
 from django_user_agents.utils import get_user_agent
 from toerns.models import toerndirectory, fetchRouteData
-from toerns.settings import MEDIA_ROOT
+from toerns.settings import MEDIA_ROOT, DEBUG
 from toerns.NavToolsLib import NavTools
 import matplotlib
 matplotlib.use('SVG')  # 'Agg' or 'SVG'
@@ -85,7 +85,13 @@ def fetchContent(request, route="all"):
     #print(f"is_mobile: {content['is_mobile']}")
 
     if route == "all":
-        trips = toerndirectory.objects.all().order_by("-startDate")
+        if DEBUG:
+            trips = toerndirectory.objects.all().order_by("-startDate")
+        else:
+            today = datetime.now().strftime(dateFmtWrite)
+            #print(f"\nselection by: {today}\n")
+            trips = toerndirectory.objects.filter(startDate__lt=today).order_by("-startDate")
+        
         if trips is None:
             trips = {}
             content["numToerns"] = 0
@@ -210,7 +216,6 @@ def updateTrip(request):
     content["trips"] = toerndirectory.objects.all().order_by("-startDate")
     return render(request, "toerns/updateTrip.html", context=content)
 
-
 @require_POST
 def updateTripData(request):
     """---------------------------------------------------------------------
@@ -229,16 +234,17 @@ def updateTripData(request):
         return JsonResponse(content)
 
     if 'true' in request.POST['route']:
-        content['success'] = True
-        if request.FILES['fileUpload']:
-            uploadedFile = request.FILES['fileUpload']
+        content['successRoute'] = True
+        content['successImage'] = False
+        uploadedFile = request.FILES.get('routeUpload')
+        if uploadedFile:
             fs = FileSystemStorage()
             filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
             if fs.exists(filePath):
                 fs.delete(filePath)
             fileName = fs.save(filePath, uploadedFile)
             if not fileName:
-                content['success'] = False
+                content['successRoute'] = False
                 content['msg'] += f"Route file '{uploadedFile}' upload failed."
                 return JsonResponse(content)
             fn = fileName.split('/').pop()
@@ -263,11 +269,11 @@ def updateTripData(request):
 
                 dbTable = fetchRouteData(routeName)
                 numWaypoints = dbTable.objects.all().count()
-                content['success'] = True
+                content['successRoute'] = True
                 content['msg'] += F"Updated {numWaypoints} waypoints in DB table '{routeName}'."
 
             except Exception as e:
-                content['success'] = False
+                content['successRoute'] = False
                 content['msg'] += F"Failed to update the route data in the database.<br>{str(e)}"
         else:
             content['success'] = False
@@ -275,8 +281,8 @@ def updateTripData(request):
 
 
     if 'true' in request.POST['image']:
-        if request.FILES['imageUpload']:
-            uploadedFile = request.FILES['imageUpload']
+        uploadedFile = request.FILES.get('imageUpload')
+        if uploadedFile:
             fs = FileSystemStorage()
             filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
             if fs.exists(filePath):
@@ -288,10 +294,10 @@ def updateTripData(request):
             toern = toerndirectory.objects.get(startDate=startDate)
             toern.image = imageName
             toern.save()
-            content['success'] = True
+            content['successImage'] = True
             content['msg'] += f"<br>Uploaded the image '{imageName}' to the website."
         else:
-            content['success'] = False
+            content['successImage'] = False
             content['msg'] += F"<br>No valid image file received."
 
     return JsonResponse(content)
@@ -543,12 +549,17 @@ def printDirectory(request):
 def plotRoute(request, routeName):
     """---------------------------------------------------------------------
         view function to plot the route on a Google Map
+        If no routeName is given or it is invalid redirect to Directory page 
     """
 
-    dbTable = fetchRouteData(routeName)
-    routeData = dbTable.objects.all()
-    if routeData is None:
-        routeData = {}
+    try:
+        if not table_exists(routeName):
+            return redirect('Directory')
+        dbTable = fetchRouteData(routeName)
+        routeData = dbTable.objects.all()
+    except Exception as e:
+        print(f"\nDB table '{routeName}' does not exist.\nError: {str(e)}\n")
+        return redirect('Directory')
 
     content = fetchContent(request, route=routeName)
     content["routeName"] = routeName
@@ -556,6 +567,16 @@ def plotRoute(request, routeName):
     content["wpsJSON"] = json.dumps(serializers.serialize("json", routeData))
 
     return render(request, "toerns/plotRoute.html", content)
+
+def table_exists(table_name):
+    return table_name in connection.introspection.table_names()
+
+
+def plotRoute_redirect(request):
+    """---------------------------------------------------------------------
+        view function to predirect plotRoute when called w/o a routeName
+    """
+    return redirect('Directory')
 
 
 def update_sqliteDB(request):

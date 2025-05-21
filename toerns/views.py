@@ -81,7 +81,6 @@ def fetchContent(request, route="all"):
         'is_tablet': user_agent.is_tablet,
         'is_desktop': not user_agent.is_mobile,
     }
-
     #print(f"is_mobile: {content['is_mobile']}")
 
     if route == "all":
@@ -89,8 +88,7 @@ def fetchContent(request, route="all"):
             trips = toerndirectory.objects.all().order_by("-startDate")
         else:
             today = datetime.now().strftime(dateFmtWrite)
-            #print(f"\nselection by: {today}\n")
-            trips = toerndirectory.objects.filter(startDate__lt=today).order_by("-startDate")
+            trips = toerndirectory.objects.filter(startDate__lte=today).order_by("-startDate")
         
         if trips is None:
             trips = {}
@@ -441,6 +439,9 @@ def navToolsData(request):
                     xml += "<sym>empty</sym>\n"
                 else:
                     xml += "<sym>"+ wp.type +"</sym>\n"
+
+                if len(wp.notes):
+                    xml += "<desc>"+wp.notes+"</desc>\n"
 
                 xml += "<type>WPT</type>\n"
                 xml += (

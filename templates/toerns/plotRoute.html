@@ -14,7 +14,7 @@
         center = bounds.getCenter();
         map.fitBounds(bounds);
 
-    (c) Kaiserware Volker Petersen, September 2011-2022
+    (c) Kaiserware Volker Petersen, September 2011-2025
 
 ---------------------------------------------------------------------------------------- -->
 
@@ -326,42 +326,45 @@
                 zIndex: index
             });
 
-            info = '<div id="infobox">';
-            if (type=="image") {
-                info += '<img vspace="0" border="0px" src="./static/images/' + images + '" width="270px" />';
-            }
-            if (type=="video") {
-                IS_IPAD = navigator.userAgent.match(/iPad/i) != null;
-                IS_IPHONE = (navigator.userAgent.match(/iPhone/i) != null) || (navigator.userAgent.match(/iPod/i) != null);
-                if (IS_IPAD || IS_IPHONE) {
-                // 		detected ipad, ipod, or iphone user. Let us use the Apple Quicktime video player
-                    info = '<iframe width="560" height="315" src="./static/'+images+'" frameborder="0" allowfullscreen></iframe>';
+            if(distance>0 || hdg>0) 
+            {
+                info = '<div id="infobox">';
+                if (type=="image") {
+                    info += '<img vspace="0" border="0px" src="./static/images/' + images + '" width="270px" />';
                 }
-                else {
-                //  any non-Apple browser / device. Let us use the Microsoft video player
-                    info = '<iframe width="560" height="315" src="./static/'+images+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
-                }
+                if (type=="video") {
+                    IS_IPAD = navigator.userAgent.match(/iPad/i) != null;
+                    IS_IPHONE = (navigator.userAgent.match(/iPhone/i) != null) || (navigator.userAgent.match(/iPod/i) != null);
+                    if (IS_IPAD || IS_IPHONE) {
+                    // 		detected ipad, ipod, or iphone user. Let us use the Apple Quicktime video player
+                        info = '<iframe width="560" height="315" src="./static/'+images+'" frameborder="0" allowfullscreen></iframe>';
+                    }
+                    else {
+                    //  any non-Apple browser / device. Let us use the Microsoft video player
+                        info = '<iframe width="560" height="315" src="./static/'+images+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+                    }
 
+                }
+                info += '<table width="290px">';
+                info += '<tr><td width="80px">From:</td><td width="200px">' + fromWP + '</td></tr>';
+                info += '<tr><td width="80px">To:</td><td width="200px">' + toWP + '</td></tr>';
+                info += '<tr><td width="80px">Latitude:</td><td width="200px">' + PositionDegreeToString(latTo, 1) + '</td></tr>';
+                info += '<tr><td width="80px">Longitude:</td><td width="200px">' + PositionDegreeToString(lngTo, 0) + '</td></tr>';
+                
+                if (getDistance==0.0) {
+                    info += '</table>';
+                } else {
+                    info += '<tr><td width="80px">Distance:</td><td width="200px">' + distance.toFixed(1) + 'nm</td></tr>';
+                    info += '<tr><td width="80px">Heading: </td><td width="200px">' + hdg.toFixed(0) + '\xB0 </td></tr></table>';
+                }
+                info += '</div>';
+                
+                popup = new google.maps.InfoWindow({
+                    maxWidth: 600,
+                    content: info,
+                    zIndex: 900
+                });
             }
-            info += '<table width="290px">';
-            info += '<tr><td width="80px">From:</td><td width="200px">' + fromWP + '</td></tr>';
-            info += '<tr><td width="80px">To:</td><td width="200px">' + toWP + '</td></tr>';
-            info += '<tr><td width="80px">Latitude:</td><td width="200px">' + PositionDegreeToString(latTo, 1) + '</td></tr>';
-            info += '<tr><td width="80px">Longitude:</td><td width="200px">' + PositionDegreeToString(lngTo, 0) + '</td></tr>';
-            
-            if (getDistance==0.0) {
-                info += '</table>';
-            } else {
-                info += '<tr><td width="80px">Distance:</td><td width="200px">' + distance.toFixed(1) + 'nm</td></tr>';
-                info += '<tr><td width="80px">Heading: </td><td width="200px">' + hdg.toFixed(0) + '\xB0 </td></tr></table>';
-            }
-            info += '</div>';
-            
-            popup = new google.maps.InfoWindow({
-                maxWidth: 600,
-                content: info,
-                zIndex: 900
-            });
 
             marker.addListener('click', () => {});  // workaround for the mouseover event listener
             marker.content.addEventListener('mouseover', function() {

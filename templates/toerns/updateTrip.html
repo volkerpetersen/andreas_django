@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="row pt-1">
-          <label for="fileUpload" class="col-12 col-md-3 form-label">Select route file:</label>
+          <label for="routeUpload" class="col-12 col-md-3 form-label">Select route file:</label>
           <div class="col-12 col-md-8">
             <input type="file" name="routeUpload" id="routeUpload" onchange="waypoint_check()" accept=".gpx, .sql" />
           </div>
@@ -119,7 +119,7 @@
   };
 
   function waypoint_check() {
-    var upl = document.getElementById("fileUpload");
+    var upl = document.getElementById("routeUpload");
     var routeType = upl.files[0].name.split(".");
     var extension = routeType.pop();
     var routeSelection = document.querySelector("input[name='routeFormat']:checked").value;
@@ -137,8 +137,7 @@
       $('#updateTripSubmit').prop('disabled', false);
       //console.log("enabled")
     }
-    //console.log("Route: "+ waypointFile);
-    //console.log("Image: " + imageFile);
+    //console.log("Waypoint check: (waypointFile || imageFile)=" + (waypointFile || imageFile) + " image="imageFile + " waypoints=" + waypointFile);
   };
 
   function image_check() {
@@ -158,8 +157,7 @@
       $('#updateTripSubmit').prop('disabled', false);
       //console.log("enabled")
     }
-    //console.log("Route: " + waypointFile);
-    //console.log("Image: " + imageFile);
+    //console.log("Waypoint check: (waypointFile || imageFile)=" + (waypointFile || imageFile) + " image="imageFile + " waypoints=" + waypointFile);
   };
 
   jQuery(document).ready(function(){

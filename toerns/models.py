@@ -56,19 +56,16 @@ class toerndirectory(models.Model):
         ('Pacific', u'Pacific')
     )
 
-
-    startDate = models.DateField(primary_key=True,
-                                 help_text="date in YYYY-MM-DD format")
-    endDate = models.DateField(blank=True,
-                               help_text="date in YYYY-MM-DD format")
+    id = models.AutoField(primary_key=True)
+    startDate = models.DateField(help_text="date in YYYY-MM-DD format")
+    endDate = models.DateField(help_text="date in YYYY-MM-DD format")
     destination = models.CharField(blank=True, null=True, max_length=150)
     georegion = models.CharField(blank=True, null=True, max_length=40, choices=geoChoices,
                                  help_text="Atlantic, Baltic, Caribbean, Croatia, Great Lakes, Pacific")
     maptable = models.CharField(blank=True, null=True, max_length=100,
                                 help_text="name of the Google Maps waypoints table")
     boat = models.CharField(blank=True, null=True, max_length=400)
-    miles = models.DecimalField(
-        blank=True, null=True, max_digits=8, decimal_places=2)
+    miles = models.DecimalField(null=True, max_digits=8, decimal_places=2)
     daysAtSea = models.IntegerField()
     skipper = models.ManyToManyField(CrewMembers, blank=True, related_name='skipperToern')
     crew = models.ManyToManyField(CrewMembers, blank=True, related_name='crewToern')

@@ -12,7 +12,7 @@
 {% block title %}Trip Dashboard{% endblock %}
 
 {% load static %}
-
+{% load humanize %}
 {% block content %}
     {{ destinationMiles|json_script:"destinationMiles" }}
     {{ destinationCount|json_script:"destinationCount" }}
@@ -38,6 +38,61 @@
     </div>
     <!-- end of main page body content container -->
 
+    <!--
+    -------------------------------------------------------------------------------
+        Modal Crew Table
+    -------------------------------------------------------------------------------
+    -->
+    <div class="modal fade" id="modalCrewTable" tabindex="-1" role="dialog" aria-labelledby="modalCrewTable"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="text-error">Crew Listing</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="crewTable">
+                        <div class="table-responsive col-12">
+                            <table id="crewStats" class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start" scope="col">Crew</th>
+                                        <th class="text-start" scope="col">Role</th>
+                                        <th class="text-center" scope="col">Trips</th>
+                                        <th class="text-center" scope="col">Miles</th>
+                                        <th class="text-center" scope="col">Days</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for name, stats in crewStats %}
+                                    <tr>
+                                        <td>{{ name }}</td>
+                                        <td>{{ stats.role }}</td>
+                                        <td class="text-end">{{ stats.trips }}</td>
+                                        <td class="text-end">{{ stats.miles|floatformat:0|intcomma }}</td>
+                                        <td class="text-end">{{ stats.days }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-info" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /Modal Crew Table Listing-->
+    
+    <style>
+        /* Hide Google Bubble Chart infoBubble close button */
+        .gm-ui-hover-effect {
+            display: none !important;
+        }
+    </style>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type='text/javascript'>
         // convert Python dictionaries into Javascript. The Id elements are created on top of the template file.
@@ -52,11 +107,11 @@
 
         let geoArea = {
             'Atlantic': {
-                'position': { 'lat': 34.0, 'lng': -73.0 },
+                'position': { 'lat': 39.0, 'lng': -43.0 },
                 'miles': 0.1
             },
             'Baltic': {
-                'position': { 'lat': 54.0, 'lng': 11.0 },
+                'position': { 'lat': 55.0, 'lng': 12.0 },
                 'miles': 0.1
             },
             'Caribbean': {
@@ -72,7 +127,7 @@
                 'miles': 0.1
             },
             'Pacific': {
-                'position': { 'lat': 32.0, 'lng': -128.0 },
+                'position': { 'lat': 28.0, 'lng': -140.0 },
                 'miles': 0.1
             }
         };
@@ -140,12 +195,11 @@
             for (key in geoArea) {
                 // Add the circle for each GeoArea to the map.
                 // https://developers.google.com/maps/documentation/javascript/examples/circle-simple
-
                 if(key in destinationMilesDict) {
                     labelText = "<strong>" + key + "</strong><br />";
                     labelText += destinationCountDict[key] + " trips with <br />";
                     labelText += numberWithCommas(destinationMilesDict[key], 0)+"nm";
-
+                    console.log(labelText+geoArea[key]['position']);
                     createInfoWindow(labelText, geoArea[key]['position'], destinationMilesDict[key] / sum_miles, map);
                 }
             }
@@ -180,6 +234,11 @@
                 currentPopup = infoBubble;
                 //console.log("Event fired");
             });
+
+            google.maps.event.addListener(bubble, "mouseout", function () {
+                infoBubble.close();
+            });
+
         }
 
         // Callback that creates and populates a data table, instantiates
@@ -232,16 +291,16 @@
             "mapsApiKey": "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c"
         });
 
-        jQuery(document).ready(function(){
+        $(document).ready(function(){
             var containerHeight, text;
 
-            jQuery("#searchboxDiv").html("");  // delete the searchbox
+            $("#searchboxDiv").html("<button id='crewTableButton' class='btn btn-secondary' type='button'>Crew View</button>");  // delete the searchbox
             
             // Set a Chart callback to run when the Google Visualization API is loaded.
             google.charts.setOnLoadCallback(drawChart);
 
             text = "Stats on " + numberWithCommas(sum_miles, 0) + " nm";
-            jQuery("#subheadline").html(text + " and "+numToerns+" trips<br />");
+            $("#subheadline").html(text + " and "+numToerns+" trips<br />");
 
             document.body.classList.add('vh-100');
 
@@ -249,21 +308,25 @@
             containerHeight -= document.getElementById("title_container").clientHeight;
             containerHeight -= document.getElementById("footer").clientHeight;
             document.getElementById("main").style.minHeight = (containerHeight) + "px";
-            elementHeight = (containerHeight - 25) / 2;
+            elementHeight = (containerHeight-25) / 2;
             optionsPie.height = elementHeight;
             optionsCol.height = elementHeight;
             optionsBar.height = elementHeight;
             //console.log(elementHeight);
             if (isMobile) {
-                optionsCol.width = jQuery("#content_container").outerWidth();
+                optionsCol.width = $("#content_container").outerWidth();
                 optionsCol.titleTextStyle.fontSize = 16;
                 optionsPie.titleTextStyle.fontSize = 16;
                 optionsBar.titleTextStyle.fontSize = 16;
             } else {
-                optionsCol.width = jQuery("#content_container").outerWidth() / 2.0;
+                optionsCol.width = $("#content_container").outerWidth() / 2.0;
             }
-            jQuery("#content_row").width(jQuery("#content_container").outerWidth());
-            jQuery("#bubbleMap").height(elementHeight);
+            $("#content_row").width($("#content_container").outerWidth());
+            $("#bubbleMap").height(elementHeight);
+
+            $("#crewTableButton").click(function() {
+                $("#modalCrewTable").modal("show");
+            });
         });
 
     </script>

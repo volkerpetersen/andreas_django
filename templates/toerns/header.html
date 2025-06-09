@@ -129,7 +129,8 @@
 <body>	
 	<header id="title_container" class="container">
 		<div class="row">
-			<div class="col-12 col-sm-5 headline" id="headline" href="#">Bernt&#39;s Sailing Log</div>
+			<div class="col-2 col-sm-1 headline"><img class="img-fluid" src="{% static 'images/Andreas_Logo.png' %}" /></div>
+			<div class="col-10 col-sm-4 headline" id="headline" href="#">Bernt&#39;s Sailing Log</div>
 			<div class="col-11 col-sm-7 subheadline" id="subheadline"></div>
 		</div>
 	
@@ -150,9 +151,10 @@
 								<li><a class="dropdown-item" href="{% url 'Safety' %}">Safety</a></li>
 								<li><a class="dropdown-item" href="{% url 'Weather' %}">Weather Page</a></li>
 								<li><a class="dropdown-item" href="{% url 'Documentation' %}">Site Documentation</a></li>
+								<li><a class="dropdown-item" href="{% url 'PrintDirectory' %}">Print Directory</a></li>
 							</ul>
 						</li>
-						<li><a class="dropdown-item" href="/admin">Admin</a></li>
+						<li><a class="nav-item" href="/admin">Admin</a></li>
 					</ul>
 					<div id="nonMobileSearchbox"></div>
 				</div><!--/.nav-collapse -->

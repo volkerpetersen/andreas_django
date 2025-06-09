@@ -1,0 +1,71 @@
+<!------------------------------------------------------------------
+	printDirectory.html
+	Print version of the Toern Directory page
+
+	in pythonanywhere Bash console:
+    git pull git@github.com:volkerpetersen/DjangoWebsites.git
+
+	exceute on localhost using:
+	python manage.py runserver
+-------------------------------------------------------------------->
+
+{% extends "toerns/header.html" %}
+{% block title %}Trip Directory{% endblock %}
+
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <!-- Start of main page body content-->
+    <div class="container">
+		<table class="table table-bordered display responsive wrap" cellspacing="0" width="100%" >
+		<thead>
+			<tr>
+				<th class="col-2 text-center">Date</th>
+				<th class="col-6 text-center">Destination</th>
+				<th class="col-1 text-center">Miles</th>
+				<th class="col-1 text-center">Days</th>
+				<th class="col-2 text-center">Skipper</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for trip in trips %}
+	        <tr>
+				<td class="text-start">{{ trip.startDate }}</td>
+				<td class="text-start">{{ trip.destination|safe }}</td>
+				<td class="text-end">{{ trip.miles|floatformat:1|intcomma }}</td>
+				<td class="text-end">{{ trip.daysAtSea }}</td>
+				<td class="text-start">
+					{% for skipper in trip.skipper.all %}
+						{{ skipper.firstName }}&nbsp;{{ skipper.lastName }}
+					{% endfor %}
+				</td>
+	        </tr>
+		{% empty %}
+			<div class="row">
+				<div class="col-12">
+					<h2>No sailing trips found in the SQLite DB.</h2>
+				</div>
+			</div>
+		{% endfor %}
+		</tbody>
+		</table>
+    </div>
+
+
+	<script type='text/javascript'>
+		let numToerns = toernDirectory.length;
+		let miles = 0;
+		// loop over all trips in the SQLite data (table ToernDirectoryTable) stored in the Javascript arrays
+		//console.log("Number of trips is SailingLog.js: " + numToerns);
+		for (i = 0; i<numToerns; i++) {
+			toern = toernDirectory[i]['fields'];
+			miles += parseFloat(toern['miles']);
+		}
+		jQuery(document).ready(function(){
+			jQuery("#searchboxDiv").remove();
+			str = numToerns + " Trips and " + number_format(miles, 0) + " nm.";
+			jQuery("#subheadline").html(str);
+		});
+	</script>
+
+{% endblock %}

@@ -143,13 +143,16 @@ def dashboard(request):
     destinationMiles = {}
     destinationCount = {}
     skipperMiles = {}
+    crewStats = {}
     annualMiles = {}
     annualDays = {}
     for trip in trips:
         try:
             miles = float(trip.miles)
+            daysAtSea = int(trip.daysAtSea)
         except:
             miles = 0
+            daysAtSea = 0
         year = trip.startDate.strftime("%Y")
         skipper = trip.skipper.first()
         name = f"{skipper.firstName} {skipper.lastName}"
@@ -182,11 +185,34 @@ def dashboard(request):
         else:
             annualDays[year] = trip.daysAtSea
 
+        for crew in trip.crew.all():
+            name = f"{crew.firstName} {crew.lastName}"
+            if name in crewStats:
+                crewStats[name]['miles'] += miles
+                crewStats[name]['days'] += daysAtSea
+                crewStats[name]['trips'] += 1
+                if 'Skipper' in crewStats[name]['role']:
+                    crewStats[name]['role'] = 'Skipper and Crew'
+            else:
+                crewStats[name] = {'miles': miles, 'days': daysAtSea, 'trips': 1, 'role': 'Crew'}
+
+        for skipper in trip.skipper.all():
+            name = f"{skipper.firstName} {skipper.lastName}"
+            if name in crewStats:
+                crewStats[name]['miles'] += miles
+                crewStats[name]['days'] += daysAtSea
+                crewStats[name]['trips'] += 1
+                if 'Crew' in crewStats[name]['role']:
+                    crewStats[name]['role'] = 'Skipper and Crew'
+            else:
+                crewStats[name] = {'miles': miles, 'days': daysAtSea, 'trips': 1, 'role': 'Skipper'}
+
     content['destinationMiles'] = destinationMiles
     content['destinationCount'] = destinationCount
     content['skipperMiles'] = skipperMiles
     content['annualMiles'] = annualMiles
     content['annualDays'] = annualDays
+    content['crewStats'] = crewStats.items()
 
     return render(request, "toerns/dashboard.html", 
                   context=content)

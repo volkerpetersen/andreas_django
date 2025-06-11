@@ -295,6 +295,7 @@ body, html {
   }
 
   .navbar-toggler {
+    margin-top: 10px !important;
     margin-right: 4px !important;
   }
 
@@ -314,6 +315,7 @@ body, html {
   .headline {
     text-align: center !important;
     margin-top: 15px !important;
+    padding-right: 0px !important;
     font-size: 30px !important;
   }
 

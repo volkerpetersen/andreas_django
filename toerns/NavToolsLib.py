@@ -19,6 +19,7 @@ __doc__ = """
 		Navigation_Route_Analyzer.pyw
 		uploadAllToernMySQL.py
 		uploadMySQL.py
+        toerns and andreas websites
 -----------------------------------------------------------------------------
 """
 
@@ -812,8 +813,8 @@ class NavTools:
         else:
             filepath = os.path.normpath(os.path.join(path, filename))
             if not os.path.isfile(filepath):
-                print(f"\nCan't locate file '{filepath}'. Teminating App!")
                 summary = {}
+                print(f"File not found:\n{filepath}\n")
                 return summary
 
             with open(filepath) as csv_file:
@@ -887,7 +888,7 @@ class NavTools:
     def heat_map(self, exp, figCtr=1):
         df = exp['df']
         mask = df<0.001
-        fig = plt.figure(figCtr, figsize=(10,6))
+        fig = plt.figure(figCtr, figsize=self.figsize)
         ax = plt.gca()
         ax.set_facecolor('#FFFFFF') # white
         sns.heatmap(df, annot=True, cmap=self.colorMap, 
@@ -895,6 +896,7 @@ class NavTools:
                     ax=ax, cbar=False,
                     annot_kws={'size': 8},
                     linewidth=0.5, linecolor='grey')
+
 
         plt.title('Percentage of time at given TWS/TWA')
         plt.xlabel('True Wind Angle')

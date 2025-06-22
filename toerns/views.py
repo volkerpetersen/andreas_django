@@ -466,7 +466,7 @@ def navToolsData(request):
                 else:
                     xml += "<sym>"+ wp.type +"</sym>\n"
 
-                if len(wp.notes):
+                if wp.notes and len(wp.notes):
                     xml += "<desc>"+wp.notes+"</desc>\n"
 
                 xml += "<type>WPT</type>\n"
@@ -518,8 +518,11 @@ def navToolsData(request):
             content['msg'] = F"Error processing gpx or SQL route data."
 
     except Exception as e:
+        import traceback
+        tb = traceback.format_exc().splitlines()
+        error_line = tb[-3] if len(tb) >= 3 else 'No line info'
         content['success'] = False
-        content['msg'] = F"Failed to process the data.<br>{str(e)}"
+        content['msg'] = F"Failed to process the data.<br>{str(e)}<br>Error occured at line {error_line} in views.py"
     return JsonResponse(content)
 
 

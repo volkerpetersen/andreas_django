@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS "2025_SanDiego_SanPedro" (
         PRIMARY KEY ("id")
         );
         INSERT OR REPLACE INTO "2025_SanDiego_SanPedro" ("id", "name", "lat", "lon", "type", "image", "notes") VALUES
-        (0, 'San Diego', '32.723133333', '-117.222850000', 'harbor', '', ''),
+        (0, 'San Diego', '32.723133333', '-117.222850000', 'harbor', '', 'departure 2025-06-25 20:00'),
 (1, 'WP0001', '32.721818000', '-117.222654000', 'none', '', " "),
 (2, 'WP0002', '32.720400000', '-117.219227000', 'none', '', " "),
 (3, 'WP0003', '32.715758000', '-117.218240000', 'none', '', " "),

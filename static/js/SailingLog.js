@@ -37,6 +37,22 @@ this.imageEnlarge = function(){
 };
 
 
+//-----------------------------------------------------------------------------------------
+// function to parse all the yacht info from the DB Toern record
+//-----------------------------------------------------------------------------------------
+function parse_yacht(yacht) {
+	if (yacht == null)
+		return yacht
+	yacht = yacht.replace(/linefeed/g, "<br>");
+	yacht = yacht.replace(/openLink/g, "<a");
+	yacht = yacht.replace(/closeLink/g, "</a>");
+	yacht = yacht.replace(/&#34;/g, "'");
+	yacht = yacht.replace(", <br>", ".<br>");
+	yacht = yacht.replace("pdf/", "../static/pdf/");
+	//console.log(yacht);
+	return yacht;
+}
+
 
 //-----------------------------------------------------------------------------------------
 // function to swap an element in a class definition

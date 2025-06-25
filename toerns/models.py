@@ -80,25 +80,32 @@ class toerndirectory(models.Model):
     def __str__(self):
         return f"{self.startDate}: {self.destination}"
 
-def fetchRouteData(tableName):
-    class RouteMetaClass(models.base.ModelBase):
-        def __new__(cls, name, bases, attrs):
-            name += tableName
-            return models.base.ModelBase.__new__(cls, name, bases, attrs)
+_model_cache = {}
 
-    class RouteData(models.Model):
-        __metaclass__ = RouteMetaClass
-
-        id = models.AutoField(primary_key=True)
-        name = models.TextField(db_column="name", blank=True, null=True)
-        lat = models.TextField(blank=True, null=True)
-        lon = models.TextField(blank=True, null=True)
-        type = models.TextField(blank=True, null=True)
-        image = models.TextField(blank=True, null=True)
-        notes = models.CharField(max_length=80, blank=True, null=True)
-
-        class Meta:
-            db_table = tableName
-
-    return RouteData
-
+def fetchRouteData(table_name):
+    # Return cached model if exists
+    if table_name in _model_cache:
+        return _model_cache[table_name]
+    
+    # Define model fields
+    class Meta:
+        db_table = table_name
+        managed = False  # Critical for dynamic tables
+    
+    # Create model class dynamically
+    attrs = {
+        'id': models.AutoField(primary_key=True),
+        'name': models.TextField(blank=True, null=True),
+        'lat': models.FloatField(blank=True, null=True),
+        'lon': models.FloatField(blank=True, null=True),
+        'type': models.TextField(blank=True, null=True),
+        'image': models.TextField(blank=True, null=True),
+        'notes': models.CharField(max_length=80, blank=True, null=True),
+        'Meta': Meta,
+        '__module__': __name__
+    }
+    
+    # Create and cache model
+    model_class = type(f'RouteData_{table_name}', (models.Model,), attrs)
+    _model_cache[table_name] = model_class
+    return model_class

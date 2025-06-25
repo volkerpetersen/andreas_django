@@ -108,9 +108,19 @@ def fetchContent(request, route="all"):
     elif route is None:
         trips = {}
     else:
-        trips = toerndirectory.objects.filter(maptable=route)
+        trips = toerndirectory.objects.filter(maptable=route).first()
         if trips is None:
             trips = {}
+        else:
+            crew = ""
+            for crewMember in trips.crew.all().order_by('lastName', 'firstName'):
+                if crewMember:
+                    crew += f"{crewMember.firstName} {crewMember.lastName}, "
+            for skipper in trips.skipper.all():
+                if skipper:
+                    crew += f"and skipper {skipper.firstName} {skipper.lastName}"
+                    break
+            content["crew"] = crew
 
     content["trips"] = trips
 
@@ -576,6 +586,10 @@ def printDirectory(request):
                   context=fetchContent(request, route="all"))
 
 
+def table_exists(table_name):
+    return table_name in connection.introspection.table_names()
+
+
 def plotRoute(request, routeName):
     """---------------------------------------------------------------------
         view function to plot the route on a Google Map
@@ -584,29 +598,25 @@ def plotRoute(request, routeName):
 
     try:
         if not table_exists(routeName):
-            return redirect('Directory')
-        dbTable = fetchRouteData(routeName)
-        routeData = dbTable.objects.all()
+            content = fetchContent(request, route=None)
+            content["error"] = routeName
+        else:
+            content = fetchContent(request, route=routeName)
+            dbTable = fetchRouteData(routeName)
+            routeData = dbTable.objects.all()
+            content["error"] = ""
+            content["routeName"] = routeName
+            content["wps"] = routeData
+            content["wpsJSON"] = json.dumps(serializers.serialize("json", routeData))
+            if content["trips"] is not None:
+                content["tripsJSON"] = serializers.serialize("json", [content["trips"]])
+            else:
+                content["tripsJSON"] = []
     except Exception as e:
-        print(f"\nDB table '{routeName}' does not exist.\nError: {str(e)}\n")
+        print(f"\nError fetching DB table '{routeName}'.\n{str(e)}\n")
         return redirect('Directory')
 
-    content = fetchContent(request, route=routeName)
-    content["routeName"] = routeName
-    content["wps"] = routeData
-    content["wpsJSON"] = json.dumps(serializers.serialize("json", routeData))
-
     return render(request, "toerns/plotRoute.html", content)
-
-def table_exists(table_name):
-    return table_name in connection.introspection.table_names()
-
-
-def plotRoute_redirect(request):
-    """---------------------------------------------------------------------
-        view function to predirect plotRoute when called w/o a routeName
-    """
-    return redirect('Directory')
 
 
 def update_sqliteDB(request):

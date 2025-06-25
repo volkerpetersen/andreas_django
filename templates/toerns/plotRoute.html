@@ -61,381 +61,386 @@
         </div>
         <p>&nbsp;</p>
     </div>
-    <script>
-        (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
-            key: "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c",
-            v: "weekly",
-            // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-            // Add other bootstrap parameters as needed, using camel case.
-        });
-
-        function checkGoogleMapsLoaded() {
-            if (typeof google === 'object' && typeof google.maps === 'object') {
-                //console.log("Google Maps API loaded");
-                initMap();
-            } else {
-                //console.log("Google Maps API not loaded yet");
-                setTimeout(checkGoogleMapsLoaded, 50);
-            }
-        }
-
-        // Start checking if Google Maps has been loaded
-        checkGoogleMapsLoaded();
-
-        // global variables
-        let routeData = [];
-        let latOld = 0.0;
-        let lonOld = 0.0;
-        let distance = 0.0;
-        let rhumbline;
-        let routeSTR;
-        let idx, oneway, start, end, numWpts, wp, fromWP, toWP;
-        let map, lat, lon, type, image, notes, crew, currentPopup;
-
-        let polyOptions = {
-            strokeColor: '#342826',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-            }
-
-        try {
-            routeData = JSON.parse({% autoescape off %}{{wpsJSON}}{% endautoescape %});
-            tripData = JSON.parse({% autoescape off %}{{tripsJSON}}{% endautoescape %});
-            tripData = tripData[0]['fields'];
-        } catch(error) {
-            // code to allow maps to be displayed that don't have
-            // an entry in the ToernDirectory SQLite table
-            tripData = false;
-        }
-
-        numWpts = routeData.length;
-        start = routeData[0]['fields'];
-        end = routeData[numWpts-1]['fields'];
-        
-        //	determine if this was a round-trip or one-way journey
-        if (start['lat'] == end['lat'] && start['lon'] == end['lon']) {
-            // starting and ending waypoints are the same => ROUND-TRIP
-            routeSTR = 'Round-trip from ' + start['name'] + ' via:<br />';
-        } else {
-            // starting and ending waypoints are different => ONE-WAY
-            routeSTR =  'One-way trip from ' + start['name'] + ' via<br />';
-        }
-
-        // remove the searchbox on this page
-        $("#searchboxDiv").html("");
-
-        async function initMap() {
-            var html, center, bounds, yacht;
-
-            const { Map } = await google.maps.importLibrary("maps");
-            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-            map = new Map(document.getElementById("map_canvas"), {
-                center: {lat: 0, lng: 0},  // dummy number, gets set with the bounds.extend
-                zoom: 11,    // dummy number, gets set with the bounds.extend - see addMarker()
-                scaleControl: true,
-                mapTypeId: google.maps.MapTypeId.TERRAIN,    // ROADMAP, SATELLITE, or HYBRID
-                mapId: "ae07dd75342d4621", // created https://console.cloud.google.com/google/maps-apis/studio/maps/ae07dd75342d4621?project=volkermaps
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-                },
-                navigationControl: true,
-                navigationControlOptions: {
-                    style: google.maps.NavigationControlStyle.LARGE
-                }
+    {% if error %}
+        <script>
+            alert("No route table '{{ error }}' found in the database!\nPlease use Admin tools to check the Maptable name\nand / or upload the route data.");
+        </script>
+    {% else %}
+        <script>
+            (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
+                key: "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c",
+                v: "weekly",
+                // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+                // Add other bootstrap parameters as needed, using camel case.
             });
 
-            // print the current cursor position in input field 'CursorLocation'
-            google.maps.event.addListener(map, "mousemove", function(event){
-                var cursorposition = "Cursor location: "
-                cursorposition += PositionDegreeToString(event.latLng.lat(), 1);
-                cursorposition += "&nbsp;&nbsp; | &nbsp;&nbsp;" + PositionDegreeToString(event.latLng.lng(), 0);
-                jQuery("#CursorLocation").html(cursorposition);
-            });
-            // clear the input field 'CursorLocation' when the cursor leaves the map area
-            google.maps.event.addListener(map, "mouseout", function(){
-                $("#CursorLocation").html("Cursor is not on the map");
-            });
-
-            bounds = new google.maps.LatLngBounds();
-
-            // display waypoints on Map
-            // loop thru all waypoints and plot them to the map
-            distance = 0.0;
-            latOld = parseFloat(routeData[0]['fields']['lat']);
-            lonOld = parseFloat(routeData[0]['fields']['lon']);
-            fromWP = routeData[0]['fields']['name'];
-            start = fromWP;
-            type = routeData[0]['fields']['type'];
-            bounds.extend(new google.maps.LatLng(latOld, lonOld));
-            //alert("Type: " + type+"  Lat: "+latOld+"  lon: "+lonOld);
-            addMarker(AdvancedMarkerElement, latOld, lonOld, distance, 0, fromWP, "", "", type);
-            for (idx=1; idx<numWpts; idx++) {
-                wp = routeData[idx]['fields'];
-                toWP = wp['name'];
-                lat = parseFloat(wp['lat']);
-                lon = parseFloat(wp['lon']);
-                type = wp['type'].toLowerCase();
-                notes = wp['notes'];
-                image = wp['image'];
-                rhumbline = getDistance(lat, lon, latOld, lonOld);
-                distance = distance + rhumbline.dist;
-                //console.log(`${idx} lat old: ${latOld} lat: ${lat} distance: ${distance}`);
-                addLine(lat, lon, latOld, lonOld);
-                if (type != "none") {
-                    addMarker(AdvancedMarkerElement, lat, lon, distance, rhumbline.hdg, fromWP, toWP, image, type);
-                    bounds.extend(new google.maps.LatLng(lat, lon));
-                    fromWP = toWP;
-                    distance = 0;
-                }
-                // current destination ($to) not yet in the $route string - let's add it
-                if (type!='video' && type!="image" && type!="none") {
-                    if (idx == numWpts-1) {
-                        if (routeSTR.search('Round-trip')>-1) {
-                            routeSTR += 'back to ' + toWP + '.<br />';
-                        } else {
-                            routeSTR += 'to ' + toWP + '.<br />';
-                        }
-                    } else {
-                        routeSTR += toWP + ',<br />';
-                    }
-                }
-                latOld = lat;
-                lonOld = lon;
-            }
-            // center map across all waypoints and adjust zoom level to show all
-            center = bounds.getCenter();
-            map.fitBounds(bounds);
-            
-            if (tripData != false) {
-                yacht = parse_yacht(tripData['boat']);
-
-                html = "<h4>" + tripData['destination'] + "</h4>";
-                html+= "<p>" + routeSTR + "</p><p>";
-                html+= number_format(tripData['miles'], 1);
-                html+= " nm over " + tripData['daysAtSea'] + " days";
-                html+= " on the yacht " + yacht;
-                html+= "</p><p>with " + parse_crew(tripData) + ".</p>";
-                $("#toernInfo").html(html);
-            } else {
-                // code to allow maps to be displayed that don't have
-                // an entry in the ToernDirectory SQLite table
-                $('#mapArea').removeClass('col-sm-8');
-                $('#toernInfo').removeClass('col-sm-4');
-                $('#mapRow').addClass('mapRow');
-                $('#mapArea').addClass('mapArea');
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------
-        // java script to compute the Rhumb Line distance/heading between 2 positions (lat, lon)
-        //-----------------------------------------------------------------------------------------
-        function getDistance(latTo, lonTo, latFrom, lonFrom) {
-            // same values as used in NavToolsLib.py
-            // calculations match Expedition but not OpenCPN
-            var R = 6378.2334;       // Earth Radius in km as used by Google Maps / Expedition 
-            var km_nm = 0.539956803; // km to nm conversion factor
-            var Radius = R*km_nm;	 // Earth Radius in nm
-            var dLat = toRadians(latTo-latFrom);
-            var dLon = toRadians(lonTo-lonFrom);
-            var lat1 = toRadians(latFrom);
-            var lat2 = toRadians(latTo);
-            var precision = 0.0000001;
-            if (Math.abs(dLat)<precision && Math.abs(dLon)<precision) {
-                return {dist: 0.0, hdg: 0.0};
-            }
-            var dPhi = Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));
-            var q = (Math.abs(dPhi)>precision) ? dLat/dPhi : Math.cos(lat1);  // E-W line gives dPhi=0
-
-            // if dLon over 180° take shorter rhumb across 180° meridian:
-            if (Math.abs(dLon) > Math.PI) {
-                dLon = dLon>0 ? -(2*Math.PI-dLon) : (2*Math.PI+dLon);
-            }
-            var distance = Math.sqrt(dLat*dLat + q*q*dLon*dLon) * Radius;
-            var brng = toDegrees(Math.atan2(dLon, dPhi));
-            brng = Mod(brng, 360.0);
-            //console.log(`dist: ${distance} hdg: ${brng} dlat: ${toDegrees(dLat)} dlon: ${toDegrees(dLon)}`);
-            return {dist: distance, hdg: brng};
-        }
-        function toRadians(degrees) {
-        /** Converts numeric degrees to radians */
-            return degrees * Math.PI / 180.0;
-        }
-
-        function toDegrees(radians) {
-        /** Converts numeric radians to degrees */
-            return radians * 180.0 / Math.PI;
-        }
-
-
-        function Mod(a, b) {
-        /** Modulo function */
-            while (a < 0) {
-                a += b;
-            }
-            return a % b;
-        }
-
-        //-----------------------------------------------------------------------------------------
-        // java script to add a Marker to the Map using the Google Map using the API ver 3
-        //-----------------------------------------------------------------------------------------
-        function addMarker(AdvancedMarkerElement, latTo, lngTo, distance, hdg, fromWP, toWP, images, type) {
-            // Add markers to the map
-            var index, info, popup;
-
-            //-----------------------------------------------------------------------------------------
-            // Variable definitions for the Google Map using the API ver 3
-            //-----------------------------------------------------------------------------------------
-            const customIcons = [];
-            customIcons['harbor'] = document.createElement('img');
-            customIcons['harbor'].src = '../static/images/mm_20_blue.png';
-            customIcons['mooring'] = document.createElement('img');
-            customIcons['mooring'].src = '../static/images/mm_20_yellow.png';
-            customIcons['route'] = document.createElement('img');
-            customIcons['route'].src = '../static/images/mm_20_red.png';
-            customIcons['image'] = document.createElement('img');
-            customIcons['image'].src = '../static/images/mm_20_green.png';
-            customIcons['video'] = document.createElement('img');
-            customIcons['video'].src = '../static/images/mm_20_purple_dot.png';
-
-            if (type=="route") {
-                index = 10;
-            }
-            else if (type=="harbor") {
-                index = 11;
-            }
-            else {
-                index = 18;
-            }
-
-            const markerImage = customIcons[type];
-            markerImage.width = '14';
-            markerImage.height = '24';
-            
-            const markerContainer = document.createElement('div');
-            markerContainer.append(markerImage);
-            markerContainer.style.position = 'absolute';
-            markerContainer.style.transform = 'translate(-50%, -100%)';
- 
-            const marker = new AdvancedMarkerElement({
-                position: {lat: latTo, lng: lngTo},
-                map: map,
-                content: markerImage,
-                gmpClickable: true,
-                zIndex: index
-            });
-
-            if(distance>0 || hdg>0) 
-            {
-                info = '<div id="infobox">';
-                if (type=="image") {
-                    info += '<img vspace="0" border="0px" src="./static/images/' + images + '" width="270px" />';
-                }
-                if (type=="video") {
-                    IS_IPAD = navigator.userAgent.match(/iPad/i) != null;
-                    IS_IPHONE = (navigator.userAgent.match(/iPhone/i) != null) || (navigator.userAgent.match(/iPod/i) != null);
-                    if (IS_IPAD || IS_IPHONE) {
-                    // 		detected ipad, ipod, or iphone user. Let us use the Apple Quicktime video player
-                        info = '<iframe width="560" height="315" src="./static/'+images+'" frameborder="0" allowfullscreen></iframe>';
-                    }
-                    else {
-                    //  any non-Apple browser / device. Let us use the Microsoft video player
-                        info = '<iframe width="560" height="315" src="./static/'+images+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
-                    }
-
-                }
-                info += '<table width="290px">';
-                info += '<tr><td width="80px">From:</td><td width="200px">' + fromWP + '</td></tr>';
-                info += '<tr><td width="80px">To:</td><td width="200px">' + toWP + '</td></tr>';
-                info += '<tr><td width="80px">Latitude:</td><td width="200px">' + PositionDegreeToString(latTo, 1) + '</td></tr>';
-                info += '<tr><td width="80px">Longitude:</td><td width="200px">' + PositionDegreeToString(lngTo, 0) + '</td></tr>';
-                
-                if (getDistance==0.0) {
-                    info += '</table>';
+            function checkGoogleMapsLoaded() {
+                if (typeof google === 'object' && typeof google.maps === 'object') {
+                    //console.log("Google Maps API loaded");
+                    initMap();
                 } else {
-                    info += '<tr><td width="80px">Distance:</td><td width="200px">' + distance.toFixed(1) + 'nm</td></tr>';
-                    info += '<tr><td width="80px">Heading: </td><td width="200px">' + hdg.toFixed(0) + '\xB0 </td></tr></table>';
+                    //console.log("Google Maps API not loaded yet");
+                    setTimeout(checkGoogleMapsLoaded, 50);
                 }
-                info += '</div>';
-                
-                popup = new google.maps.InfoWindow({
-                    maxWidth: 600,
-                    content: info,
-                    zIndex: 900
-                });
             }
 
-            marker.addListener('click', () => {});  // workaround for the mouseover event listener
-            marker.content.addEventListener('mouseover', function() {
-                if (currentPopup != null) {
-                    currentPopup.close();
-                    currentPopup = null;
-                }
-                popup.open(map, marker);
-                currentPopup = popup;
-            });
-            if (type=='video') {
-                marker.addListener('closeclick', function() {
-                // executes when window close click has been clicked on - just closing the current Popup window
-                    if (currentPopup != null) {
-                        currentPopup.close();
-                        currentPopup = null;
-                    }
-                });
-            } else {
-                marker.content.addEventListener('mouseout', function() {
-                //  executes when mouse leaves the marker - just closing the current Popup window
-                    if (currentPopup != null) {
-                        currentPopup.close();
-                        currentPopup = null;
-                    }
-                });
-            }
-        }
+            // Start checking if Google Maps has been loaded
+            checkGoogleMapsLoaded();
 
-        //-----------------------------------------------------------------------------------------
-        // java script to plot a polygone line using the Google Map API ver 3
-        //-----------------------------------------------------------------------------------------
-        function addLine(lat, lon, latOld, lonOld) {
-            var StartEndCoordinates = [
-                new google.maps.LatLng(latOld, lonOld),
-                new google.maps.LatLng(lat, lon)
-            ];
-            var line = new google.maps.Polyline({
-                path: StartEndCoordinates,
-                strokeColor: "#342826",
+            // global variables
+            let routeData = [];
+            let latOld = 0.0;
+            let lonOld = 0.0;
+            let distance = 0.0;
+            let rhumbline;
+            let routeSTR;
+            let idx, oneway, start, end, numWpts, wp, fromWP, toWP;
+            let map, lat, lon, type, image, notes, crew, currentPopup;
+
+            let polyOptions = {
+                strokeColor: '#342826',
                 strokeOpacity: 1.0,
                 strokeWeight: 3
-            });
-            line.setMap(map);
-        }
-
-        //-----------------------------------------------------------------------------------------
-        // java script to convert a float/decimal position into a degree/minute/second string
-        //-----------------------------------------------------------------------------------------
-        function PositionDegreeToString(wp, flag) {
-            wpabs = Math.abs(wp);
-            var d = parseInt(wpabs);
-            var m = parseInt((wpabs - d)*60.0);
-            var s = (((wpabs - d)*60.0 - m)*60.0);
-            var strg = m.toFixed(0) + "\' " + s.toFixed(1);
-            if (flag == 1) {		// we convert a latitude
-                if (wp > 0) {
-                    strg = d.toFixed(0) + "\xB0 " + strg+"\'\' N";
-                //   hexadecimal codes \xXX in JavaScript strings; e.g. degree (°) is \xB0
-                } else {
-                    strg = d.toFixed(0) + "\xB0 " + strg+"'' S";
                 }
-            } else {    	      // we convert a longitude
-                if (wp > 0) {
-                    strg = d.toFixed(0) + "\xB0 " + strg+"'' E";
+
+            try {
+                routeData = JSON.parse({% autoescape off %}{{wpsJSON}}{% endautoescape %});
+                tripData = JSON.parse("{{tripsJSON|escapejs|safe}}");
+                tripData = tripData[0]['fields'];
+            } catch(error) {
+                // code to allow maps to be displayed that don't have
+                // an entry in the ToernDirectory SQLite table
+                tripData = false;
+            }
+
+            numWpts = routeData.length;
+            start = routeData[0]['fields'];
+            end = routeData[numWpts-1]['fields'];
+            
+            //	determine if this was a round-trip or one-way journey
+            if (start['lat'] == end['lat'] && start['lon'] == end['lon']) {
+                // starting and ending waypoints are the same => ROUND-TRIP
+                routeSTR = 'Round-trip from ' + start['name'] + ' via:<br />';
+            } else {
+                // starting and ending waypoints are different => ONE-WAY
+                routeSTR =  'One-way trip from ' + start['name'] + ' via<br />';
+            }
+
+            // remove the searchbox on this page
+            $("#searchboxDiv").html("");
+
+            async function initMap() {
+                var html, center, bounds, yacht;
+
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+                map = new Map(document.getElementById("map_canvas"), {
+                    center: {lat: 0, lng: 0},  // dummy number, gets set with the bounds.extend
+                    zoom: 11,    // dummy number, gets set with the bounds.extend - see addMarker()
+                    scaleControl: true,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,    // ROADMAP, SATELLITE, or HYBRID
+                    mapId: "ae07dd75342d4621", // created https://console.cloud.google.com/google/maps-apis/studio/maps/ae07dd75342d4621?project=volkermaps
+                    mapTypeControl: true,
+                    mapTypeControlOptions: {
+                        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+                    },
+                    navigationControl: true,
+                    navigationControlOptions: {
+                        style: google.maps.NavigationControlStyle.LARGE
+                    }
+                });
+
+                // print the current cursor position in input field 'CursorLocation'
+                google.maps.event.addListener(map, "mousemove", function(event){
+                    var cursorposition = "Cursor location: "
+                    cursorposition += PositionDegreeToString(event.latLng.lat(), 1);
+                    cursorposition += "&nbsp;&nbsp; | &nbsp;&nbsp;" + PositionDegreeToString(event.latLng.lng(), 0);
+                    jQuery("#CursorLocation").html(cursorposition);
+                });
+                // clear the input field 'CursorLocation' when the cursor leaves the map area
+                google.maps.event.addListener(map, "mouseout", function(){
+                    $("#CursorLocation").html("Cursor is not on the map");
+                });
+
+                bounds = new google.maps.LatLngBounds();
+
+                // display waypoints on Map
+                // loop thru all waypoints and plot them to the map
+                distance = 0.0;
+                latOld = parseFloat(routeData[0]['fields']['lat']);
+                lonOld = parseFloat(routeData[0]['fields']['lon']);
+                fromWP = routeData[0]['fields']['name'];
+                start = fromWP;
+                type = routeData[0]['fields']['type'];
+                bounds.extend(new google.maps.LatLng(latOld, lonOld));
+                //alert("Type: " + type+"  Lat: "+latOld+"  lon: "+lonOld);
+                addMarker(AdvancedMarkerElement, latOld, lonOld, distance, 0, fromWP, "", "", type);
+                for (idx=1; idx<numWpts; idx++) {
+                    wp = routeData[idx]['fields'];
+                    toWP = wp['name'];
+                    lat = parseFloat(wp['lat']);
+                    lon = parseFloat(wp['lon']);
+                    type = wp['type'].toLowerCase();
+                    notes = wp['notes'];
+                    image = wp['image'];
+                    rhumbline = getDistance(lat, lon, latOld, lonOld);
+                    distance = distance + rhumbline.dist;
+                    //console.log(`${idx} lat old: ${latOld} lat: ${lat} distance: ${distance}`);
+                    addLine(lat, lon, latOld, lonOld);
+                    if (type != "none") {
+                        addMarker(AdvancedMarkerElement, lat, lon, distance, rhumbline.hdg, fromWP, toWP, image, type);
+                        bounds.extend(new google.maps.LatLng(lat, lon));
+                        fromWP = toWP;
+                        distance = 0;
+                    }
+                    // current destination ($to) not yet in the $route string - let's add it
+                    if (type!='video' && type!="image" && type!="none") {
+                        if (idx == numWpts-1) {
+                            if (routeSTR.search('Round-trip')>-1) {
+                                routeSTR += 'back to ' + toWP + '.<br />';
+                            } else {
+                                routeSTR += 'to ' + toWP + '.<br />';
+                            }
+                        } else {
+                            routeSTR += toWP + ',<br />';
+                        }
+                    }
+                    latOld = lat;
+                    lonOld = lon;
+                }
+                // center map across all waypoints and adjust zoom level to show all
+                center = bounds.getCenter();
+                map.fitBounds(bounds);
+                
+                if (tripData != false) {
+                    yacht = parse_yacht(tripData['boat']);
+                    html = "<h4>" + tripData['destination'] + "</h4>";
+                    html+= "<p>" + routeSTR + "</p><p>";
+                    html+= number_format(tripData['miles'], 1);
+                    html+= " nm over " + tripData['daysAtSea'] + " days";
+                    html+= " on the yacht " + yacht;
+                    html+= "</p><p>with {{crew}}.</p>";
+                    $("#toernInfo").html(html);
                 } else {
-                    strg = d.toFixed(0) + "\xB0 " + strg+"'' W";
+                    // code to allow maps to be displayed that don't have
+                    // an entry in the ToernDirectory SQLite table
+                    $('#mapArea').removeClass('col-sm-8');
+                    $('#toernInfo').removeClass('col-sm-4');
+                    $('#mapRow').addClass('mapRow');
+                    $('#mapArea').addClass('mapArea');
                 }
             }
-            return(strg);
-        }
-    </script>
+
+            //-----------------------------------------------------------------------------------------
+            // java script to compute the Rhumb Line distance/heading between 2 positions (lat, lon)
+            //-----------------------------------------------------------------------------------------
+            function getDistance(latTo, lonTo, latFrom, lonFrom) {
+                // same values as used in NavToolsLib.py
+                // calculations match Expedition but not OpenCPN
+                var R = 6378.2334;       // Earth Radius in km as used by Google Maps / Expedition 
+                var km_nm = 0.539956803; // km to nm conversion factor
+                var Radius = R*km_nm;	 // Earth Radius in nm
+                var dLat = toRadians(latTo-latFrom);
+                var dLon = toRadians(lonTo-lonFrom);
+                var lat1 = toRadians(latFrom);
+                var lat2 = toRadians(latTo);
+                var precision = 0.0000001;
+                if (Math.abs(dLat)<precision && Math.abs(dLon)<precision) {
+                    return {dist: 0.0, hdg: 0.0};
+                }
+                var dPhi = Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));
+                var q = (Math.abs(dPhi)>precision) ? dLat/dPhi : Math.cos(lat1);  // E-W line gives dPhi=0
+
+                // if dLon over 180° take shorter rhumb across 180° meridian:
+                if (Math.abs(dLon) > Math.PI) {
+                    dLon = dLon>0 ? -(2*Math.PI-dLon) : (2*Math.PI+dLon);
+                }
+                var distance = Math.sqrt(dLat*dLat + q*q*dLon*dLon) * Radius;
+                var brng = toDegrees(Math.atan2(dLon, dPhi));
+                brng = Mod(brng, 360.0);
+                //console.log(`dist: ${distance} hdg: ${brng} dlat: ${toDegrees(dLat)} dlon: ${toDegrees(dLon)}`);
+                return {dist: distance, hdg: brng};
+            }
+            function toRadians(degrees) {
+            /** Converts numeric degrees to radians */
+                return degrees * Math.PI / 180.0;
+            }
+
+            function toDegrees(radians) {
+            /** Converts numeric radians to degrees */
+                return radians * 180.0 / Math.PI;
+            }
+
+
+            function Mod(a, b) {
+            /** Modulo function */
+                while (a < 0) {
+                    a += b;
+                }
+                return a % b;
+            }
+
+            //-----------------------------------------------------------------------------------------
+            // java script to add a Marker to the Map using the Google Map using the API ver 3
+            //-----------------------------------------------------------------------------------------
+            function addMarker(AdvancedMarkerElement, latTo, lngTo, distance, hdg, fromWP, toWP, images, type) {
+                // Add markers to the map
+                var index, info, popup;
+
+                //-----------------------------------------------------------------------------------------
+                // Variable definitions for the Google Map using the API ver 3
+                //-----------------------------------------------------------------------------------------
+                const customIcons = [];
+                customIcons['harbor'] = document.createElement('img');
+                customIcons['harbor'].src = '../static/images/mm_20_blue.png';
+                customIcons['mooring'] = document.createElement('img');
+                customIcons['mooring'].src = '../static/images/mm_20_yellow.png';
+                customIcons['route'] = document.createElement('img');
+                customIcons['route'].src = '../static/images/mm_20_red.png';
+                customIcons['image'] = document.createElement('img');
+                customIcons['image'].src = '../static/images/mm_20_green.png';
+                customIcons['video'] = document.createElement('img');
+                customIcons['video'].src = '../static/images/mm_20_purple_dot.png';
+
+                if (type=="route") {
+                    index = 10;
+                }
+                else if (type=="harbor") {
+                    index = 11;
+                }
+                else {
+                    index = 18;
+                }
+
+                const markerImage = customIcons[type];
+                markerImage.width = '14';
+                markerImage.height = '24';
+                
+                const markerContainer = document.createElement('div');
+                markerContainer.append(markerImage);
+                markerContainer.style.position = 'absolute';
+                markerContainer.style.transform = 'translate(-50%, -100%)';
+    
+                const marker = new AdvancedMarkerElement({
+                    position: {lat: latTo, lng: lngTo},
+                    map: map,
+                    content: markerImage,
+                    gmpClickable: true,
+                    zIndex: index
+                });
+
+                if(distance>0 || hdg>0) 
+                {
+                    info = '<div id="infobox">';
+                    if (type=="image") {
+                        info += '<img vspace="0" border="0px" src="./static/images/' + images + '" width="270px" />';
+                    }
+                    if (type=="video") {
+                        IS_IPAD = navigator.userAgent.match(/iPad/i) != null;
+                        IS_IPHONE = (navigator.userAgent.match(/iPhone/i) != null) || (navigator.userAgent.match(/iPod/i) != null);
+                        if (IS_IPAD || IS_IPHONE) {
+                        // 		detected ipad, ipod, or iphone user. Let us use the Apple Quicktime video player
+                            info = '<iframe width="560" height="315" src="./static/'+images+'" frameborder="0" allowfullscreen></iframe>';
+                        }
+                        else {
+                        //  any non-Apple browser / device. Let us use the Microsoft video player
+                            info = '<iframe width="560" height="315" src="./static/'+images+'?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+                        }
+
+                    }
+                    info += '<table width="290px">';
+                    info += '<tr><td width="80px">From:</td><td width="200px">' + fromWP + '</td></tr>';
+                    info += '<tr><td width="80px">To:</td><td width="200px">' + toWP + '</td></tr>';
+                    info += '<tr><td width="80px">Latitude:</td><td width="200px">' + PositionDegreeToString(latTo, 1) + '</td></tr>';
+                    info += '<tr><td width="80px">Longitude:</td><td width="200px">' + PositionDegreeToString(lngTo, 0) + '</td></tr>';
+                    
+                    if (getDistance==0.0) {
+                        info += '</table>';
+                    } else {
+                        info += '<tr><td width="80px">Distance:</td><td width="200px">' + distance.toFixed(1) + 'nm</td></tr>';
+                        info += '<tr><td width="80px">Heading: </td><td width="200px">' + hdg.toFixed(0) + '\xB0 </td></tr></table>';
+                    }
+                    info += '</div>';
+                    
+                    popup = new google.maps.InfoWindow({
+                        maxWidth: 600,
+                        content: info,
+                        zIndex: 900
+                    });
+                }
+
+                marker.addListener('click', () => {});  // workaround for the mouseover event listener
+                marker.content.addEventListener('mouseover', function() {
+                    if (currentPopup != null) {
+                        currentPopup.close();
+                        currentPopup = null;
+                    }
+                    popup.open(map, marker);
+                    currentPopup = popup;
+                });
+                if (type=='video') {
+                    marker.addListener('closeclick', function() {
+                    // executes when window close click has been clicked on - just closing the current Popup window
+                        if (currentPopup != null) {
+                            currentPopup.close();
+                            currentPopup = null;
+                        }
+                    });
+                } else {
+                    marker.content.addEventListener('mouseout', function() {
+                    //  executes when mouse leaves the marker - just closing the current Popup window
+                        if (currentPopup != null) {
+                            currentPopup.close();
+                            currentPopup = null;
+                        }
+                    });
+                }
+            }
+
+            //-----------------------------------------------------------------------------------------
+            // java script to plot a polygone line using the Google Map API ver 3
+            //-----------------------------------------------------------------------------------------
+            function addLine(lat, lon, latOld, lonOld) {
+                var StartEndCoordinates = [
+                    new google.maps.LatLng(latOld, lonOld),
+                    new google.maps.LatLng(lat, lon)
+                ];
+                var line = new google.maps.Polyline({
+                    path: StartEndCoordinates,
+                    strokeColor: "#342826",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
+                });
+                line.setMap(map);
+            }
+
+            //-----------------------------------------------------------------------------------------
+            // java script to convert a float/decimal position into a degree/minute/second string
+            //-----------------------------------------------------------------------------------------
+            function PositionDegreeToString(wp, flag) {
+                wpabs = Math.abs(wp);
+                var d = parseInt(wpabs);
+                var m = parseInt((wpabs - d)*60.0);
+                var s = (((wpabs - d)*60.0 - m)*60.0);
+                var strg = m.toFixed(0) + "\' " + s.toFixed(1);
+                if (flag == 1) {		// we convert a latitude
+                    if (wp > 0) {
+                        strg = d.toFixed(0) + "\xB0 " + strg+"\'\' N";
+                    //   hexadecimal codes \xXX in JavaScript strings; e.g. degree (°) is \xB0
+                    } else {
+                        strg = d.toFixed(0) + "\xB0 " + strg+"'' S";
+                    }
+                } else {    	      // we convert a longitude
+                    if (wp > 0) {
+                        strg = d.toFixed(0) + "\xB0 " + strg+"'' E";
+                    } else {
+                        strg = d.toFixed(0) + "\xB0 " + strg+"'' W";
+                    }
+                }
+                return(strg);
+            }
+        </script>
+    {% endif %}
 {% endblock %}
 

@@ -395,7 +395,7 @@
       <time>2025-07-01T22:00:00Z</time>
       <name>2025-07-01 15:00</name>
       <desc>timedleg 2025-07-01 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-4985f730d123</opencpn:guid>
@@ -910,7 +910,7 @@
       <time>2025-07-02T22:00:00Z</time>
       <name>2025-07-02 15:00</name>
       <desc>timedleg 2025-07-02 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-e5327e4d8a48</opencpn:guid>
@@ -1035,7 +1035,7 @@
       <time>2025-07-03T22:00:00Z</time>
       <name>2025-07-03 15:00</name>
       <desc>timedleg 2025-07-03 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-9dbfc6908726</opencpn:guid>
@@ -1186,7 +1186,7 @@
       <time>2025-07-04T22:00:00Z</time>
       <name>2025-07-04 15:00</name>
       <desc>timedleg 2025-07-04 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-11cde1b5459f</opencpn:guid>
@@ -1324,7 +1324,7 @@
       <time>2025-07-05T22:00:00Z</time>
       <name>2025-07-05 15:00</name>
       <desc>timedleg 2025-07-05 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-4c99add52e33</opencpn:guid>
@@ -1501,7 +1501,7 @@
       <time>2025-07-06T22:00:05Z</time>
       <name>2025-07-06 15:00</name>
       <desc>timedleg 2025-07-06 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-6e6258b1f1b2</opencpn:guid>
@@ -1665,7 +1665,7 @@
       <time>2025-07-07T22:00:00Z</time>
       <name>2025-07-07 15:00</name>
       <desc>timedleg 2025-07-07 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-513a23fc8034</opencpn:guid>
@@ -1842,7 +1842,7 @@
       <time>2025-07-08T22:00:00Z</time>
       <name>2025-07-08 15:00</name>
       <desc>timedleg 2025-07-08 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-88e627a01eb6</opencpn:guid>
@@ -2045,7 +2045,7 @@
       <time>2025-07-09T22:00:00Z</time>
       <name>2025-07-09 15:00</name>
       <desc>timedleg 2025-07-09 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-d2f7761f0da3</opencpn:guid>
@@ -2261,7 +2261,7 @@
       <time>2025-07-10T22:00:00Z</time>
       <name>2025-07-10 15:00</name>
       <desc>timedleg 2025-07-10 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-db60006ac706</opencpn:guid>
@@ -2451,7 +2451,7 @@
       <time>2025-07-11T22:00:00Z</time>
       <name>2025-07-11 15:00</name>
       <desc>timedleg 2025-07-11 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-d9ef5fc3d008</opencpn:guid>
@@ -2641,7 +2641,7 @@
       <time>2025-07-12T22:00:00Z</time>
       <name>2025-07-12 15:00</name>
       <desc>timedleg 2025-07-12 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-b238b953d381</opencpn:guid>
@@ -2844,7 +2844,7 @@
       <time>2025-07-13T22:00:00Z</time>
       <name>2025-07-13 15:00</name>
       <desc>timedleg 2025-07-13 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-c938ceb33efd</opencpn:guid>
@@ -3346,7 +3346,7 @@
       <time>2025-07-14T22:00:00Z</time>
       <name>2025-07-14 15:00</name>
       <desc>timedleg 2025-07-14 15:00</desc>
-      <sym>empty</sym>
+      <sym>diamond</sym>
       <type>WPT</type>
       <extensions>
         <opencpn:guid>715bffff-e783-458a-87cf-ff1367ee960a</opencpn:guid>

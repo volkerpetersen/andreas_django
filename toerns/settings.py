@@ -193,26 +193,25 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'backupCount': 5, # keep at most 5 log files
             'maxBytes': 5242880, # 5*1024*1024 bytes (5MB)
-            'filename': os.path.join(BASE_DIR,'logs', 'webApp.log'),
+            'filename': os.path.join(BASE_DIR,'logs','webApp.log'),
             'formatter': 'verbose',
         },
 
-        'console': {
-            'level': 'WARNING',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+        'null': {
+            'level': 'CRITICAL',
+            'class': 'logging.NullHandler',
         },
     },
     # A logger can have multiple handlers
     'loggers': {
         'django': {
             # log to sqlite DB
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'WARNING',
             'propagate': True,
         },
         'toerns': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'WARNING',
             'propagate': True,
         },

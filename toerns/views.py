@@ -253,7 +253,7 @@ def updateTrip(request):
 @require_POST
 def updateTripData(request):
     """---------------------------------------------------------------------
-        AJAX function to process a route/image update AJAX request
+        AJAX function to process a route/image/pdf update AJAX request
     """
     content = {}
     content['msg'] = ""
@@ -285,7 +285,6 @@ def updateTripData(request):
             fn = fn.split('.')
             routeName = fn[0]
             routeFormat = fn[1]
-
             try:
                 navTools = NavTools()
                 path = os.path.normpath(os.path.join(MEDIA_ROOT, 'routes'))
@@ -310,7 +309,7 @@ def updateTripData(request):
                 content['successRoute'] = False
                 content['msg'] += F"Failed to update the route data in the database.<br>{str(e)}"
         else:
-            content['success'] = False
+            content['successRoute'] = False
             content['msg'] += F"No valid waypoint file received."
 
 
@@ -319,9 +318,11 @@ def updateTripData(request):
         if uploadedFile:
             fs = FileSystemStorage()
             filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
+            #print(f"final file path: {filePath}")
             if fs.exists(filePath):
                 fs.delete(filePath)
             imageName = fs.save(filePath, uploadedFile)
+            #print(f"final image name: {imageName}")
             imageURL = fs.url(imageName)
 
             # update the maptable and image entries in the Toerndirectory table
@@ -329,10 +330,27 @@ def updateTripData(request):
             toern.image = imageName
             toern.save()
             content['successImage'] = True
-            content['msg'] += f"<br>Uploaded the image '{imageName}' to the website."
+            content['msg'] += f"<br>Uploaded the image '{imageName}' to the trip '{toern.destination}'."
         else:
             content['successImage'] = False
             content['msg'] += F"<br>No valid image file received."
+
+    if 'true' in request.POST['pdf']:
+        uploadedFile = request.FILES.get('pdfUpload')
+        if uploadedFile:
+            fs = FileSystemStorage()
+            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"pdf"),uploadedFile.name))
+            print(f"final file path: {filePath}")
+            if fs.exists(filePath):
+                fs.delete(filePath)
+            pdfName = fs.save(filePath, uploadedFile)
+            print(f"final image name: {pdfName}")
+
+            content['successImage'] = True
+            content['msg'] += f"<br>Uploaded the file '{pdfName}' to the website."
+        else:
+            content['successImage'] = False
+            content['msg'] += F"<br>No valid PDF file received."
 
     return JsonResponse(content)
 

@@ -1,6 +1,6 @@
 # DjangoWebsites
-Toern Directory website: [volkersailing.pythonanywhere.com](http://volkersailing.pythonanywhere.com/)
+Toern Directory website: [andreas61667.pythonanywhere.com](http://andreas61667.pythonanywhere.com/)
 
-Update in Bash console:
-git pull git@github.com:volkerpetersen/DjangoWebsites.git
+Update in pythonanywhere.com Bash console:
+git pull git@github.com:volkerpetersen/andreas_django.git
  

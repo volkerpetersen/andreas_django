@@ -19,13 +19,12 @@
   <div class="container">
     <div class="row pt-2">
       <div class="col-12">
-        <p class="form-label">Please make sure that the trip for which you want to upload 
-          the route data has already been entered into the the 'Toerndirectory'
-          table with an entry in the field 'maptable' with the name of the 
-          DB table storing the Google Maps waypoints.
+        <p class="form-label">Please make sure that the trip for which you want to upload
+          content (route data, image, or PDF) has already been entered into the the 'Toerndirectory'
+          table.
           <br><br>
-          This form allows you to upload a trip image and the waypoint data 
-          from a file in either an GPX or SQL file format.
+          This form allows you to upload a trip image, a pdf file (that can be accessed using a link in the destination
+          field), or the waypoint data from a file in either an GPX or SQL file format.
         </p>
       </div>
     </div>
@@ -36,16 +35,17 @@
           <label for="startDate" class="col-12 col-md-3 form-label">Select a trip from this list:</label>
           <div class="col-12 col-md-7">
             <select class="form-select" id="routeSelect" name="routeSelect">
-            {% for trip in trips %}
-            {% autoescape off %}
+              {% for trip in trips %}
+              {% autoescape off %}
               <option value="{{trip.startDate}}">{{trip.startDate}} - {{trip.destination}}</option>
-            {% endautoescape %}
-            {% endfor %}
+              {% endautoescape %}
+              {% endfor %}
             </select>
           </div>
         </div>
         <div class="row pt-1">
-          <label for="inputFormat" class="col-12 col-md-3 form-label">Select input format:</label>
+          <label for="inputFormat" class="col-12 col-md-3 form-label">Select input format:<br />(only for route
+            data)</label>
           <div class="col-12 col-md-5">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="routeFormat" id="gpx" value="gpx" checked>
@@ -66,7 +66,14 @@
         <div class="row pt-1">
           <label for="imageUpload" class="col-12 col-md-3 form-label">Select image file:</label>
           <div class="col-12 col-md-8">
-            <input type="file" name="imageUpload" id="imageUpload" onchange="image_check()" accept=".jpg, .jpeg, .png, .webp,. tiff" />
+            <input type="file" name="imageUpload" id="imageUpload" onchange="image_check()"
+              accept=".jpg, .jpeg, .png, .webp,. tiff" />
+          </div>
+        </div>
+        <div class="row pt-1">
+          <label for="pdfUpload" class="col-12 col-md-3 form-label">Select PDF file:</label>
+          <div class="col-12 col-md-8">
+            <input type="file" name="pdfUpload" id="pdfUpload" onchange="pdf_check()" accept=".pdf" />
           </div>
         </div>
         <div class="row pt-2">
@@ -82,148 +89,168 @@
       </form>
     </div>
   </div>
-
-<!--
-=============================================================================================================
-	Modal Form Feedback msg
-=============================================================================================================
--->
-<div class="modal fade in" id="modalFormFeedback" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div id="modalFormFeedbackHeader"><!-- Header msg spaceholder --></div>
-        <button type="button" class="btn-close" id="modalFormClose" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <div id="modalFormFeedbackBody"><!-- Body msg spaceholder --></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+  
+  <!--
+  =============================================================================================================
+  	Modal Form Feedback msg
+  =============================================================================================================
+  -->
+  <div class="modal fade in" id="modalFormFeedback" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div id="modalFormFeedbackHeader"><!-- Header msg spaceholder --></div>
+          <button type="button" class="btn-close" id="modalFormClose" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalFormFeedbackBody"><!-- Body msg spaceholder --></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
-  </div>
-</div><!-- /Modal Form Feedback msg-->
+  </div><!-- /Modal Form Feedback msg-->
+  
+  
+  <script type='text/javascript'>
+    let waypointFile = false;
+    let imageFile = false;
 
+    function resetPageHeight(element) {
+      document.body.classList.add('vh-100');
+      var height = document.body.clientHeight;
+      height -= document.getElementById("title_container").clientHeight;
+      height -= document.getElementById("footer").clientHeight;
+      element.style.minHeight = (height) + "px";
+    };
 
-<script type='text/javascript'>
-  let waypointFile = false;
-  let imageFile = false;
+    function waypoint_check() {
+      var upl = document.getElementById("routeUpload");
+      var routeType = upl.files[0].name.split(".");
+      var extension = routeType.pop();
+      var routeSelection = document.querySelector("input[name='routeFormat']:checked").value;
 
-  function resetPageHeight(element) {
-    document.body.classList.add('vh-100');
-    var height = document.body.clientHeight;
-    height -= document.getElementById("title_container").clientHeight;
-    height -= document.getElementById("footer").clientHeight;
-    element.style.minHeight = (height) + "px";
-  };
-
-  function waypoint_check() {
-    var upl = document.getElementById("routeUpload");
-    var routeType = upl.files[0].name.split(".");
-    var extension = routeType.pop();
-    var routeSelection = document.querySelector("input[name='routeFormat']:checked").value;
-
-    if (extension.toLowerCase() != routeSelection.toLowerCase()) {
-      $("#invalidFileFormat").html("File format and input format selection don't match. Please select a matching route file.");
-      waypointFile = false;
-    }
-    else {
-      $("#invalidFileFormat").html("");
-      waypointFile = true
-    }
-
-    if(waypointFile || imageFile) {
-      $('#updateTripSubmit').prop('disabled', false);
-      //console.log("enabled")
-    }
-    //console.log("Waypoint check: (waypointFile || imageFile)=" + (waypointFile || imageFile) + " image="imageFile + " waypoints=" + waypointFile);
-  };
-
-  function image_check() {
-    var upl = document.getElementById("imageUpload");
-    var image = upl.files[0]
-
-    if (image && image.type.includes('image')) {
-      $("#invalidImageFormat").html("");
-      imageFile = true;
-    }
-    else {
-      $("#invalidImageFormat").html("Invalid image file format selected. Please select an image file.");
-      imageFile = false;
-    }
-
-    if (waypointFile || imageFile) {
-      $('#updateTripSubmit').prop('disabled', false);
-      //console.log("enabled")
-    }
-    //console.log("Waypoint check: (waypointFile || imageFile)=" + (waypointFile || imageFile) + " image="imageFile + " waypoints=" + waypointFile);
-  };
-
-  jQuery(document).ready(function(){
-    $('#updateTripSubmit').prop('disabled', true);
-    $("#searchbox").remove();
-    $("#headline").html("Update Trip Data")
-    resetPageHeight(document.getElementById("main"))
-  });
-
-  $("#updateTripDataForm").on('submit', function (e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    if(waypointFile) {
-      formData.append('route', true);
-    } else {
-      formData.append('route', false);
-    }
-    if (imageFile) {
-      formData.append('image', true);
-    } else {
-      formData.append('image', false);
-    }
-    //formData.push({'name':'fileUpload', 'value': document.getElementById('fileUpload').files[0].name});
-    //formData.push({'name':'routeSelect','value': document.getElementById('routeSelect').value});
-    //for (var value of formData.entries()) {
-    //  console.log(value);
-    //}
-    
-    $.ajax({
-      type: "POST",
-      url: '{% url "updateTripData" %}',
-      data: formData,
-      processData: false, // prevent jQuery from transforming the data into query string
-      contentType: false, // let jQuery set the type correctly
-      success: function(response) {
-        hdr = "<h5>Trip Data Update</h5>";
-        //alert("Return values: "+JSON.stringify(response, null, 2));
-        if (response.successRoute || response.successImage) {
-          msg = "<h5>" + response.msg + "<br></h5>";
-          //alert("success")
-        } else {
-          msg = "<h5>" + response.msg + "<br>Please contact Volker Petersen for assistance.</h5>";
-        }
-        $("#modalFormFeedback").modal("show");
-        $("#modalFormFeedbackHeader").html(hdr);
-        $("#modalFormFeedbackBody").html(msg);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        msg = "<h5>";
-        if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
-          msg += jqXHR.responseJSON.error;
-        } else if (jqXHR.status === 0) {
-          msg += "Could not connect to the server.";
-        } else if (jqXHR.status) {
-          msg += "Server error: " + jqXHR.status;
-        } else if (errorThrown) {
-          msg += errorThrown;
-        } else {
-          msg += textStatus;
-        }
-        msg += "<br>Please contact Volker Petersen for assistance.</h5>";
-        console.log("Route update error: " + msg);
+      if (extension.toLowerCase() != routeSelection.toLowerCase()) {
+        $("#invalidFileFormat").html("File format and input format selection don't match. Please select a matching route file.");
+        waypointFile = false;
       }
-    });
-  });
+      else {
+        $("#invalidFileFormat").html("");
+        waypointFile = true
+      }
 
-</script>
+      if (waypointFile || imageFile || pdfFile) {
+        $('#updateTripSubmit').prop('disabled', false);
+      }
+      //console.log("Waypoint check: (waypointFile || imageFile)=" + (waypointFile || imageFile) + " image="imageFile + " waypoints=" + waypointFile);
+    };
+
+    function image_check() {
+      var upl = document.getElementById("imageUpload");
+      var image = upl.files[0]
+
+      if (image && image.type.includes('image')) {
+        $("#invalidImageFormat").html("");
+        imageFile = true;
+      }
+      else {
+        $("#invalidImageFormat").html("Invalid image file format selected. Please select an image file.");
+        imageFile = false;
+      }
+
+      if (waypointFile || imageFile || pdfFile) {
+        $('#updateTripSubmit').prop('disabled', false);
+      }
+      //console.log("Image check: (waypointFile || imageFile)="+ (waypointFile || imageFile)+" image="imageFile+" waypoints="+ waypointFile);
+    };
+
+    function pdf_check() {
+      var upl = document.getElementById("pdfUpload");
+      var pdf = upl.files[0]
+      var routeType = upl.files[0].name.split(".");
+      var extension = routeType.pop();
+
+      if (extension.toLowerCase() != 'pdf') {
+        $("#invalidPDFFormat").html("Invalid PDF file format selected. Please select a PDF file.");
+        pdfFile = false;
+      }
+      else {
+        $("#invalidFileFormat").html("");
+        pdfFile = true
+      }
+
+      if (waypointFile || imageFile || pdfFile) {
+        $('#updateTripSubmit').prop('disabled', false);
+      }
+      //console.log("Image check: (waypointFile || imageFile)="+ (waypointFile || imageFile)+" image="imageFile+" waypoints="+ waypointFile);
+    };
+
+    jQuery(document).ready(function () {
+      $('#updateTripSubmit').prop('disabled', true);
+      $("#searchbox").remove();
+      $("#headline").html("Update Trip Data")
+      resetPageHeight(document.getElementById("main"))
+    });
+
+    $("#updateTripDataForm").on('submit', function (e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      if (waypointFile) {
+        formData.append('route', true);
+      } else {
+        formData.append('route', false);
+      }
+      if (imageFile) {
+        formData.append('image', true);
+      } else {
+        formData.append('image', false);
+      }
+      if (pdfFile) {
+        formData.append('pdf', true);
+      } else {
+        formData.append('pdf', false);
+      }
+      $.ajax({
+        type: "POST",
+        url: '{% url "updateTripData" %}',
+        data: formData,
+        processData: false, // prevent jQuery from transforming the data into query string
+        contentType: false, // let jQuery set the type correctly
+        success: function (response) {
+          hdr = "<h5>Trip Data Update</h5>";
+          //alert("Return values: "+JSON.stringify(response, null, 2));
+          if (response.successRoute || response.successImage) {
+            msg = "<h5>" + response.msg + "<br>Thanks for your kind assistance.</h5>";
+          } else {
+            msg = "<h5>" + response.msg + "<br>ERROR: Please contact Volker Petersen for assistance.</h5>";
+          }
+          $("#modalFormFeedback").modal("show");
+          $("#modalFormFeedbackHeader").html(hdr);
+          $("#modalFormFeedbackBody").html(msg);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          hdr = "<h5>Trip Data Update</h5>";
+          msg = "<h5>";
+          if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+            msg += jqXHR.responseJSON.error;
+          } else if (jqXHR.status === 0) {
+            msg += "Could not connect to the server.";
+          } else if (jqXHR.status) {
+            msg += "Server error: " + jqXHR.status;
+          } else if (errorThrown) {
+            msg += errorThrown;
+          } else {
+            msg += textStatus;
+          }
+          msg += "<br>ERROR: Please contact Volker Petersen for assistance.</h5>";
+          $("#modalFormFeedback").modal("show");
+          $("#modalFormFeedbackHeader").html(hdr);
+          $("#modalFormFeedbackBody").html(msg);
+        }
+      });
+    });
+
+  </script>
   <!-- end of safety.html body content container -->
-{% endblock %}
+  {% endblock %}

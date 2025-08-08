@@ -25,6 +25,7 @@ site admin page /admin  UN:helgaas  PW:raceAdmin
 
 install a python package in pythonanywhere:
 pip install --user package_name
+python -m pip install -r requirements.txt
 
 cd '/D/VolkerPetersen/Google Drive/ProgramCode/Python_Projects/DjangoWebsites/andreas_django'
 git remote set-url origin https://volkerpetersen:b4c8e7f1052f4b25a65c38ba977014608f991a86@github.com/volkerpetersen/DjangoWebsites.git
@@ -104,7 +105,7 @@ TEMPLATES = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / SQLITE,
+        "NAME": os.path.join(BASE_DIR / SQLITE),
     },
 }
 
@@ -173,12 +174,12 @@ JAZZMIN_SETTINGS = {
     "custom_links": {
         "toerns": [
             {
-            "name": "Upload Content",
+            "name": "Upload files",
             "url": "/updateTrip",
             "icon": "fas fa-cog",
             },
             {
-            "name": "Nav Tools",
+            "name": "Navigation Tools",
             "url": "/navTools",
             "icon": "fas fa-tools",
             },

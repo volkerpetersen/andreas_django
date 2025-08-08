@@ -275,11 +275,11 @@ def updateTripData(request):
         content['successImage'] = False
         uploadedFile = request.FILES.get('routeUpload')
         if uploadedFile:
-            fs = FileSystemStorage()
-            filePath = os.path.normpath(os.path.join(MEDIA_ROOT,"routes",uploadedFile.name))
-            if fs.exists(filePath):
-                fs.delete(filePath)
-            fileName = fs.save(filePath, uploadedFile)
+            fs = FileSystemStorage(location=os.path.join(MEDIA_ROOT,"routes"))
+            fileName = uploadedFile.name
+            if fs.exists(fileName):
+                fs.delete(fileName)
+            fileName = fs.save(fileName, uploadedFile)
             if not fileName:
                 content['successRoute'] = False
                 content['msg'] += f"Route file '{uploadedFile}' upload failed."
@@ -319,14 +319,11 @@ def updateTripData(request):
     if 'true' in request.POST['image']:
         uploadedFile = request.FILES.get('imageUpload')
         if uploadedFile:
-            fs = FileSystemStorage()
-            filePath = os.path.normpath(os.path.join(MEDIA_ROOT,"images",uploadedFile.name))
-            #print(f"final file path: {filePath}")
-            if fs.exists(filePath):
-                fs.delete(filePath)
-            imageName = fs.save(filePath, uploadedFile)
-            #print(f"final image name: {imageName}")
-            imageURL = fs.url(imageName)
+            fs = FileSystemStorage(location=os.path.join(MEDIA_ROOT,"images"))
+            fileName = uploadedFile.name
+            if fs.exists(fileName):
+                fs.delete(fileName)
+            imageName = fs.save(fileName, uploadedFile)
 
             # update the maptable and image entries in the Toerndirectory table
             toern = toerndirectory.objects.get(startDate=startDate)
@@ -346,7 +343,6 @@ def updateTripData(request):
             if fs.exists(fileName):
                 fs.delete(fileName)
             pdfName = fs.save(fileName, uploadedFile)
-            print(f"final image name: {pdfName}")
 
             content['successImage'] = True
             content['msg'] += f"<br>Uploaded the file '{pdfName}' to the website."

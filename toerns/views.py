@@ -135,9 +135,6 @@ def index(request):
     """---------------------------------------------------------------------
         view function for the home page with the Toern Directory
     """
-    logger.warning("This is a warning!")
-    logger.error("This is an error!")
-    logger.critical("This is a Critical error!")
     return render(request, "toerns/index.html", 
                   context=fetchContent(request, route="all"))
 
@@ -279,7 +276,7 @@ def updateTripData(request):
         uploadedFile = request.FILES.get('routeUpload')
         if uploadedFile:
             fs = FileSystemStorage()
-            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"routes"),uploadedFile.name))
+            filePath = os.path.normpath(os.path.join(MEDIA_ROOT,"routes",uploadedFile.name))
             if fs.exists(filePath):
                 fs.delete(filePath)
             fileName = fs.save(filePath, uploadedFile)
@@ -323,7 +320,7 @@ def updateTripData(request):
         uploadedFile = request.FILES.get('imageUpload')
         if uploadedFile:
             fs = FileSystemStorage()
-            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"images"),uploadedFile.name))
+            filePath = os.path.normpath(os.path.join(MEDIA_ROOT,"images",uploadedFile.name))
             #print(f"final file path: {filePath}")
             if fs.exists(filePath):
                 fs.delete(filePath)
@@ -344,12 +341,11 @@ def updateTripData(request):
     if 'true' in request.POST['pdf']:
         uploadedFile = request.FILES.get('pdfUpload')
         if uploadedFile:
-            fs = FileSystemStorage()
-            filePath = os.path.normpath(os.path.join(os.path.join(MEDIA_ROOT,"pdf"),uploadedFile.name))
-            print(f"final file path: {filePath}")
-            if fs.exists(filePath):
-                fs.delete(filePath)
-            pdfName = fs.save(filePath, uploadedFile)
+            fs = FileSystemStorage(location=os.path.join(MEDIA_ROOT,"pdf"))
+            fileName = uploadedFile.name
+            if fs.exists(fileName):
+                fs.delete(fileName)
+            pdfName = fs.save(fileName, uploadedFile)
             print(f"final image name: {pdfName}")
 
             content['successImage'] = True

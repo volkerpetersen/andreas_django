@@ -218,32 +218,32 @@
         processData: false, // prevent jQuery from transforming the data into query string
         contentType: false, // let jQuery set the type correctly
         success: function (response) {
-          hdr = "<h5>Trip Data Update</h5>";
+          var hdr = "<h5>Trip Data Update</h5>";
           //alert("Return values: "+JSON.stringify(response, null, 2));
           if (response.successRoute || response.successImage) {
-            msg = "<h5>" + response.msg + "<br>Thanks for your kind assistance.</h5>";
+            var msg = "<h5>" + response.msg + "<br>Thanks for your kind assistance.</h5>";
           } else {
-            msg = "<h5>" + response.msg + "<br>ERROR: Please contact Volker Petersen for assistance.</h5>";
+            var msg = "<h5>" + response.msg + "<br>ERROR: Please contact Volker Petersen for assistance.</h5>";
           }
           $("#modalFormFeedback").modal("show");
           $("#modalFormFeedbackHeader").html(hdr);
           $("#modalFormFeedbackBody").html(msg);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          hdr = "<h5>Trip Data Update</h5>";
-          msg = "<h5>";
+          var hdr = "<h5>Trip Data Update</h5>";
+          var msg = "<h5>";
           if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
-            msg += jqXHR.responseJSON.error;
+            msg = msg + jqXHR.responseJSON.error;
           } else if (jqXHR.status === 0) {
-            msg += "Could not connect to the server.";
+            msg = msg + "Could not connect to the server.";
           } else if (jqXHR.status) {
-            msg += "Server error: " + jqXHR.status;
+            msg = msg + "Server error: " + jqXHR.status;
           } else if (errorThrown) {
-            msg += errorThrown;
+            msg = msg + errorThrown;
           } else {
-            msg += textStatus;
+            msg = msg + textStatus;
           }
-          msg += "<br>ERROR: Please contact Volker Petersen for assistance.</h5>";
+          msg = msg + "<br>Fatal Error: Please contact Volker Petersen for assistance.</h5>";
           $("#modalFormFeedback").modal("show");
           $("#modalFormFeedbackHeader").html(hdr);
           $("#modalFormFeedbackBody").html(msg);

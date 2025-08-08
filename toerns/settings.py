@@ -37,6 +37,8 @@ from pathlib import Path
 import environ, os
 import re
 from django.template import base
+from django.utils.log import DEFAULT_LOGGING
+from logging.config import dictConfig
 
 # To break the given Django template tag into multiple lines, 
 # you need to override Django's default regex to allow newlines
@@ -110,8 +112,7 @@ DATABASES = {
 }
 
 # config media area for route file upload
-MEDIA_ROOT = os.path.join(
-    BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -168,6 +169,56 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DEFAULT_CHARSET = "utf-8"
+
+# Assure that errors end up to Apache error logs via console output
+# when debug mode is disabled
+DEFAULT_LOGGING['handlers']['console']['filters'] = []
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,  # The version number of our log
+    'disable_existing_loggers': False,
+    # specify a formatter
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {name} {levelname} {module} {message}',
+            'style': '{',
+        },
+    },
+
+    # django uses some of its own loggers for internal operations. In case you want to disable them just replace the False above with true.
+    # A handler for WARNING. It is basically writing the WARNING messages into a file called WARNING.log
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'backupCount': 5, # keep at most 5 log files
+            'maxBytes': 5242880, # 5*1024*1024 bytes (5MB)
+            'filename': os.path.join(BASE_DIR,'logs', 'webApp.log'),
+            'formatter': 'verbose',
+        },
+
+        'console': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    # A logger can have multiple handlers
+    'loggers': {
+        'django': {
+            # log to sqlite DB
+            'handlers': ['console', 'file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        'toerns': {
+            'handlers': ['console', 'file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
+dictConfig(LOGGING)
 
 # https://django-jazzmin.readthedocs.io/configuration/
 JAZZMIN_SETTINGS = {

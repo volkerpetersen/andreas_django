@@ -15,6 +15,7 @@ import os
 import csv
 import io
 import base64
+import logging
 from datetime import datetime
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
@@ -31,6 +32,8 @@ import matplotlib
 matplotlib.use('SVG')  # 'Agg' or 'SVG'
 import matplotlib.pyplot as plt
 import pandas as pd
+
+logger = logging.getLogger("toerns")
 
 dateFmtRead = ["%B %d, %Y",     # April 07, 2025
                "%b. %d, %Y",    # Apr. 07, 2025
@@ -132,6 +135,9 @@ def index(request):
     """---------------------------------------------------------------------
         view function for the home page with the Toern Directory
     """
+    logger.warning("This is a warning!")
+    logger.error("This is an error!")
+    logger.critical("This is a Critical error!")
     return render(request, "toerns/index.html", 
                   context=fetchContent(request, route="all"))
 

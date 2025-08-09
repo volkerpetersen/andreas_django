@@ -586,14 +586,6 @@ def weather(request):
     return render(request, "toerns/weather.html", 
                   context=fetchContent(request, route=None))
 
-def ais(request):
-    """---------------------------------------------------------------------
-        view function for the AIS display
-    """
-    return render(request, "toerns/ais.html", 
-                  context=fetchContent(request, route=None))
-
-
 def printDirectory(request):
     """---------------------------------------------------------------------
         view function for the print version of Toern Directory

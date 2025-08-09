@@ -1,0 +1,6 @@
+User-Agent: *
+User-Agent: googlebot
+Disallow: /logs/
+Disallow: /static/
+Disallow: /templates/
+Disallow: /toerns/

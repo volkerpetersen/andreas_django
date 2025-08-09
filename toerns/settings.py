@@ -141,7 +141,7 @@ else:
     ALLOWED_HOSTS = ["andreas61667.pythonanywhere.com"]
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = False
+    DEBUG = True
 # end of environment parameters
 #print(f"ALLOWED_HOSTS:   {ALLOWED_HOSTS[0]}")
 #print(f"STATICFILES_DIR: {STATICFILES_DIRS[0]}\n")

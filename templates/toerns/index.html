@@ -49,7 +49,7 @@
 				-->
 				{% with
 					destination=trip.georegion|add:"<br /><a href='plotRoute/"|add:trip.maptable|add:"' target='_blank'>"|add:trip.destination|add:"</a>"
-					yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../static/pdf/,&#34;,'"
+					yacht=trip.boat|multi_replace:"linefeed,<br>,openLink,<a,closeLink,</a>,pdf/,../media/pdf/,&#34;,'"
 					img_caption=trip.destination
 					img_error=" onerror='imgErrorTripPicture(this)' />"
 				%}

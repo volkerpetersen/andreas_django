@@ -113,24 +113,49 @@ DATABASES = {
     },
 }
 
-# config media area for GPX route & PDF file uploads
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'
+# Research on Perplexity and https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = "/static/"
 
+# This is the folder collectstatic will fill for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# These are your source static folders (edit during development)
 STATICFILES_DIRS = [
     os.path.normpath(os.path.join(BASE_DIR, "static")),
 ]
 
+# config media area for route file upload
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+
+# project folder structure
+# andreas/
+# │
+# ├── manage.py
+# ├── toerns/
+# │   ├── settings.py
+# │   └── ...
+# ├── static/          # your dev static files (images, CSS, JS)
+# ├── staticfiles/     # created by collectstatic for production
+# ├── media/           # user-uploaded files
+
 # comment out STATICFILES_DIR and uncomment STATIC_ROOT
-# prior to running python manage.py collectstatic
+# prior to running 'python manage.py collectstatic'
 # for running python manage.py runserver go back to
 # STATICFILES_DIR active and STATIC_ROOT inactive
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# only run colectstatic on development platform
+
+# On your production server you would map:
+#
+#    /static/ to /home/username/myproject/staticfiles (STATIC_ROOT) in the Web tab.
+#    /media/ to /home/username/myproject/media for user uploads.
+#
+# This way,
+#    Dev server uses STATICFILES_DIRS for serving during runserver.
+#    Production server only serves from STATIC_ROOT (collected files) and MEDIA_ROOT (uploads).
 
 WSGI_APPLICATION = "toerns.wsgi.application"
 

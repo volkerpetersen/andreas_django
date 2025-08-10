@@ -26,7 +26,7 @@ from django.db import connection
 from django.db.models import Sum
 from django_user_agents.utils import get_user_agent
 from toerns.models import toerndirectory, fetchRouteData
-from toerns.settings import MEDIA_ROOT, DEBUG
+from toerns.settings import MEDIA_ROOT, STATIC_ROOT, DEBUG
 from toerns.NavToolsLib import NavTools
 import matplotlib
 matplotlib.use('SVG')  # 'Agg' or 'SVG'
@@ -319,7 +319,7 @@ def updateTripData(request):
     if 'true' in request.POST['image']:
         uploadedFile = request.FILES.get('imageUpload')
         if uploadedFile:
-            fs = FileSystemStorage(location=os.path.join(MEDIA_ROOT,"images"))
+            fs = FileSystemStorage(location=os.path.join(STATIC_ROOT,"images"))
             fileName = uploadedFile.name
             if fs.exists(fileName):
                 fs.delete(fileName)

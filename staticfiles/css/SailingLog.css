@@ -1,0 +1,835 @@
+/*
+========================================================================================
+    HTML5 responsive Webpage to display Volker's sailing logs utilising:
+      - Google Maps API v3 to display the map
+      - MySQL DBs to store and retrieve the trip data
+      - Bootstrap ver 5.0.1 framework
+
+  This SailingLog.css files contains all css formatting for this webpage
+
+    (c) Kaiserware, Volker Petersen, 2011-2021
+========================================================================================
+
+	# for individual elements identified via id tag
+	. for a group of multiple elements identified via class tag
+		css:  .center {text-align: center}
+		html: p.center
+*/
+
+/* Bootstrap helper*/
+body, html {
+	height: 100%;     /* make sure it is at least as tall as the viewport */
+	width: 100%;      /* make sure it is at least as wide as the viewport */
+	margin: 0px;
+	font-family: 'Palatino, sans-serif';
+	font-weight: 400;
+  font-size: 18px !important;
+	line-height: 1.20 !important;
+	color:#000000;
+}
+
+.footer {
+  border: 0px;
+  padding: 15px 10px 0px 10px;
+  color: #dddddd;
+  font-size: 0.95rem;
+  background: #2E2E2E !important;
+}
+
+
+.pt-4 {
+	padding-top: 4rem !important;
+}
+
+.pt-3 {
+	padding-top: 3rem !important;
+}
+
+.pt-2 {
+	padding-top: 2rem !important;
+}
+
+.pt-1 {
+	padding-top: 1rem !important;
+}
+
+/* admin.py formating for Many-To-Many field selections */
+.select2-container--default .select2-selection--multiple {
+  color: #000000;
+  background-color: #7e7e7e;
+  border-color: #7E7E7E;
+}
+/* admin.py Targeting selected items in ManyToMany fields */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  color: #000000;
+  background-color: #3E3E3E;
+  color: #3E3E3E;
+}
+/* main menu formatting */
+.navbar-toggler,
+.navbar-toggler:focus {
+  position: fixed;
+  right: 10px;
+  top: 50px;
+  padding: 0.30rem;
+  color: #6c757d;
+  border: 0.5px solid transparent;
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0px;
+}
+
+.main-nav {
+  list-style: none;
+}
+
+.main-nav > ul > li {
+  position: relative;
+  white-space: nowrap;
+  float: left;
+}
+
+.main-nav a {
+  display: block;
+  position: relative;
+  color: #413e66;
+  padding: 10px 20px 10px 20px;
+  transition: 0.5s;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+
+.main-nav a:hover,
+.main-nav .active > a,
+.main-nav li:hover > a {
+  color: #1bb1dc;
+  background-color: #e7e7e7 !important;
+}
+
+.nav-item {
+  margin-top: 3px !important;
+  margin-bottom: 3px !important;
+  text-align: right;
+}
+
+.dropdown-item {
+  text-align: right;
+}
+
+.dropdown-menu {
+  background-color: #e7e7e7 !important;
+}
+
+.searchbox {
+  margin-top: -17px;
+  margin-bottom: 5px;
+}
+
+.plr-0 {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+.navbar-form {
+  color: #3360CC !important;
+  font-weight: 500 !important;
+  margin: 0px !important;
+  position: relative !important;
+}
+
+.bodytextitalic{
+  font-family: 'Shadows Into Light Two', cursive;
+  /* font-family:'Times New Roman'; */
+  /* font-style:italic; */
+  font-size:20px;
+  font-weight: 800;
+  text-align: center;
+  color:#000000;
+  padding-top: 5px !important;
+}
+
+.monospace {
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+}
+#title_container {
+  background-color: #ffffff;
+}
+
+#cursor_location {
+  position: fixed;
+  background-color: #bababa;
+  z-index: 9000;
+}
+
+#route_info {
+  position: fixed;
+  background-color: #bababa;
+  z-index: 900;
+  padding: 5px 10px 5px 10px;
+}
+#route_modal_button {
+  position: fixed;
+  z-index: 900;
+}
+
+.form-label {
+  font-size: 20px;
+  padding-top: 0px;
+}
+
+.searchbox {
+  margin-right: 8px !important;
+  margin-top: -21px !important;
+}
+
+.searchboxMobile {
+  margin-left: 8px !important;
+  margin-top: -15px !important;
+  margin-bottom: 5px !important;
+}
+
+.no-padding {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.row-padding {
+  margin-left: 0px !important;
+  margin-top: 4px !important;
+}
+
+.col-padding {
+	padding-left: 4px !important;
+	padding-right: 0px !important;
+}
+
+.social-icons{
+  margin-left: 0%;
+  margin-bottom: 0%;
+  text-align: right;
+  margin-top: -9px;
+  padding: 13px 0px 0px 0px;  /* top, right, bottom, left */
+}
+
+.navbar-toggle {
+  margin-top: -25px !important;
+}
+
+
+.headline {
+  margin-top: 5px !important;
+  text-align: left !important;
+  font-family: 'Shadows Into Light Two', cursive;
+  font-style: italic;
+  font-weight: 800;  /* 800 */
+  font-size: calc(3.2vw) !important;
+}
+
+.subheadline {
+  margin-top: 15px !important;
+  text-align: right !important;
+  margin-bottom: 10px !important;
+  font-family: 'Shadows Into Light Two', cursive;
+  font-size: calc(2.2vw) !important;
+  font-weight: 550;  /* 550 */
+}
+
+.list-bullet {
+  list-style-type: square;
+  padding-left:3rem;
+}
+
+.error {
+  font-size: 20px;
+  color: #640000;
+}
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  display: none;
+  background: #1bb1dc;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  line-height: 1;
+  font-size: 16px;
+  border-radius: 50%;
+  right: 10px;
+  bottom: 10px;
+  padding-top: 12px;
+  transition: background 0.5s;
+  z-index: 600;
+}
+
+
+.locationString {
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  z-index: 20;
+}
+
+
+
+/* ========= Smartphone portrait ========= */
+@media screen and (max-width: 576px) {
+  body, html {
+    font-family: 'Palatino, sans-serif';
+    font-weight: 400;
+    font-size: calc(4.8vw) !important;
+  }
+
+  .subheadline {
+    margin-top: 8px !important;
+    text-align: left !important;
+    font-size: calc(3.8vw) !important;
+  }
+
+  .navbar-nav {
+    border: 1px solid;
+    border-color: #a7a7a7;
+    border-radius: 0.3rem;
+  }
+
+  .navbar-toggler {
+    margin-top: 10px !important;
+    margin-right: 4px !important;
+  }
+
+  .col-hdr {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    margin-top: 0px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .footer {
+    font-size: 0.85rem;
+  }
+  
+  .headline {
+    text-align: center !important;
+    margin-top: 15px !important;
+    padding-right: 0px !important;
+    font-size: 30px !important;
+  }
+
+  .trip-name {
+	  font-family: 'Shadows Into Light Two', cursive;
+	  font-size: calc(4.5vw);
+	  font-weight: 500;
+	  margin-top: 5px;
+	  padding-right: 4px;
+	  padding-left: 4px;
+	}
+
+	.portfolio-filter > li,
+	.portfolio-filter > li > a {
+	text-align: left;
+	margin: 0px 0px 0px 0px !important;
+	padding: 5px;
+	}
+
+  .portfolio-item {
+    margin: 0px 0px 5px 0px !important;
+    padding:0;
+  }
+
+  .mapHeader {
+    margin-top: 10px;
+    padding-bottom: 10px;
+		background-color: #bbb;
+		z-index: 20;
+  }
+
+	#chartlegend {
+		font-size: 12px;
+		font-weight: 500;
+    z-index: 20;
+	}
+	#map_canvas {
+		height: 350px;
+    width: calc(100% + 30px);
+		margin: 0 -15px 0 -15px;
+		border: 0px;
+	}
+
+  #toern_table_wrapper {
+    margin-top: -25px;
+  }
+}
+
+/* ========= Desktops computers and large tablets ========= */
+@media screen and (min-width: 577px) {
+	.trip-name {
+	  font-family: 'Shadows Into Light Two', cursive;
+	  font-size: calc(4.5vw);
+	  font-weight: 500;
+	  margin-top: 5px;
+	  padding-right: 4px;
+	  padding-left: 4px;
+	}
+
+  .portfolio-filter {
+    text-align: center;
+  	margin: 20px 0px 0px 0px;
+	  padding: 5px;
+  }
+
+  .portfolio-item {
+    margin: 0px 0px 25px 0px !important;
+    padding:0;
+  }
+
+  .mapHeader {
+		min-height: 40px;
+    padding-top: 4px;
+    margin-left: -11px;
+		background-color: #bbb;
+		z-index: 20;
+  }
+
+  .mapRow {
+    margin-left: 0px;
+  }
+
+  .mapArea {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+	#chartlegend {
+		height: 40px;
+		padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 15px;
+		font-size: 14px;
+		font-weight: 600;
+		z-index: 20;
+	}
+	#map_canvas {
+		height: 575px;
+    width: calc(100% - 2px);
+		border: 0px;
+		z-index: 10;
+    margin: 0px 0px 0px 2px;
+	}
+
+}
+
+/* ========= Desktops computers and large tablets ========= */
+@media screen and (min-width: 578px) and (min-height: 550px) {
+	.trip-name {
+	  font-family: 'Shadows Into Light Two', cursive;
+	  font-size: calc(1.2vw);
+	  font-weight: 500;
+	  margin-top: 5px;
+    margin-bottom: 20px;
+	  padding-right: 4px;
+	  padding-left: 4px;
+	}
+
+  .scrollable {
+    overflow: auto;   /* required with fixed navbar-menu to add scroll-bar for trip-log table */
+  }
+
+  #greatCircle {
+    margin-top: 5px !important;
+    margin-right: 2px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+}
+
+  .navbar-left {
+    font-size: calc(1.7vw) !important;
+  }
+
+}
+
+/* ========= Landscape phones and portrait tablets ========= */
+@media screen and (min-width: 768px) and (max-width: 799px) {
+  .scrollable {
+    overflow: auto;   /* required with fixed navbar-menu to add scroll-bar for trip-log table */
+  }
+
+  #greatCircle {
+    margin-top: 0px !important;
+    margin-right: 2px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+
+}
+
+/* ========= Landscape phones and smaller ========= */
+@media screen and (max-width: 767px) {
+  .full-row-navbar {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
+
+  .navbar-form {
+    padding-left: 0px !important;
+  }
+
+  .scrollable {
+    overflow: visible;   /* required to allow the navbar-menu to be scrolled off the top of the page */
+  }
+
+  .navbar-toggle {
+    margin-top: -50px !important;
+    z-index: 100 !important;
+  }
+
+  li.navbar-left {
+    padding-left: 8px !important;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
+  li.navbar-left.active {
+    padding-left: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
+  .no-footer {
+    border-bottom: 0px !important;
+  }
+
+  .social-icons {
+    margin: -2px 0px 0px 0px !important;
+    text-align: right;
+    padding: 13px 0px 0px 0px !important;  /* top, right, bottom, left */
+  }
+
+  #greatCircle {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+
+
+  ul.portfolio-filter {
+    margin-top: -20px !important;
+  }
+
+  .portfolio-filter > li a {
+    font-size: 14px !important;
+  }
+
+}
+
+.tab-row {
+  background-color: #e7e7e7;
+  height: 60px;
+  padding: 1% 1% 1% 1%;
+  text-align: center;
+}
+
+.tab-cell {
+  width: 28%;
+  text-align: right;
+  padding-right: 5%;
+}
+
+.no-overflow {
+	overflow: hidden;
+}
+
+.navbar-inner {
+	height: 110px;
+}
+
+.trip-list {
+  font-size:18px;
+  font-weight:300;
+  color:#000000;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+}
+
+.top-buffer {
+  margin-top: 12px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.sm-margin {
+	margin-left: 15px !important;
+	margin-right: 15px !important;
+}
+
+.hr-rule {
+	margin-top: 10px !important;
+	margin-bottom: 0px !important;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+	background-color: #aaaaaa;
+	height: 3px;
+}
+
+#trip-log {
+  font-style: italic;
+  text-align: left;
+}
+
+.col-hdr-container {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.col-hdr {
+  font-size:20px;
+  font-weight:500;
+  color:#000000;
+  background-color: #e7e7e7;
+  text-align: center;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #e7e7e7;
+  border-radius: 7px 7px 7px 7px;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border-radius: 7px 7px 7px 7px;
+}
+
+.col-pad {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.icontext {
+  font-size:16px;
+  font-weight: 500;
+  color:#000000;
+}
+
+/* eliminate the header sortation icons */
+table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+}
+
+/* eliminate all borders */
+.borderless tbody tr td,
+.borderless thead tr th {
+    border: none !important;
+}
+
+/* eliminate the search box so that I can use my own outside of the table */
+.dataTables_filter,
+.dataTables_info {
+    display: none !important;
+}
+
+/* Floating Enlarged Picture position */
+.float-picture {
+  position:absolute;
+  left:35%;
+  top: 32%;
+  width: 614px; /* with 7px boarder results in 600px image width */
+  max-height: 490px;
+  background-color: #bbbbbb;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #bbbbbb;
+  border-radius: 7px 7px 7px 7px;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border-radius: 7px 7px 7px 7px;
+  z-index:21;
+}
+
+/*--Social Media icon definitions--*/
+.social-icons li a {
+  width: 28px;
+  height: 28px;
+  padding: 0px 0px 0px 0px;  /* top, right, bottom, left */
+  display: block;
+}
+.social-icons ul li:first-child, ol li:first-child {
+	margin-top: 0px;
+	margin-left: 0px;
+}
+.social-icons li {
+	background: none;
+	padding: 0px;
+	margin-left:0px;
+  margin-right: 0px;
+	display: inline-block;
+}
+/********************************
+********* Portfolio CSS *********
+*********************************/
+
+.portfolio-items {
+  list-style: none outside none;
+  margin: 10px 0 20px 0;
+  padding: 0px;
+}
+
+
+ul.portfolio-filter {
+  padding-left: 0px !important;
+}
+
+.portfolio-filter > li {
+  display: inline-block;
+}
+
+.portfolio-filter > li a {
+  color: #555555;
+  background: none repeat scroll 0 0 #e7e7e7 !important;
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 20px;
+  transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+  -o-transition: all 0.5s ease 0s;
+  border: 0px solid #e7e7e7;
+  outline: none;
+}
+
+.portfolio-filter > li a.active  {
+  color:#3360cc !important;
+  background: #e7e7e7 !important;
+  border: 0px solid #e7e7e7 !important;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.portfolio-filter > li a:hover {
+  color:#3360cc !important;
+  background: #e7e7e7;
+  border: 0px solid #e7e7e7 !important;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.portfolio-border {
+  border-top: 2px solid #777777 !important;
+  margin: 7px 0px 12px 0px !important;
+}
+
+
+.trip-details-wrap img{
+  padding: 0px 5px 0px 5px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.trip-details-wrap .trip-details-inner{
+  top: 0;
+  background: transparent;
+  opacity: .8;
+  width: 100%;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.trip-details-wrap .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  border-radius: 12px;
+  background: #e7e7e7;
+  color: #000000;
+  vertical-align: middle;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+  padding: 12px;
+  z-index: 500;
+}
+
+.trip-details-wrap .overlay .preview {
+  bottom: 0;
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 0;
+  background: transparent;
+  text-align: center;
+  color: #000000;
+}
+
+.trip-details-wrap:hover .overlay {
+  opacity: 1;
+}
+
+
+/* Start: Recommended Isotope styles */
+/**** Isotope Filtering ****/
+
+.isotope-item {
+	z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -ms-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -ms-transition-property: -ms-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}
+
+/* End: Recommended Isotope styles */
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}

@@ -21,17 +21,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic.base import RedirectView
-from django.urls import path, re_path
-from django.conf import settings
+from django.urls import path
+from django.conf.urls.static import static
 from . import views
-from toerns.models import toerndirectory
+from toerns.settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 handler404 = 'toerns.views.error_404'
 handler500 = 'toerns.views.error_500'
 
 urlpatterns = [
-    re_path(r"^$", views.index, name="Directory"),
+    path("", views.index, name="Directory"),
     path("gallery", views.gallery, name="Gallery"),
     path("dashboard", views.dashboard, name="Dashboard"),
     path("safetyAndreas", views.safetyAndreas, name="Safety"),
@@ -46,3 +45,6 @@ urlpatterns = [
     path("navToolsData", views.navToolsData, name="navToolsData"),
     path("plotRoute/<routeName>", views.plotRoute, name="Route"),
 ]
+
+if DEBUG:
+    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

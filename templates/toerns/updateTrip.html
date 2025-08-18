@@ -116,6 +116,7 @@
   <script type='text/javascript'>
     let waypointFile = false;
     let imageFile = false;
+    let pdfFile = false;
 
     function resetPageHeight(element) {
       document.body.classList.add('vh-100');
@@ -183,7 +184,7 @@
       if (waypointFile || imageFile || pdfFile) {
         $('#updateTripSubmit').prop('disabled', false);
       }
-      //console.log("Image check: (waypointFile || imageFile)="+ (waypointFile || imageFile)+" image="imageFile+" waypoints="+ waypointFile);
+      //console.log("Image check: (waypointFile || imageFile || pdfFile)="+ (waypointFile || imageFile || pdfFile)+" image="+imageFile+" waypoints="+ waypointFile+" pdf="+pdfFile);
     };
 
     jQuery(document).ready(function () {

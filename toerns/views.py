@@ -226,6 +226,7 @@ def dashboard(request):
     content['annualMiles'] = annualMiles
     content['annualDays'] = annualDays
     content['crewStats'] = crewStats.items()
+    content['crewCount'] = len(crewStats)
 
     return render(request, "toerns/dashboard.html", 
                   context=content)
@@ -296,7 +297,7 @@ def updateTripData(request):
                     #print(msg)
                     fileName = fileName.replace('gpx', 'sql')
 
-                (msg, fn) = uploadSQL(MEDIA_ROOT, fileName)
+                (msg, fn) = uploadSQL(path, fileName)
 
                 # update the maptable and image entries in the Toerndirectory table
                 toern = toerndirectory.objects.get(startDate=startDate)

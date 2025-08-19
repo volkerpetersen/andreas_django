@@ -28,7 +28,7 @@
                 %}
                 <div class="portfolio-item {{ trip.georegion|replace:" ,_" }} col-xs-12 col-sm-4 col-md-3" data-value="{{ trip.miles }}">
                     <div class="trip-details-wrap">
-                        <img class="img-responsive" id="tripImage" src="../static/{{ trip.image }}" alt="{{ trip.destination }}" onerror="imgErrorTripPicture(this)" />
+                        <img class="img-responsive" id="tripImage" src="../static/images/{{ trip.image }}" alt="{{ trip.destination }}" onerror="imgErrorTripPicture(this)" />
                         <div class="text-center trip-name">
                             {{ trip.startDate|date:"F" }}&nbsp;{{ trip.startDate|date:"Y" }}<br />{{ trip.destination }}
                         </div>

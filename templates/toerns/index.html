@@ -61,14 +61,14 @@
 								{% if trip.picturelink %}
 									{% with
 										picture1="<a href='"|add:trip.picturelink|add:"' target='_blank'><img class='img-fluid'"
-										picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
+										picture2=" border='0px' src='static/images/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
 									%}
 									{{ picture1|safe }}{{ picture2|safe }}
 									{% endwith %}
 								{% else %}
 									{% with 
 										picture1="<img class='img-fluid'"
-										picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error
+										picture2=" border='0px' src='static/images/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error
 									%}
 									{{ picture1|safe }}{{ picture2|safe }}
 									{% endwith %}
@@ -119,14 +119,14 @@
 						{% if trip.picturelink %}
 							{% with
 								picture1="<a href='"|add:trip.picturelink|add:"' target='_blank'><img class='img-fluid enlarge'"
-								picture2=" border='0px' src='static/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
+								picture2=" border='0px' src='static/images/"|add:trip.image|add:"' title='Click here for all trip images!' alt='"|add:img_caption|add:"'"|add:img_error|add:"</a>"
 							%}
 							{{ picture1|safe }}{{ picture2|safe }}
 							{% endwith %}
 						{% else %}
 							{% with
 								picture1="<img class='img-fluid enlarge'"
-								picture2=" border='0px' src='static/"|add:trip.image|add:"' title='No picture album available' alt='"|add:img_caption|add:"'"|add:img_error
+								picture2=" border='0px' src='static/images/"|add:trip.image|add:"' title='No picture album available' alt='"|add:img_caption|add:"'"|add:img_error
 							%}
 							{{ picture1|safe }}{{ picture2|safe }}
 							{% endwith %}

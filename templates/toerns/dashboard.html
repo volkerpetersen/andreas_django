@@ -286,13 +286,24 @@
         }
 
         // Load the Visualization API and the corechart package.
+        // API Key is in .env and gets loaded in setting.py and views.py        
+        const googleMapsApiKey = "{{ googleMapsApiKey|escapejs }}"
         google.charts.load("current", {
             "packages": ["corechart"],
-            "mapsApiKey": "AIzaSyDzCAa-hibdRJ-NdOnIRK-IG5uN2U3kv9c"
+            "mapsApiKey": googleMapsApiKey
         });
 
         $(document).ready(function(){
             var containerHeight, text;
+
+            $('#crewStats').DataTable({
+                pageLength: 25,
+                lengthMenu: [
+                    [25, 50, -1],
+                    [25, 50, "All"]
+                ],
+                order: [[0, 'asc'], [3, 'desc']]
+            });
 
             $("#searchboxDiv").html("<button id='crewTableButton' class='btn btn-secondary' type='button'>Crew View</button>");  // delete the searchbox
             

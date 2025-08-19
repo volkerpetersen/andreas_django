@@ -243,6 +243,7 @@ class NavTools:
             settings['verbose'] = rawSettings['verbose']
             settings['error'] = True
             settings['TimeZoneDifference'] = rawSettings['TimeZoneDifference']
+            settings['trackingStart'] = rawSettings['preRaceStartTracking']
             settings['minCourseChange'] = rawSettings['minCourseChange']
 
         except Exception as e:
@@ -950,11 +951,12 @@ class NavTools:
         return gpx
 
 
-    def parseKMLRouteFile(self, pathKML, pathGPX, filename, boatname, timezoneDifference, raceStart, watchStart, watchRhythm, minCourseChange):
+    def parseKMLRouteFile(self, pathKML, pathGPX, filename, boatname, timezoneDifference, raceStart, trackingStart, watchStart, watchRhythm, minCourseChange):
         """--------------------------------------------------------------------------
         Method to parse the waypoint and route information from a .kml 
         file into a GPS file. Only after a course change of at least
         'minCourseChange' degrees will a new waypoint be created.
+        All datetime values are in local time!
         Yellowbrick race tracking route files are available at
         https://yb.tl/racenamexyz.kml
 
@@ -965,7 +967,8 @@ class NavTools:
             boatname (string): name of the boat in the .kml file
             timezoneDifference (float): racecourse timezone difference to UTC
             raceStart (datetime): start of the race
-            watchStart (datetime): race course time of watch schedule start
+            trackingStart (datetime): hrs prior to race start
+            watchStart (datetime): watch schedule start
             watchRhythm (int): number of watch hrs on/off
             minCourseChange (float): minimum course change before a new WP is generated
 
@@ -975,6 +978,7 @@ class NavTools:
 
         log_msg = ""
         ctr = 0
+        trackingStartFlag = False
 
         try:
             fileKML = os.path.join(pathKML, filename+".kml")
@@ -1028,7 +1032,12 @@ class NavTools:
 
                     currentT = self.getTime(
                         times[ctr].text, timezoneDifference)
+                    if not trackingStartFlag and currentT >= trackingStart:
+                        trackingStartFlag = True
+                        lastWP = latlon    # initialize lastWP
+                        lastT = currentT   # initialize lastT
                     if not raceStartFlag and currentT >= raceStart:
+                        trackingStartFlag = False
                         raceStartFlag = True
                         startCtr = ctr     # initialize startCtr
                         lastWP = latlon    # initialize lastWP
@@ -1037,13 +1046,14 @@ class NavTools:
                         watchStartFlag = True
                     if watchStartFlag:
                         elapsed = currentT - lastT
-                    if raceStartFlag:
+                    if raceStartFlag or trackingStartFlag:
                         hdg = self.calc_heading(lastWP[1], lastWP[0], latlon[1], latlon[0])
                         if (elapsed.total_seconds() >= watchRhythm*60*60 
                             or currentT == watchStart):
                                 watchChange = True
                                                                    # only add a WP if
                         if(startCtr == ctr or                      # race start
+                           trackingStartFlag or                    # tracking start
                            watchChange or                          # watch change
                            ctr==len(locations)-1                   # last waypoint
                            or abs(hdg-lastHDG) > minCourseChange): # a course change larger than minCourseChange
@@ -1063,11 +1073,13 @@ class NavTools:
                                 wp = wp.replace(
                                     "NM{:05d}".format(wpCTR+1), "Race Start")
                             if ctr == len(locations)-1:
-                                wp = wp.replace("empty", "diamond")
+                                if raceStartFlag:
+                                    wp = wp.replace("empty", "diamond")
                                 wp = wp.replace(
                                     "</name>", f"</name>\n   <desc>arrival {strT}</desc>")
                                 elapsed = timedelta(seconds=0)
                             if watchChange:
+                                wp = wp.replace("empty", "diamond")
                                 wp = wp.replace(
                                     "NM{:05d}".format(wpCTR+1), strT)
                                 wp = wp.replace(
@@ -1204,7 +1216,7 @@ if __name__ == "__main__":
     """
 
     print(f"\nPlease run NavigationTools.pyw App\n")
-    exit(0)
+    #exit(0)
 
     # debugging kml parser
     navtools = NavTools()
@@ -1214,16 +1226,17 @@ if __name__ == "__main__":
     else:
         raise Exception(
             f"Error reading from configuration file ('{settings['error']}')")
-    pathKML = "E:\\My Documents\\Google Drive\\Sailing\\OpenCPN_Routes"
+    pathKML = "E:\\My Documents\\Downloads"
     pathGPX = pathKML
-    filename = "2024_Bayview_Race_to_Mackinac"
-    boatname = "Aeolus"
-    timezoneDifference = -4
-    raceStart = datetime.strptime("2024-07-20 14:36", "%Y-%m-%d %H:%M")
-    watchStart = datetime.strptime("2024-07-20 15:00", "%Y-%m-%d %H:%M")
+    filename = "tsiyr25"
+    boatname = "Zigzag"
+    timezoneDifference = -5
+    raceStart = datetime.strptime("2025-08-02 12:17", "%Y-%m-%d %H:%M")
+    watchStart = datetime.strptime("2025-08-02 15:00", "%Y-%m-%d %H:%M")
+    trackingStart = raceStart - timedelta(hours=2)
     watchRhythm = 3
     minCourseChange = 7.5
-    msg = navtools.parseKMLRouteFile(pathKML, pathGPX, filename, boatname, timezoneDifference, raceStart, watchStart, watchRhythm, minCourseChange)
+    msg = navtools.parseKMLRouteFile(pathKML, pathGPX, filename, boatname, timezoneDifference, raceStart, trackingStart, watchStart, watchRhythm, minCourseChange)
 
     print(msg)
 

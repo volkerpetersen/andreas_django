@@ -26,7 +26,7 @@ from django.db import connection
 from django.db.models import Sum
 from django_user_agents.utils import get_user_agent
 from toerns.models import toerndirectory, fetchRouteData
-from toerns.settings import MEDIA_ROOT, STATIC_ROOT, DEBUG
+from toerns.settings import MEDIA_ROOT, STATIC_ROOT, DEBUG, googleMapsApiKey
 from toerns.NavToolsLib import NavTools
 import matplotlib
 matplotlib.use('SVG')  # 'Agg' or 'SVG'
@@ -83,6 +83,7 @@ def fetchContent(request, route="all"):
         'is_mobile': user_agent.is_mobile,
         'is_tablet': user_agent.is_tablet,
         'is_desktop': not user_agent.is_mobile,
+        'googleMapsApiKey': googleMapsApiKey,
     }
     #print(f"is_mobile: {content['is_mobile']}")
 

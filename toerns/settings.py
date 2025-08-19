@@ -61,6 +61,7 @@ environ.Env.read_env()
 # read the secret key and SQLite DB name from .env file in this folder
 SECRET_KEY = env('SECRET_KEY')
 SQLITE = env('SQLITE')
+googleMapsApiKey = env('googleMapsApiKey')
 
 # Application definition
 INSTALLED_APPS = [

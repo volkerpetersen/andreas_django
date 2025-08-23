@@ -22,7 +22,7 @@ class SailingSkills(models.Model):
     class Meta:
         managed = True
         db_table = "SailingSkills"
-        verbose_name_plural = 'SailingSkills'
+        verbose_name_plural = 'Sailing Skills'
         ordering = ['skill']
 
     def __str__(self):

@@ -251,6 +251,12 @@ dictConfig(LOGGING)
 
 # https://django-jazzmin.readthedocs.io/configuration/
 JAZZMIN_SETTINGS = {
+    "order_with_respect_to": [
+        "toerns.toerndirectory",
+        "toerns.CrewMembers",
+        "toerns.SailingSkills",
+    ],
+    "hide_apps": ["auth"],  # to hide the Authorization section
     "custom_links": {
         "toerns": [
             {
